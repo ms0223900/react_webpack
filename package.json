@@ -6,7 +6,9 @@
   "scripts": {
     "open": "webpack-dev-server",
     "build": "webpack -p",
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint src/*.jsx",
+    "lintFix": "eslint --fix src/*.js src/*.jsx"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +16,7 @@
   "dependencies": {
     "css-loader": "^2.1.0",
     "eslint": "^5.13.0",
+    "eslint-plugin-react": "^7.12.4",
     "file-loader": "^3.0.1",
     "jest": "^24.1.0",
     "react": "^16.8.1",

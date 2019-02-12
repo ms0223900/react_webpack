@@ -18,20 +18,23 @@ module.exports = {
     ],
     "rules": {
         "indent": [
-            "error",
+            "warn",
             "tab"
         ],
         "linebreak-style": [
-            "error",
+            "warn",
             "unix"
         ],
         "quotes": [
-            "error",
+            "warn",
             "single"
         ],
         "semi": [
-            "error",
+            "warn",
             "never"
-        ]
+        ],
+        "no-console": "off",
+        "react/jsx-uses-vars": "error",
+        "react/jsx-uses-react": "error",
     }
 };

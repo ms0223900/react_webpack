@@ -1,43 +1,41 @@
 import React, { Fragment } from 'react'
-import ReactDOM from 'react-dom'
-import '../styles/style.scss';
+// import ReactDOM from 'react-dom'
+import '../styles/style.scss'
 
-import List from './components/List';
+import List from './components/List'
 
-function AA(props) {
-  return (
-  <h2>
+function AA() {
+	return (
+		<h2>
     this is a AA11sasdask!
-  </h2>);
+		</h2>)
 }
-
-
 
 
 
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-  render() {
-    return (
-      <Fragment>
-        <h1>Hi App</h1>
-        <AA />
-        <List />
-        <button className={'button2'}>
+	constructor(props) {
+		super(props)
+		this.state = {}
+	}
+	render() {
+		return (
+			<Fragment>
+				<h1>Hi App</h1>
+				<AA />
+				<List />
+				<button className={'button2'}>
           button2
-        </button>
-        <button className={'button3'}>
+				</button>
+				<button className={'button3'}>
           button3
-        </button>
-      </Fragment>
-    );
-  }
+				</button>
+			</Fragment>
+		)
+	}
 }
 
-export default App;
+export default App
 
-console.log('app12221.jsx');
+console.log('app12221.jsx')
