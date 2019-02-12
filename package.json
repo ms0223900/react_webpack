@@ -1,19 +1,21 @@
 {
-  "name": "webpackTest",
+  "name": "wb",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "open": "webpack-dev-server",
-    "build": "webpack -p"
+    "build": "webpack -p",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "css-loader": "^2.1.0",
+    "eslint": "^5.13.0",
     "file-loader": "^3.0.1",
+    "jest": "^24.1.0",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",
     "style-loader": "^0.23.1",
@@ -23,7 +25,10 @@
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
+    "babel-jest": "^24.1.0",
     "babel-loader": "^8.0.5",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.9.1",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
     "webpack": "^4.29.3",

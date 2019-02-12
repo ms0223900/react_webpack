@@ -10,6 +10,12 @@ function AA(props) {
     this is a AA11sasdask!
   </h2>);
 }
+
+
+
+
+
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -22,7 +28,10 @@ class App extends React.Component {
         <AA />
         <List />
         <button className={'button2'}>
-          button
+          button2
+        </button>
+        <button className={'button3'}>
+          button3
         </button>
       </Fragment>
     );
@@ -30,9 +39,5 @@ class App extends React.Component {
 }
 
 export default App;
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
-);
 
 console.log('app12221.jsx');

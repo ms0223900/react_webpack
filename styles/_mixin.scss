@@ -1,7 +1,15 @@
+
+
 @mixin button {
+  position: relative;
+  outline: none;
   width: 100px;
-  height: 60px;
+  height: 36px;
   background-color: #111;
   color: #fff;
-  border-radius: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  &:active {
+    top: 1px;
+  }
 }

@@ -4,3 +4,7 @@
 .button2 {
   @include button;
 }
+.button3 {
+  @include button;
+  background-color: #aa2;
+}

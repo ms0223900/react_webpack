@@ -8,7 +8,7 @@ class List extends React.PureComponent {
   render() {
     return (
       <li>
-        I am a list. Heloo
+        I am a list. Hel~~~
       </li>
     );
   }
