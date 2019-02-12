@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 module.exports = {
   entry: {
-    app: ['./src/index.js', './src/app.jsx'],
+    app: ['./src/index.jsx', './src/app.jsx'],
     vendors: ['react'],
   },
   output: {
@@ -11,11 +11,30 @@ module.exports = {
   },
   module: {
     rules: [
-      { test: /.jsx$/, exclude: /node_modules/, use: { 
-        loader: 'babel-loader', options: { presets: ['@babel/preset-react'] } }
+      { 
+        test: /\.(jsx|js)$/, 
+        exclude: /node_modules/, use: { 
+        loader: 'babel-loader', 
+        
+        options: { presets: ['@babel/preset-react'] } }
       },
       { test: /.js$/, exclude: /node_modules/, use: { 
         loader: 'babel-loader', options: { presets: ['@babel/preset-env'] } }
+      },
+      { test: /\.css$/, exclude: /node_modules/, use: ['style-loader', 'css-loader'],
+      },
+      { test: /\.(scss|sass)$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader'
+          },
+          {
+            loader: 'sass-loader'
+          }
+        ],
       },
     ],
   },
@@ -32,5 +51,8 @@ module.exports = {
   },
   devServer: {
     port: 9100,
+  },
+  resolve: {
+    extensions: ['.js', '.jsx']
   }
 }
