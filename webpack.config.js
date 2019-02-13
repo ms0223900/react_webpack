@@ -50,8 +50,10 @@ module.exports = {
 	},
 	devServer: {
 		port: 9100,
+		stats: 'errors-only',
 	},
 	resolve: {
 		extensions: ['.js', '.jsx']
-	}
+	},
+	stats: 'errors-only',
 }

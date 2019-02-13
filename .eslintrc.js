@@ -18,10 +18,6 @@ module.exports = {
         "react"
     ],
     "rules": {
-        // "indent": [
-        //     1,
-        //     "tab"
-        // ],
         "linebreak-style": [
             "warn",
             "unix"
@@ -30,10 +26,6 @@ module.exports = {
             "warn",
             "single"
         ],
-        // "semi": [
-        //     "warn",
-        //     "single"
-        // ],
         "no-console": "off",
         "react/jsx-uses-vars": "error",
         "react/jsx-uses-react": "error",
