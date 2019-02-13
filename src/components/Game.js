@@ -16,7 +16,7 @@ export default class Game extends React.PureComponent {
 
   _updateCanvas() {
     const ctx = this.refs.canvas.getContext('2d');
-    const { posPrev, posNext, count, food } = this.props;
+    const { posPrev, posNext, count, food, } = this.props;
     
     if(count === 0) {
       ctx.clearRect(0, 0, 720, 480);
@@ -35,6 +35,7 @@ export default class Game extends React.PureComponent {
         height={480}
         ref='canvas'
         id='canvas'
+        onClick={this.props.getCtxPos}
       >
       </canvas>
     );

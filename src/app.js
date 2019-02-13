@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-// import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom'
 import '../styles/style.scss'
 
 // import Header from './components/Header'
@@ -24,25 +24,35 @@ class App extends React.Component {
     this._onChangeColor = this._onChangeColor.bind(this)
   }
 
-  
+  checkCollide = () => {
+    const { posNext, snakePos, direction } = this.state;
+    const next = posNext + direction;
+    if(next % 36 === 0 | next < 0 | next > 36 * 24 | snakePos.indexOf(next) >= 0) {
+      this._onhandleClickTimer();
+      return true;
+    }
+  }
   updateFrame = () => {
     const { posNext, food, snakePos } = this.state;
-    let newSnake = [posNext, ...snakePos], newFood = food;
-    if(posNext === food) {
-      while(newSnake.indexOf(newFood = ~~(Math.random() * 36 * 24)) >= 0);
-    } else {
-      newSnake = newSnake.slice(0, -1);
-    }
+    if(!this.checkCollide()) {
+      let newSnake = [posNext, ...snakePos], newFood = food;
+      if(posNext === food) {
+        while(newSnake.indexOf(newFood = ~~(Math.random() * 36 * 24)) >= 0);
+      } else {
+        newSnake = newSnake.slice(0, -1);
+      }
 
-    this.setState(({ count, snakePos, direction }) => ({
-      count: count + 0.1,
-      snakePos: newSnake,
-      posNext: posNext + direction, 
-      posPrev: snakePos[snakePos.length - 1],
-      food: newFood,
-    }));
+      this.setState(({ count, snakePos, direction }) => ({
+        count: count + 0.1,
+        snakePos: newSnake,
+        posNext: posNext + direction, 
+        posPrev: snakePos[snakePos.length - 1],
+        food: newFood,
+      }));
+    }
     
-    console.log(snakePos);
+    
+    // console.log(snakePos);
     // console.log(posNext);
   }
   _onhandleKeydown = (e) => {
@@ -77,10 +87,41 @@ class App extends React.Component {
         count: 0,
         snakePos: [41, 40],
         posNext: 42,
+        posPrev: 40,
         direction: 1,
       })
     }
   }
+  _onGetCtxPos = (e) => {
+    const mouse = {
+      x: e.pageX,
+      y: e.pageY,
+    }
+    const ctxInfo = ReactDOM.findDOMNode(this.refs.canvas).getBoundingClientRect();
+    const centerPoint = {
+      x: ctxInfo.x + ctxInfo.width / 2,
+      y: ctxInfo.y + ctxInfo.height / 2,
+    }
+    
+    let newDir;
+    if(mouse.x > centerPoint.x && Math.abs(mouse.y - centerPoint.y) < ctxInfo.height / 3 ) {
+      newDir = 1
+    } else if(mouse.x < centerPoint.x && Math.abs(mouse.y - centerPoint.y) < ctxInfo.height / 3 ) {
+      newDir = -1;
+    } else if(mouse.y > centerPoint.y && Math.abs(mouse.y - centerPoint.y) >= ctxInfo.height / 3 ) {
+      newDir = 36;
+    } else {
+      newDir = -36;
+    }
+    if(this.state.direction !== newDir) {
+      this.setState({
+        direction: newDir,
+      })
+    }
+    // console.log(e.pageX, e.pageY);
+    // console.log(centerPoint);
+  }
+
 
   componentDidMount = () => {
     document.addEventListener('keydown', this._onhandleKeydown)
@@ -101,10 +142,12 @@ class App extends React.Component {
           handleReset={this._onhandleReset}
         />
         <Game
+          ref='canvas'
           posPrev={posPrev}
           posNext={posNext} 
           count={count}
           food={food}
+          getCtxPos={this._onGetCtxPos}
         />
 			</Fragment>
 		)
