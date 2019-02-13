@@ -6,6 +6,7 @@ module.exports = {
         "node": true
     },
     "extends": "eslint:recommended",
+    "parser": 'babel-eslint',
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
@@ -17,10 +18,10 @@ module.exports = {
         "react"
     ],
     "rules": {
-        "indent": [
-            "warn",
-            "tab"
-        ],
+        // "indent": [
+        //     1,
+        //     "tab"
+        // ],
         "linebreak-style": [
             "warn",
             "unix"
@@ -29,10 +30,10 @@ module.exports = {
             "warn",
             "single"
         ],
-        "semi": [
-            "warn",
-            "never"
-        ],
+        // "semi": [
+        //     "warn",
+        //     "single"
+        // ],
         "no-console": "off",
         "react/jsx-uses-vars": "error",
         "react/jsx-uses-react": "error",

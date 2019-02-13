@@ -35,5 +35,5 @@ module.exports = {
   // Indicates whether each individual test should be reported during the run
   verbose: false,
 
-  setupFilesAfterEnv: ["<rootDir>enzyme.config.js"],
+  setupFilesAfterEnv: ['<rootDir>enzyme.config.js'],
 };

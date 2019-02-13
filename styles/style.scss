@@ -1,10 +1,17 @@
 @import 'mixin';
+@import 'reset.css';
 
+.header {
+  background-color: #345;
+  padding: 20px;
+  color: #fff;
+}
 
 .button2 {
   @include button;
 }
 .button3 {
   @include button;
+  color: #000;
   background-color: #aa2;
 }
