@@ -1,4 +1,4 @@
-
+npm install
 ##with webpack + react + jest + enzyme + eslint 
 
 ##npm scripts:

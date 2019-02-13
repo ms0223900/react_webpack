@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
 import '../../styles/style.scss';
+// import 'typeface-roboto'
 
 export default class Header extends React.Component {
   constructor(props) {
@@ -11,21 +12,21 @@ export default class Header extends React.Component {
     };
     this.timer;
   }
-  _count = () => {
-    this.setState({
-      count: this.state.count + 1,
-    })
-  }
-  _setTimer = () => {
-    const { timerSwitch } = this.state;
-    this.setState({
-      timerSwitch: this.state.timerSwitch === false ? true : false,
-    });
-    timerSwitch ? 
-      (clearInterval(this.timer)) :
-      (this.timer = setInterval(this._count, 1000));
+  // _count = () => {
+  //   this.setState({
+  //     count: this.state.count + 1,
+  //   })
+  // }
+  // _setTimer = () => {
+  //   const { timerSwitch } = this.state;
+  //   this.setState({
+  //     timerSwitch: this.state.timerSwitch === false ? true : false,
+  //   });
+  //   timerSwitch ? 
+  //     (clearInterval(this.timer)) :
+  //     (this.timer = setInterval(this._count, 1000));
     
-  }
+  // }
   render() {
     const { count, timerSwitch } = this.state;
     return (
