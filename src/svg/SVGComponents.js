@@ -15,7 +15,7 @@ const HalfCircle = (props) => {
 
 
 const Circle = (props) => {
-  const { className='circle', cx='40', cy='40', r='30', fill } = props;
+  const { className='circle', cx=40, cy=40, r='30', fill } = props;
   // const { cx='40', cy='40', r='30', stroke='none', strokeWidth='0', fill='#000' } = props;
   return (
     <circle cx={cx} cy={cy} r={r} className={className} fill={fill} />
@@ -40,7 +40,7 @@ const Line = (props) => {
 const Text = (props) => {
   const { x='200', y='300', text='A text', className='svg-text' } = props
   return (
-    <text x={x} y={y} className={className}>
+    <text x={x} y={y} className={className} {...props} >
       {text}
     </text>
   )
@@ -57,5 +57,41 @@ const LinearGradient = (props) => {
     </defs>
   )
 }
+
+export const Arrow = (props) => {
+  const { x, y, rotate=0 } = props
+  return (
+    <g transform={`translate(${x}, ${y}) rotate(${rotate})`}  > 
+      <path d={'M0 0 l16 6 l-16 6 z'} />
+    </g>
+  )
+}
+
+export const RoundedCorner = (props) => {
+  const { x1=40, y1=100, H=200, V=200, r=30 } = props
+  let corner;
+  if(V < 0 && H > 0) {
+    corner = `c${5.5 * (r / 10)} 0, ${r} ${-4.5 * r /10}, ${r} ${-r} V${V}`;
+  } else if(V > 0 && H > 0) {
+    corner = `c${5.5 * (r / 10)} 0, ${r} ${4.5 * r /10}, ${r} ${r} V${V}`;
+  }
+  return (
+    <g>
+      {/* <path 
+        d={`M${10 + x} ${10 + y}, C${10 + x} ${4.5 + y}, ${5.5 + x} ${0 + y}, ${0 + x} ${0 + y}`} 
+        fill={'none'} 
+        stroke={'#000'} 
+        strokeWidth={2} {...props} /> */}
+        <path 
+          d={ `M${x1} ${y1}, H${H - 30}, ${corner}` }
+          fill={'none'} 
+          stroke={'#000'} 
+          strokeWidth={2} {...props}
+        />
+    </g>
+    
+  )
+}
+
 
 export { Line, Rect, Circle, HalfCircle, Text, LinearGradient };

@@ -1,6 +1,11 @@
 @import 'mixin';
 @import 'reset.css';
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+TC&subset=chinese-traditional');
 
+* {
+  font-family: 'Roboto', sans-serif, 'Noto Sans TC';
+}
 .header {
   background-color: #345;
   padding: 20px;
@@ -46,11 +51,40 @@
 .title {
   fill: #33d;
   font-size: 36px;
-  font-weight: bold;
-  writing-mode: tb;
+  // writing-mode: tb;
 }
 .grid {
   fill: none;
   stroke: #ddd;
   stroke-width: .5px;
+}
+
+#paper {
+  width: 842px;
+  height: 595px;
+}
+
+.stop-normal {
+  fill: #fff;
+  stroke: #000;
+  stroke-width: 3px;
+}
+
+.stop-now {
+  fill: #000;
+  stroke: #000;
+  stroke-width: 3px;
+}
+
+.stopName-normal {
+  font-size: 16px;
+  font-weight: 600;
+  writing-mode: tb;
+}
+
+.stopName-now {
+  font-size: 16px;
+  font-weight: 900;
+  writing-mode: tb;
+  fill: #f00;
 }

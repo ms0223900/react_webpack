@@ -3,34 +3,61 @@ import React from 'react'
 import '../../styles/style.scss'
 
 import { GridLayout } from './GridLayout'
-import { Line, Text, Circle, HalfCircle, LinearGradient } from './SVGComponents'
+// import { Line, Text, Circle, HalfCircle, LinearGradient } from './SVGComponents'
 
+// import Stop from './Stop'
+import StopLine from './StopLine'
+import { RoundedCorner } from './SVGComponents'
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      text: '',
+      routeData: [],
+    };
+  }
+
+  convertToOBj = () => {
+    const { text } = this.state;
+    const newText = () => {
+      let arr = [];
+      for(let i in text.split('\n')) {
+        arr[i] = text.split('\n')[i].split('	'); //是大空格
+      }
+      let dataArr = [];
+      for (let i = 0; i < arr[0].length; i++) {
+        dataArr = [...dataArr, {
+          id: i,
+          stopName: arr[0][i],
+          stopType: arr[1][i],
+        }]
+      }
+      return dataArr;
+    };
+    this.setState({
+      routeData: newText(),
+    })
   }
   render() {
+    const { routeData } = this.state;
     return (
       <div>
         <h2>SVG</h2>
-        <svg width='720' height='480' xmlns='http://www.w3.org/2000/svg'>
-          <GridLayout w={720} h={480}/>
-          <LinearGradient id={'LG1'} color1='#a00' color2='#a90'/>
-          {/* <Circle fill='url(#LG1)' /> */}
-          {/* <Line />
-          <Text />
-          <Rect /> */}
-          {/* <path d={'M20 20 V 90 H 90 V 20 Z'} />  */}
-          {/* <path d={'M240 240 A 60 40, 0, 0 1, 240 0'} /> */}
-          <Line x1={80} y1={80} x2={20} y2={80}/>
-          <HalfCircle pos1={[80, 80]} fill='none' stroke='#000' strokeWidth={2}/>
-          <Text text='Hello world' x='400' y='200' className='title' />
+        <svg id='paper' xmlns='http://www.w3.org/2000/svg'>
+          <GridLayout w={840} h={600}/>
+
+          <StopLine routeData={routeData} />
+          <RoundedCorner />
         </svg>
-        <svg width='720' height='480' className='withShadow'>
+        
+        <textarea onChange={ e => this.setState({ text: e.target.value, })} style={{ height: '300px', }} />
+        <button onClick={this.convertToOBj} >
+          Convert
+        </button>
+        {/* <svg width='720' height='480' className='withShadow'>
           <Circle cx='400' cy='400' />
-        </svg>
+        </svg> */}
       </div>
     );
   }
