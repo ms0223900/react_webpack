@@ -68,26 +68,21 @@ export const Arrow = (props) => {
 }
 
 export const RoundedCorner = (props) => {
-  const { x1=40, y1=100, H=200, V=200, r=30 } = props
+  const { x1=40, y1=100, h=200, v=200, r=30 } = props
   let corner;
-  if(V < 0 && H > 0) {
-    corner = `c${5.5 * (r / 10)} 0, ${r} ${-4.5 * r /10}, ${r} ${-r} V${V}`;
-  } else if(V > 0 && H > 0) {
-    corner = `c${5.5 * (r / 10)} 0, ${r} ${4.5 * r /10}, ${r} ${r} V${V}`;
+  if(v < 0 && h > 0) {
+    corner = `c${5.5 * (r / 10)} 0, ${r} ${-4.5 * r /10}, ${r} ${-r} v${v}`;
+  } else if(v > 0 && h > 0 || h < 0 && v < 0) {
+    corner = `c${5.5 * (r / 10)} 0, ${r} ${4.5 * r /10}, ${r} ${r} v${v}`;
   }
   return (
     <g>
-      {/* <path 
-        d={`M${10 + x} ${10 + y}, C${10 + x} ${4.5 + y}, ${5.5 + x} ${0 + y}, ${0 + x} ${0 + y}`} 
+      <path 
+        d={ `M${x1} ${y1}, h${h - 30}, ${corner}` }
         fill={'none'} 
         stroke={'#000'} 
-        strokeWidth={2} {...props} /> */}
-        <path 
-          d={ `M${x1} ${y1}, H${H - 30}, ${corner}` }
-          fill={'none'} 
-          stroke={'#000'} 
-          strokeWidth={2} {...props}
-        />
+        strokeWidth={2} {...props}
+      />
     </g>
     
   )

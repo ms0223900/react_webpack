@@ -3,7 +3,7 @@ import React from 'react'
 // import { HalfCircle } from './SVGComponents'
 import { Arrow } from './SVGComponents'
 import Stop from './Stop'
-
+import { RoundedCorner } from './SVGComponents'
 
 
 export default class StopLine extends React.Component {
@@ -47,11 +47,19 @@ function routeToRight(route=[]) {
 function routeToLeft(route, xInit=( 100 + 36*15 ), yInit=400) {
   return (
     <g>
-      <path 
-        d={`M ${xInit} ${yInit + 6} h 36 v -200 h -24 `} 
+      {/* <path 
+        d={`M ${xInit} ${xInit + 6} h 36 v -200 h -24 `} 
         stroke={'#000'} 
         strokeWidth={3} 
-        fill={'none'} />
+        fill={'none'} /> */}
+      <RoundedCorner
+        x1={xInit + 12} y1={yInit + 6}
+        h={36} v={-100}
+        r={6} />
+      <RoundedCorner
+        x1={xInit + 12 + 6} y1={yInit + 6 + 6 -100}
+        v={-100} h={-36}
+        r={6} />
       <Arrow 
         x={ xInit - 18 } 
         y={ yInit } 
