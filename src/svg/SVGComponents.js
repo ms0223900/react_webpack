@@ -67,26 +67,47 @@ export const Arrow = (props) => {
   )
 }
 
+// export const RoundedCorner = (props) => {
+//   const { x1=40, y1=100, h=200, v=200, r=30 } = props
+//   let corner;
+//   if(v < 0 && h > 0) {
+//     corner = `c${5.5 * (r / 10)} 0, ${r} ${-4.5 * r /10}, ${r} ${-r} v${v}`;
+//   } else if(v > 0 && h > 0 || h < 0 && v < 0) {
+//     corner = `c${5.5 * (r / 10)} 0, ${r} ${4.5 * r /10}, ${r} ${r} v${v}`;
+//   }
+//   return (
+//     <g>
+//       <path 
+//         d={ `M${x1} ${y1}, h${h - 30}, ${corner}` }
+//         fill={'none'} 
+//         stroke={'#000'} 
+//         strokeWidth={2} {...props}
+//       />
+//     </g>
+    
+//   )
+// }
+
+
 export const RoundedCorner = (props) => {
-  const { x1=40, y1=100, h=200, v=200, r=30 } = props
-  let corner;
-  if(v < 0 && h > 0) {
-    corner = `c${5.5 * (r / 10)} 0, ${r} ${-4.5 * r /10}, ${r} ${-r} v${v}`;
-  } else if(v > 0 && h > 0 || h < 0 && v < 0) {
-    corner = `c${5.5 * (r / 10)} 0, ${r} ${4.5 * r /10}, ${r} ${r} v${v}`;
+  const { x, y, h, v } = props
+  let { r } = props
+  if(r > h / 2  || r > v / 2) {
+    if(h > v) {
+      r = h / 2
+    }
+    r= v / 2
   }
   return (
-    <g>
-      <path 
-        d={ `M${x1} ${y1}, h${h - 30}, ${corner}` }
-        fill={'none'} 
-        stroke={'#000'} 
-        strokeWidth={2} {...props}
-      />
-    </g>
-    
+    <path 
+      d={`M${x} ${y} h${h - r} q${r} 0, ${r} ${r} v${v - r * 2} q0 ${r}, ${-r} ${r} h${-(h - r)} `}
+      fill={'none'} 
+      stroke={'#000'} 
+      strokeWidth={2.5}
+      {...props} />
   )
 }
+
 
 
 export { Line, Rect, Circle, HalfCircle, Text, LinearGradient };

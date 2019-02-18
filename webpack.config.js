@@ -2,6 +2,7 @@
 const path = require('path')
 const webpack = require('webpack')
 module.exports = {
+	// mode: 'development',
 	entry: {
 		app: ['./src/index.js', './src/app.js'],
 		vendors: ['react'],

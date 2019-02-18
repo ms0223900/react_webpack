@@ -7,7 +7,7 @@ import { GridLayout } from './GridLayout'
 
 // import Stop from './Stop'
 import StopLine from './StopLine'
-import { RoundedCorner } from './SVGComponents'
+// import { RoundedCorner } from './SVGComponents'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -48,7 +48,8 @@ export default class App extends React.Component {
           <GridLayout w={840} h={600}/>
 
           <StopLine routeData={routeData} />
-          <RoundedCorner />
+          {/* <RoundedCorner x1='100' y1='200' h='30' v='30' r='20' />
+          <path d={'M60 20 Q70 20, 70 30 v100 q0 10, -10 10 h-20'} stroke="black" fill="transparent" /> */}
         </svg>
         
         <textarea onChange={ e => this.setState({ text: e.target.value, })} style={{ height: '300px', }} />
