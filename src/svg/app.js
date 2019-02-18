@@ -3,11 +3,7 @@ import React from 'react'
 import '../../styles/style.scss'
 
 import { GridLayout } from './GridLayout'
-// import { Line, Text, Circle, HalfCircle, LinearGradient } from './SVGComponents'
-
-// import Stop from './Stop'
 import StopLine from './StopLine'
-// import { RoundedCorner } from './SVGComponents'
 
 export default class App extends React.Component {
   constructor(props) {

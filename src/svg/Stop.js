@@ -15,12 +15,12 @@ export default class Stop extends React.Component {
           cx={ circleR } 
           cy={ circleR } 
           r={ circleR } 
-          className={stopType === 'normal' ? 'stop-normal' : 'stop-now'} 
+          className={ stopType === 'normal' ? ('stop-normal') : (stopType === 'passed' ? 'stop-passed' : 'stop-now') } 
         />
         <text 
           x={ circleR - 1 } 
           y={ circleR * 2 + 8 }
-          className={stopType === 'normal' ? 'stopName-normal' : 'stopName-now'} >
+          className={ stopType === 'normal' ? ('stopName-normal') : (stopType === 'passed' ? 'stopName-passed' : 'stopName-now') } >
           {stopName}
         </text>
       </g>

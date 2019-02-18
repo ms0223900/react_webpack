@@ -1,6 +1,5 @@
 import React from 'react'
 
-// import { HalfCircle } from './SVGComponents'
 import { Arrow, RoundedCorner } from './SVGComponents'
 // import { Arrow,  } from './SVGComponents'
 import Stop from './Stop'
@@ -13,86 +12,49 @@ export default class StopLine extends React.Component {
   }
   render() {
     const { routeData=[] } = this.props;
-    // const route1 = []
-    // const route2 = []
-    // const route3 = []
-    
     return (
       <g id={'route1'}>
-      {/* { routeData.length > 0 ? RouteToRight(route1): <g /> }
-      { routeData.length > 16 ? RouteToLeft(route2): <g /> }
-      { routeData.length > 32 ? RouteToRight(route3): <g /> } */}
-      <GenarateRoutes routeData={routeData} />
-    </g>
+        <GenarateRoutes routeData={routeData} />
+      </g>
     )
   }
 }
 
-function RouteToRight({ route=[], x=100, y=200, stops=16 }) {
+function Route({ direction='right', route=[], x=100, y=200, stops=16, lastStops=0 }) {
   const avgDistance = (614 / (stops - 1))
-  return (
-    <g>
-      <Arrow x={x + 18} y={y} />
-      <path d={`M ${x} ${y + 6} l ${ (route.length - 1) * avgDistance } 0` } stroke={'#000'} strokeWidth={3} />
-      {
-        route.map(ls => (
-          <Stop 
-            x={ x + ls.id * avgDistance }
-            y={ y }
-            stopName={ ls.stopName }
-            stopType={ ls.stopType === '1' ? 'normal' : 'now' }
-          />
-        ))
-      }
-    </g>
-    
-  )
-}
+  let dir = (direction === 'right' ? true : false);
+  lastStops = lastStops === 0 ? stops : lastStops
 
-function RouteToLeft({ route=[], x=614, y=400, stops=16 }) {
-  const avgDistance = (614 / (stops - 1))
   return (
     <g>
       <Arrow 
-        x={ x - 18 } 
-        y={ y } 
-        rotate={ '180, 6, 6' } />
+        x={dir ? x + 18 : x - 18} 
+        y={y}
+        rotate={ dir ? '0' : '180, 6, 6' } />
       <path 
-        d={`M ${x} ${y + 6} l ${ -(route.length - 1) * avgDistance } 0` } 
+        d={`
+          M ${x} ${y + 6} 
+          l ${ dir ? (route.length - 1) * avgDistance : -(route.length - 1) * avgDistance } 0` } 
         stroke={'#000'} 
         strokeWidth={3} />
       {
         route.map(ls => (
           <Stop 
-            x={ x - (( (ls.id - 1) - (stops) ) * avgDistance) } 
+            x={ dir ? x + (( ls.id % lastStops ) * avgDistance) : x - (( ls.id % lastStops ) * avgDistance) }
             y={ y }
             stopName={ ls.stopName }
-            stopType={ ls.stopType === '1' ? 'normal' : 'now' }
+            stopType={ ls.stopType === '1' ? ('normal') : (ls.stopType === '-1' ? 'passed' : 'now') }
           />
         ))
       }
     </g>
-  )  
+  )
 }
 function GenarateRoutes(props) {
-  const { routeData=[] } = props
+  const { routeData } = props
   const stops = routeData.length
-  // function getSeperateRoute() {
-  //   let sepRoute = [routeData.filter(data => data.id < 10), [], [], []]
-  //   for(let i = 0; i < stops; i++) {
-  //     if(routeData[i].id >= 80) {
-  //       sepRoute[3] = [...sepRoute[3], routeData[i]]
-  //     } else if(routeData[i].id >= 40) {
-  //       sepRoute[2] = [...sepRoute[2], routeData[i]]
-  //     } else if(routeData[i].id >= 20) {
-  //       sepRoute[1] = [...sepRoute[1], routeData[i]]
-  //     }
-  //   }
-  //   return sepRoute
-  // }
-  // console.log(getSeperateRoute())
-
-
+  const lines = Math.round(stops < 10 ? 1 : Math.ceil(routeData.length / 40) + 1)
+  const stopsPerLine = Math.round(stops / lines)
   const drawLineArea = {
     x: 168,
     y: 108,
@@ -107,16 +69,14 @@ function GenarateRoutes(props) {
       '4Line': 14,
     }
   }
-  const lines = Math.round(stops < 10 ? 1 : Math.ceil(routeData.length / 40) + 1)
-  const stopsPerLine = Math.round(stops / lines)
-
   
 
   switch (lines) {
     case 1:
       return (
         <g style={{ 'fontSize': styles.font['1Line'] }}>
-          <RouteToRight 
+          <Route
+            direction='right' 
             route={routeData} 
             x={drawLineArea.x}
             y={drawLineArea.y + drawLineArea.h / (lines + 1) - 100}
@@ -124,10 +84,12 @@ function GenarateRoutes(props) {
           />
         </g>
       );
+    
     case 2:
       return (
         <g style={{ 'fontSize': styles.font['2Line'] }}>
-          <RouteToRight 
+          <Route
+            direction='right' 
             route={routeData.filter(data => data.id < stopsPerLine)} 
             x={drawLineArea.x}
             y={drawLineArea.y}
@@ -141,16 +103,115 @@ function GenarateRoutes(props) {
             r={10}  
             strokeWidth={3}
           />
-          <RouteToLeft 
+          <Route
+            direction='left' 
             route={routeData.filter(data => data.id >= stopsPerLine)} 
             x={ drawLineArea.x + drawLineArea.w }
             y={drawLineArea.y + drawLineArea.h / (lines * 1)}
             stops={stops - stopsPerLine} //剩下的站
+            lastStops={stopsPerLine}
           />
         </g>
       );
-    // case 3:
-    // case 4:
+    
+    case 3:
+      return (
+        <g style={{ 'fontSize': styles.font['3Line'] }}>
+          <Route
+            direction='right' 
+            route={routeData.filter(data => data.id < stopsPerLine)} 
+            x={drawLineArea.x}
+            y={drawLineArea.y}
+            stops={stopsPerLine}
+          />
+          <RoundedCorner 
+            x={ drawLineArea.x + drawLineArea.w + 12 }
+            y={drawLineArea.y + (drawLineArea.h / lines) * 0 + 6}
+            h={20}
+            v={drawLineArea.h / (lines * 1)}
+            r={10}  
+          />
+          <Route
+            direction='left' 
+            route={
+              routeData.filter(data => data.id >= stopsPerLine && data.id < stopsPerLine * 2)} 
+            x={ drawLineArea.x + drawLineArea.w }
+            y={drawLineArea.y + drawLineArea.h / (lines * 1)}
+            stops={stopsPerLine}
+          />
+          <RoundedCorner 
+            x={ drawLineArea.x }
+            y={drawLineArea.y + (drawLineArea.h / lines) * 1 + 6}
+            h={-20}
+            v={drawLineArea.h / (lines * 1)}
+            r={10} 
+          />
+          <Route
+            direction='right'
+            route={routeData.filter(data => data.id >= stopsPerLine * 2)} 
+            x={ drawLineArea.x }
+            y={drawLineArea.y + (drawLineArea.h / lines) * 2}
+            stops={stops - stopsPerLine * 2} //剩下的站
+            lastStops={stopsPerLine}
+          />
+        </g>
+      )
+      case 4:
+      return (
+        <g style={{ 'fontSize': styles.font['4Line'] }}>
+          <Route
+            direction='right' 
+            route={routeData.filter(data => data.id < stopsPerLine)} 
+            x={drawLineArea.x}
+            y={drawLineArea.y}
+            stops={stopsPerLine}
+          />
+          <RoundedCorner 
+            x={ drawLineArea.x + drawLineArea.w + 12 }
+            y={drawLineArea.y + (drawLineArea.h / lines) * 0 + 6}
+            h={20}
+            v={drawLineArea.h / (lines * 1)}
+            r={10}  
+          />
+          <Route
+            direction='left' 
+            route={
+              routeData.filter(data => data.id >= stopsPerLine && data.id < stopsPerLine * 2)} 
+            x={ drawLineArea.x + drawLineArea.w }
+            y={drawLineArea.y + drawLineArea.h / (lines * 1)}
+            stops={stopsPerLine}
+          />
+          <RoundedCorner 
+            x={ drawLineArea.x }
+            y={drawLineArea.y + (drawLineArea.h / lines) * 1 + 6}
+            h={-20}
+            v={drawLineArea.h / (lines * 1)}
+            r={10} 
+          />
+          <Route
+            direction='right'
+            route={routeData.filter(data => data.id >= stopsPerLine * 2 && data.id < stopsPerLine * 3)} 
+            x={ drawLineArea.x }
+            y={ drawLineArea.y + (drawLineArea.h / lines) * 2 }
+            stops={stopsPerLine}
+          />
+          <RoundedCorner 
+            x={ drawLineArea.x + drawLineArea.w + 12 }
+            y={ drawLineArea.y + (drawLineArea.h / lines) * 2 + 6 }
+            h={20}
+            v={drawLineArea.h / (lines * 1)}
+            r={10} 
+          />
+          <Route
+            direction='left'
+            route={routeData.filter(data => data.id >= stopsPerLine * 3)} 
+            x={ drawLineArea.x + drawLineArea.w }
+            y={ drawLineArea.y + (drawLineArea.h / lines) * 3 }
+            stops={stops - stopsPerLine * 3} //剩下的站
+            lastStops={stopsPerLine}
+          />
+        </g>
+      )
     default:
       return (
         <g></g>

@@ -63,6 +63,11 @@
   width: 842px;
   height: 595px;
 }
+.stop-passed {
+  fill: #fff;
+  stroke: #aaa;
+  stroke-width: 1px;
+}
 
 .stop-normal {
   fill: #fff;
@@ -74,6 +79,12 @@
   fill: #000;
   stroke: #000;
   stroke-width: 2.5px;
+}
+.stopName-passed {
+  // font-size: 16px;
+  font-weight: 600;
+  writing-mode: tb;
+  opacity: .35;
 }
 
 .stopName-normal {

@@ -92,15 +92,28 @@ export const Arrow = (props) => {
 export const RoundedCorner = (props) => {
   const { x, y, h, v } = props
   let { r } = props
-  if(r > h / 2  || r > v / 2) {
+  // max radius
+  if(r > Math.abs(h / 2)  || r > Math.abs(v / 2)) {
     if(h > v) {
-      r = h / 2
+      r = Math.abs(h / 2)
     }
-    r= v / 2
+    r = Math.abs(v / 2)
   }
+  // to adjust the line direction, change r to vector r
+  let 
+    rh = h >= 0 ? r : -r, 
+    rv = v >= 0 ? r : -r;
+
   return (
     <path 
-      d={`M${x} ${y} h${h - r} q${r} 0, ${r} ${r} v${v - r * 2} q0 ${r}, ${-r} ${r} h${-(h - r)} `}
+      d={`
+        M${x} ${y} 
+        h${ h >= 0 ? h - r : h + r } 
+        q${rh} 0, ${rh} ${rv} 
+        v${ v >= 0 ? v - r * 2 : v + r * 2 } 
+        q0 ${rv}, ${-rh} ${rv} 
+        h${h >= 0 ? -(h - r) : -(h + r) } 
+      `}
       fill={'none'} 
       stroke={'#000'} 
       strokeWidth={2.5}
