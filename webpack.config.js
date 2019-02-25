@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 const path = require('path')
 const webpack = require('webpack')
+
 module.exports = {
 	// mode: 'development',
 	entry: {
@@ -11,6 +12,7 @@ module.exports = {
 		filename: 'bundle.js',
 		path: path.resolve(__dirname, './dist/'),
 	},
+	target: 'web',
 	module: {
 		rules: [
 			{ 
@@ -35,7 +37,12 @@ module.exports = {
         test: /\.(jsx|js)$/, 
         exclude: /node_modules/,
         loader: 'eslint-loader',
-      }
+			},
+			{
+        test: /\.(csv|txt)$/, 
+        exclude: /node_modules/,
+        loader: 'file-loader',
+			}
 		],
 	},
 	optimization: { //split the static or larger code to vendor file
@@ -57,4 +64,8 @@ module.exports = {
 		extensions: ['.js', '.jsx']
 	},
 	stats: 'errors-only',
+	node: {
+		fs: 'empty',
+	},
+	
 }

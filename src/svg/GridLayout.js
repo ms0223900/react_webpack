@@ -1,7 +1,6 @@
 import React from 'react'
 
-
-export  const GridLayout = (props) => {
+export const GridLayout = (props) => {
   const { w='400', h='400' } = props
   const gridCountW = w / 20, gridCountH = h / 20;
   let arr = [];

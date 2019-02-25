@@ -38,14 +38,17 @@ function Route({ direction='right', route=[], x=100, y=200, stops=16, lastStops=
         stroke={'#000'} 
         strokeWidth={3} />
       {
-        route.map(ls => (
-          <Stop 
+        route.map(ls => {
+          console.log(ls.stopType * 1)
+          return (
+            <Stop 
             x={ dir ? x + (( ls.id % lastStops ) * avgDistance) : x - (( ls.id % lastStops ) * avgDistance) }
             y={ y }
             stopName={ ls.stopName }
-            stopType={ ls.stopType === '1' ? ('normal') : (ls.stopType === '-1' ? 'passed' : 'now') }
+            stopType={ ls.stopType * 1 === 1 ? ('normal') : (ls.stopType * 1 === -1 ? 'passed' : 'now') }
           />
-        ))
+          )
+        })
       }
     </g>
   )
@@ -54,7 +57,7 @@ function GenarateRoutes(props) {
   const { routeData } = props
   const stops = routeData.length
   const lines = Math.round(stops < 10 ? 1 : Math.ceil(routeData.length / 40) + 1)
-  const stopsPerLine = Math.round(stops / lines)
+  const stopsPerLine = Math.ceil(stops / lines)
   const drawLineArea = {
     x: 168,
     y: 108,

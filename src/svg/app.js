@@ -2,16 +2,15 @@
 import React from 'react'
 import '../../styles/style.scss'
 
-import { GridLayout } from './GridLayout'
-import StopLine from './StopLine'
+import SVGPaper from './SVGPaper'
+
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       text: '',
-      routeData: [],
-      routeInfo: {},
+      routes: [],
     };
   }
 
@@ -42,34 +41,73 @@ export default class App extends React.Component {
       routeInfo: routeInfo
     })
   }
+  componentWillMount = () => {
+    // fetch('../src/svg/routeinfo.txt')
+    //   .then(res => res.text())
+    //   .then(txt => { console.log(txt.split('\n')) })
+    //   .then(console.log(fetchData))
+    fetch('../src/svg/routeinfo.txt')
+      .then(res => res.text())
+      .then(txt => { 
+        let fetchData = txt.split('\n')
+         //single row
+        fetchData = fetchData.map(arr => arr.split(',').filter(d => d.trim().length > 0).slice(0))
+        console.log(fetchData)
+
+
+         //split into multi row
+        let multiRoute = []
+        for (let i = 0; i < fetchData.length / 8; i++) {
+          multiRoute[i] = fetchData.slice(8 * i, 7 + 8 * i + 1)
+        }
+        //multi route data
+        let routeData = []
+        for (let i = 0; i < multiRoute.length; i++) {
+          routeData[i] = []
+          for (let j = 0; j < multiRoute[i][6].length; j++) {
+            routeData[i] = [
+              ...routeData[i],
+              {
+                id: j,
+                stopName: multiRoute[i][6][j],
+                stopType: multiRoute[i][7][j]
+              }
+            ]
+          }
+        }
+        //multi route info
+        let routes = []
+        for (let i = 0; i < multiRoute.length; i++) {
+        const engName = multiRoute[i][2].length === 0 ? ['', ''] : multiRoute[i][2]
+          routes[i] = {
+            number: multiRoute[i][0][0],
+            fromTo: [multiRoute[i][1][0], multiRoute[i][1][1]],
+            fromToEng: [engName[0], engName[1]],
+            data: routeData[i]
+          }
+        }
+        
+        console.log(routes)
+        
+
+        this.setState({
+          routes: routes,
+        })
+      })
+      
+  }
+  
   render() {
-    const { routeData } = this.state;
+    const { routes } = this.state;
     return (
       <div>
-        <h2>SVG</h2>
-        <svg id='paper' xmlns='http://www.w3.org/2000/svg'>
-          <GridLayout w={840} h={600}/>
-
-          <StopLine routeData={routeData} />
-          {/* <RoundedCorner x1='100' y1='200' h='30' v='30' r='20' />
-          <path d={'M60 20 Q70 20, 70 30 v100 q0 10, -10 10 h-20'} stroke="black" fill="transparent" /> */}
-        </svg>
-        
-        <textarea onChange={ e => this.setState({ text: e.target.value, })} style={{ height: '300px', }} />
-        <button onClick={this.convertExcelToOBj} >
-          Convert
-        </button>
-        {/* <svg width='720' height='480' className='withShadow'>
-          <Circle cx='400' cy='400' />
-        </svg> */}
+        {routes.map(r => (
+          <SVGPaper routes={r} />
+        ))}
       </div>
     );
   }
 }
 
-{/* <path d="
-        M cx - r, cy
-        a r,r 0 1,0 (r * 2),0
-        a r,r 0 1,0 -(r * 2),0
-    "/> */}
+
 

@@ -7,6 +7,8 @@ var express = require('express')
 var compression = require('compression')
 var morgan = require('morgan')
 
+
+
 var app = express()
 var port = process.env.PORT || 3010
 
@@ -26,6 +28,8 @@ if (process.env.NODE_ENV == 'development' || process.env.NODE_ENV == 'testing'){
 
 app.use(compression())
 app.use(express.static(__dirname + '/dist'))
+
+
 
 app.listen(port, function(err) {
   if(err) {
