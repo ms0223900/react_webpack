@@ -1,8 +1,6 @@
 
 import React from 'react'
 import '../../styles/style.scss'
-import { data } from './datatest'
-console.log(data)
 
 import SVGPaper from './SVGPaper'
 
@@ -44,36 +42,39 @@ export default class App extends React.Component {
     })
   }
   componentWillMount = () => {
-    // fetch('../src/svg/routeinfo.txt')
-    //   .then(res => res.text())
-    //   .then(txt => { console.log(txt.split('\n')) })
-    //   .then(console.log(fetchData))
-    const routePath = '../src/routeFiles/routeDataAll.txt'
+    // const routePath = '../src/routeFiles/routeDataAll.txt'
+    const routePath = 'routeDataAll.txt'
     fetch(routePath)
       .then(res => res.text())
       .then(txt => { 
         let fetchData = txt.split('\n')
          //single row
-        fetchData = fetchData.map(arr => arr.split(',').filter(d => d.trim().length > 0).slice(0))
+        fetchData = fetchData.map(arr => arr.split(',').filter(d => d.trim().length > 0))
+        for (let i = 0; i < fetchData.length; i++) {
+          if(i % 8 === 2 && fetchData[i].length === 0) {
+            fetchData[i] = ['', '']
+          }
+        }
+        fetchData = fetchData.filter(t => t.length > 0)
         console.log(fetchData)
 
 
          //split into multi row
         let multiRoute = []
-        for (let i = 0; i < fetchData.length / 8; i++) {
-          multiRoute[i] = fetchData.slice(8 * i, 7 + 8 * i + 1)
+        for (let i = 0; i < fetchData.length / 5; i++) {
+          multiRoute[i] = fetchData.slice(5 * i, 4 + (5 * i + 1))
         }
         //multi route data
         let routeData = []
         for (let i = 0; i < multiRoute.length; i++) {
           routeData[i] = []
-          for (let j = 0; j < multiRoute[i][6].length; j++) {
+          for (let j = 0; j < multiRoute[i][3].length; j++) {
             routeData[i] = [
               ...routeData[i],
               {
                 id: j,
-                stopName: multiRoute[i][6][j],
-                stopType: multiRoute[i][7][j]
+                stopName: multiRoute[i][3][j],
+                stopType: multiRoute[i][4][j]
               }
             ]
           }
@@ -98,6 +99,9 @@ export default class App extends React.Component {
         })
       })
       
+  }
+  componentDidMount = () => {
+    console.log('load success!')
   }
   
   render() {

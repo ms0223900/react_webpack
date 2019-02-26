@@ -1,4 +1,5 @@
 import React from 'react'
+import bigArrow from '../images/BigArrow-white.svg'
 
 const HalfCircle = (props) => {
   const { pos1: [x1, y1], dir=0, r=20, clockDir=0 } = props
@@ -68,14 +69,15 @@ export const Arrow = (props) => {
 }
 
 export const BigArrow = (props) => {
-  const { x=100, y=100, width=40, rotate=0 } = props
+  const { x=100, y=100, width=40, height=20, rotate=0 } = props
   return (
     <g
       transform={`translate(${x}, ${y}) rotate(${rotate})`}
     > 
       <image 
         width={width} 
-        xlinkHref={'../src/images/BigArrow-white.svg'} 
+        height={height}
+        xlinkHref={bigArrow} 
         class={'bigArrow'}
       />
     </g>

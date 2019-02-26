@@ -3,6 +3,7 @@ import React from 'react'
 import { GridLayout } from './GridLayout'
 import StopLine from './StopLine'
 import { Head } from './Head'
+import { SideInfo } from './SideInfo'
 
 
 export default class SVGPaper extends React.Component {
@@ -10,6 +11,11 @@ export default class SVGPaper extends React.Component {
     super(props);
     this.state = {};
   }
+  componentDidMount = () => {
+    // const { routes } = this.props
+    console.log('SVGPaper load success')
+  }
+  
   render() {
     const { routes } = this.props
     return (
@@ -21,6 +27,7 @@ export default class SVGPaper extends React.Component {
             fromTo={routes.fromTo}
             fromToEng={routes.fromToEng}
           />
+          <SideInfo />
           <StopLine routeData={routes.data} />
         </svg>
         {/* <button onClick={this.convertExcelToOBj} >

@@ -39,10 +39,9 @@ module.exports = {
         loader: 'eslint-loader',
 			},
 			{
-        test: /\.(csv|txt)$/, 
-        exclude: /node_modules/,
-        loader: 'file-loader',
-			}
+				test: /\.(jpe?g|png|gif|svg)$/i, 
+				loader: 'file-loader'
+			},	
 		],
 	},
 	optimization: { //split the static or larger code to vendor file

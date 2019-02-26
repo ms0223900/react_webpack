@@ -4,6 +4,8 @@ import { Arrow, RoundedCorner } from './SVGComponents'
 // import { Arrow,  } from './SVGComponents'
 import Stop from './Stop'
 
+const ThemeColor = '#006633'
+
 
 export default class StopLine extends React.Component {
   constructor(props) {
@@ -35,7 +37,7 @@ function Route({ direction='right', route=[], x=100, y=200, stops=16, lastStops=
         d={`
           M ${x} ${y + 6} 
           l ${ dir ? (route.length - 1) * avgDistance : -(route.length - 1) * avgDistance } 0` } 
-        stroke={'#000'} 
+        stroke={ThemeColor} 
         strokeWidth={3} />
       {
         route.map(ls => {
@@ -90,7 +92,7 @@ function GenarateRoutes(props) {
     
     case 2:
       return (
-        <g style={{ 'fontSize': styles.font['2Line'] }}>
+        <g style={{ 'fontSize': styles.font['2Line'] }} transform={'translate(0, 40)'} >
           <Route
             direction='right' 
             route={routeData.filter(data => data.id < stopsPerLine)} 
@@ -105,6 +107,7 @@ function GenarateRoutes(props) {
             v={drawLineArea.h / (lines * 1)}
             r={10}  
             strokeWidth={3}
+            stroke={ThemeColor}
           />
           <Route
             direction='left' 
@@ -133,6 +136,7 @@ function GenarateRoutes(props) {
             h={20}
             v={drawLineArea.h / (lines * 1)}
             r={10}  
+            stroke={ThemeColor}
           />
           <Route
             direction='left' 
@@ -148,6 +152,7 @@ function GenarateRoutes(props) {
             h={-20}
             v={drawLineArea.h / (lines * 1)}
             r={10} 
+            stroke={ThemeColor}
           />
           <Route
             direction='right'
@@ -175,6 +180,7 @@ function GenarateRoutes(props) {
             h={20}
             v={drawLineArea.h / (lines * 1)}
             r={10}  
+            stroke={ThemeColor}
           />
           <Route
             direction='left' 
@@ -190,6 +196,7 @@ function GenarateRoutes(props) {
             h={-20}
             v={drawLineArea.h / (lines * 1)}
             r={10} 
+            stroke={ThemeColor}
           />
           <Route
             direction='right'
@@ -204,6 +211,7 @@ function GenarateRoutes(props) {
             h={20}
             v={drawLineArea.h / (lines * 1)}
             r={10} 
+            stroke={ThemeColor}
           />
           <Route
             direction='left'

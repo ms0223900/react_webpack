@@ -1,5 +1,6 @@
 import React from 'react'
 import { Text, BigArrow } from './SVGComponents'
+import backgroudImage from '../images/Head_background.png'
 
 const styles = {
   fontSize: {
@@ -29,7 +30,7 @@ export const Head = (props) => {
   return (
     <g>
       <image 
-        xlinkHref={'../src/images/Head_background.png'}
+        xlinkHref={backgroudImage}
         width={'840'} 
       />
       <Text
@@ -64,7 +65,7 @@ export const Head = (props) => {
               layOut.stop.x + 
               fromTo[0].length * styles.fontSize.stop + layOut.bigArrow.spacting 
             }
-            y={layOut.topLine}
+            y={layOut.topLine + 2}
             width={40}
             rotate={0}
             fill={'#000'}
