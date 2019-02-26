@@ -99,3 +99,19 @@
   writing-mode: tb;
   fill: #f00;
 }
+.routeNumber {
+  font-size: 62px;
+  font-style: italic;
+  font-weight: 200;
+  text-align: center;
+  vertical-align: top;
+  // fill: #fff;
+}
+.routeNumber,
+.stop,
+.stop-eng {
+  fill: #fff;
+}
+.bigArrow {
+  fill: #000;
+}

@@ -1,6 +1,8 @@
 
 import React from 'react'
 import '../../styles/style.scss'
+import { data } from './datatest'
+console.log(data)
 
 import SVGPaper from './SVGPaper'
 
@@ -46,7 +48,8 @@ export default class App extends React.Component {
     //   .then(res => res.text())
     //   .then(txt => { console.log(txt.split('\n')) })
     //   .then(console.log(fetchData))
-    fetch('../src/svg/routeinfo.txt')
+    const routePath = '../src/routeFiles/routeDataAll.txt'
+    fetch(routePath)
       .then(res => res.text())
       .then(txt => { 
         let fetchData = txt.split('\n')
@@ -100,11 +103,16 @@ export default class App extends React.Component {
   render() {
     const { routes } = this.state;
     return (
-      <div>
-        {routes.map(r => (
-          <SVGPaper routes={r} />
-        ))}
-      </div>
+      <React.Fragment>
+        <div>
+          {routes.map(r => (
+            <SVGPaper routes={r} />
+          ))}
+        </div>
+        <div>
+          路線資料載入中...
+        </div>
+      </React.Fragment>
     );
   }
 }

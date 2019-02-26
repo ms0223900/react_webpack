@@ -1,3 +1,5 @@
+/* eslint-disable quotes */
+/* eslint-disable no-unused-vars */
 require('dotenv').config()
 
 var path = require('path')
@@ -6,7 +8,8 @@ var FileStreamRotator = require('file-stream-rotator')
 var express = require('express')
 var compression = require('compression')
 var morgan = require('morgan')
-
+var write = require('./src/svg/writeFile')
+write();
 
 
 var app = express()
@@ -24,6 +27,7 @@ if (process.env.NODE_ENV == 'development' || process.env.NODE_ENV == 'testing'){
   });
   app.use(morgan('combined',{ stream: log_stream }));
 }
+
 
 
 app.use(compression())

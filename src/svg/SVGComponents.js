@@ -67,6 +67,21 @@ export const Arrow = (props) => {
   )
 }
 
+export const BigArrow = (props) => {
+  const { x=100, y=100, width=40, rotate=0 } = props
+  return (
+    <g
+      transform={`translate(${x}, ${y}) rotate(${rotate})`}
+    > 
+      <image 
+        width={width} 
+        xlinkHref={'../src/images/BigArrow-white.svg'} 
+        class={'bigArrow'}
+      />
+    </g>
+  )
+}
+
 // export const RoundedCorner = (props) => {
 //   const { x1=40, y1=100, h=200, v=200, r=30 } = props
 //   let corner;
