@@ -11,7 +11,8 @@ var express = require('express')
 var compression = require('compression')
 var morgan = require('morgan')
 var write = require('./src/svg/writeFile')
-write();
+write('ChiaYi')
+write('Yunlin');
 
 
 var app = express()
@@ -44,5 +45,3 @@ app.listen(port, function(err) {
     console.info('==> 🌎  Listening on port %s. Open up http://localhost:%s/ in your browser.', port, port)
   }
 })
-
-console.log('aa')

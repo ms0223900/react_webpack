@@ -5,7 +5,7 @@ const webpack = require('webpack')
 module.exports = {
 	// mode: 'development',
 	entry: {
-		app: ['./src/index.js', './src/app.js'],
+		app: ['./src/index.js'],
 		vendors: ['react'],
 	},
 	output: {

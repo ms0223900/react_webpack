@@ -5,8 +5,10 @@ import StopLine from './StopLine'
 import { Head } from './Head'
 import { SideInfo } from './SideInfo'
 
+import YunlinBG from '../images/Yunlin_BG-02.svg'
 
-export default class SVGPaper extends React.Component {
+
+export class SVGPaper_ChiaYi extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -36,6 +38,35 @@ export default class SVGPaper extends React.Component {
         {/* <svg width='720' height='480' className='withShadow'>
           <Circle cx='400' cy='400' />
         </svg> */}
+      </div>
+    );
+  }
+}
+
+export class SVGPaper_Yunlin extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+  componentDidMount = () => {
+    // const { routes } = this.props
+    console.log('SVGPaper load success')
+  }
+  
+  render() {
+    // const { routes } = this.props
+    return (
+      <div>
+        <svg id='paper' xmlns='http://www.w3.org/2000/svg'>
+        <image 
+          width='840'
+          xlinkHref={YunlinBG}
+        />
+          <GridLayout w={840} h={600}/>
+          <h2>
+            Yunlin
+          </h2>
+        </svg>
       </div>
     );
   }

@@ -18,10 +18,10 @@ module.exports = {
         "react"
     ],
     "rules": {
-        "linebreak-style": [
-            "warn",
-            "unix"
-        ],
+        // "linebreak-style": [
+        //     "warn",
+        //     "unix"
+        // ],
         "quotes": [
             "warn",
             "single"
