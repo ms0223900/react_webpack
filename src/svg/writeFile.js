@@ -10,11 +10,20 @@ module.exports = write = (location) => {
   for (let i = 0; i < datas.length; i++) {
     let file = fs.readdirSync(`src/routeFiles/${location}`)[i]
     let fileCxt = fs.readFileSync(`src/routeFiles/${location}/${file}`, 'UTF-8')
-    if(i > 0) {
-      totalData += '\n'
-      if(location === 'Yunlin' && fileCxt.split('\n').length % 14 !== 0) {
-        totalData += '\n' + '\n'
+    if(location === 'Yunlin') {
+      fileCxt = fileCxt.split('\n').filter(t => t.trim().length > 0)
+      console.log(fileCxt.length)
+      if(fileCxt.length % 14 !== 0) {
+        fileCxt = [...fileCxt, '', '', '']
+        fileCxt = fileCxt.join('\n')
+        fileCxt = fileCxt.slice(1, fileCxt.length)
+      } else {
+        fileCxt = fileCxt.join('\n')
       }
+      
+    }
+    if(i > 0 && location !== 'Yunlin') {
+      totalData += '\n'
     }
     totalData += fileCxt
   }

@@ -51,25 +51,27 @@ export const Convert_ChiaYi = (csv) => {
 }
 
 export const Convert_Yunlin = (csv) => {
-  let CSV = csv.split('\n')
+  let CSV = csv.split('\r').map(d => d.replace('\n', ''))
   if(CSV.length % 14 !== 0) {
     CSV = [...CSV, '']
   }
+  console.log(CSV)
   //single row
-  CSV = CSV.map(arr => arr.split(',').filter(d => d.trim().length > 0))
+  CSV = CSV.map(arr => arr.split(',').filter(d => d.length > 0))
   for (let i = 0; i < CSV.length; i++) {
     if(i % 14 === 12 && CSV[i].length === 0 || 
       i % 14 === 13 && CSV[i].length === 0) {
       CSV[i] = ['']
     }
   }
-
+  
   //14 a row
   let multiRoute = []
   for (let i = 0; i < ~~(CSV.length / 14); i++) {
     multiRoute[i] = CSV.slice(14 * i, 13 + (14 * i + 1))
   }
   CSV = multiRoute
+  console.log(multiRoute)
 
   //multi routes
   let routeData = []

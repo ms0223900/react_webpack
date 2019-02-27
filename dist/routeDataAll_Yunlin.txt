@@ -1,4 +1,31 @@
-﻿7111,F,,,,週六班次為支線A[繞駛臺西國中],,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+﻿7104,F,,,,支線A[不經 高鐵雲林站],,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+虎尾,麥寮,,高鐵雲林站、崙背、麥寮、雲林長庚醫院,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Huwei,Liuqing Industry Park,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+依里程計費,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+臺西客運 05-6322168,公路總局用路人服務專線 0800-231035,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+0715,0750,0810,0830,0900,1150,1200,1240,1320,1350,,,,,,,,,,,,,,,,,,,,,,,,,,
+0730,0750,1150,1240,1320,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+虎尾,勝源,埒內社區,興隆毛巾工廠,台大虎尾分院,高鐵雲林站,吳厝,湳仔,三和國小,十八張犁,三塊厝,深坑,港尾,東興國小,羅厝,羅厝1,新起寮,崙背,松本超市,鹽園,五塊厝,大有,華濟醫院,興化厝,霄仁厝,鎮東宮,麥寮衛生所,麥寮,麥寮鄉公所,麥寮高中,楊厝,後安,雲林長庚醫院,六輕工業區,,
+Huwei,Shengyuan,Lenei Community,SL Towel Industrial Factory,NTU Hospital Huwei Branch,Yunlin HSR Station,Wucuo,Nanzi,Sanhe Elementary School,Shibazhangli,Sankuaicuo,Shenkeng,Gangwei,Dongsing Elementary School,Luocuo,Luocuo(I),Xinqiliao,Lunbei,Songben Supermarket,Yanyuan,Wukuaicuo,Dayou,Huaji Hospital,Xinghuacuo,Xiaorencuo,Zhendong temple,Mailiao Public Health Office,Mailiao,Mailiao Township Office,Mailiao Senior High School,Yangcuo,Hou-An,Yunlin Changgung Memorial Hospital,Liuqing Industry Park,,
+-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,0,1,1,1,1,1,1,1,,
+100020,麥寮衛生所,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+7111,M,,,,週六班次為支線A[繞駛臺西國中],,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+麥寮,虎尾,經台西,馬光、褒忠、月眉、東勢、台西、崙豐,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Mailiao Public Health Office,Huwei,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+依里程計費,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+臺西客運 05-6322168,公路總局用路人服務專線 0800-231035,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+0740,0850,0945,1250,1705,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1000,1250,1705,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+麥寮衛生所,麥寮,新興,三姓寮,蚊港1,蚊港,草寮,南公館,崙豐,五港,福安宮,台西,光華村,五榔,西潭,路利潭,東潭,三塊厝,東勢監理分站,東勢,復興,月眉,媽埔,三仁醫院,褒忠,頂寮,馬光國小,馬光,後埔,西屯,大屯,東屯,北溪厝,雲林二監,廉使,虎尾
+Mailiao Public Health Office,Mailiao,Xinxing,Sanxingliao,Wengang 1,Wengang,Caoliao,Nangongguan,Lunfeng,Wugang,Fu-an Temple,Taixi,Guanghua Village,Wulang,Westtan,Lulitan,Easttan,Sankuaicuo,Dongshi Motor Vehicle Substation,Dongshi,Fuxing,Yuemei,Mabu,Sanren Hospital,Baozhong,Dingliao,Maguang Elementary School,Maguang,Houpu,Xitun,Datun,Dongtun,Beixicuo,Yunlin Second Prison,Lianshi,Huwei
+0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+100020,麥寮衛生所,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+臺西國中,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Taixi Junior High School,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,7111,F,,,,週六班次為支線A[繞駛臺西國中],,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 虎尾,麥寮,經台西,馬光、褒忠、月眉、東勢、台西、崙豐,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Huwei,Mailiao Public Health Office,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 依里程計費,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -26,7 +53,7 @@ TRA Taichung Station,Chaoma Station,Daye,Huwei Station,Gongzhuan Station,Tuku,Ma
 100011,馬光站,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 
 
-﻿7123,F版本1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+7123,F版本1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 斗六,北港,經惠來厝,虎尾、土庫、奮起湖、元長,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Douliu,Beigang,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 依里程計費,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -66,3 +93,5 @@ TRA Taichung Station,Beigang,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 TRA Taichung Station,Chaoma Station,Daye,Huwei Station,Gongzhuan Station,Tuku,Maguang,Baozhong,Yuanzhang,Xinjie,Beigang,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 -1,-1,-1,-1,-1,0,1,1,1,1,1,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 100013,土庫站,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+
+
