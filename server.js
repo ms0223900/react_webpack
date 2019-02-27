@@ -1,3 +1,5 @@
+/* eslint-disable linebreak-style */
+// eslint-disable-next-line linebreak-style
 /* eslint-disable quotes */
 /* eslint-disable no-unused-vars */
 require('dotenv').config()
@@ -42,3 +44,5 @@ app.listen(port, function(err) {
     console.info('==> 🌎  Listening on port %s. Open up http://localhost:%s/ in your browser.', port, port)
   }
 })
+
+console.log('aa')
