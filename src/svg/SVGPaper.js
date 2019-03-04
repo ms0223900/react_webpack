@@ -2,7 +2,7 @@ import React from 'react'
 
 import { GridLayout } from './GridLayout'
 import StopLine from './StopLine'
-import { Head } from './Head'
+import { Head, Head_Yunlin } from './Head'
 import { SideInfo } from './SideInfo'
 
 import YunlinBG from '../images/Yunlin_BG-02.svg'
@@ -54,7 +54,7 @@ export class SVGPaper_Yunlin extends React.Component {
   }
   
   render() {
-    // const { routes } = this.props
+    const { routes } = this.props
     return (
       <div>
         <svg id='paper' xmlns='http://www.w3.org/2000/svg'>
@@ -63,9 +63,13 @@ export class SVGPaper_Yunlin extends React.Component {
           xlinkHref={YunlinBG}
         />
           <GridLayout w={840} h={600}/>
-          <h2>
-            Yunlin
-          </h2>
+          <Head_Yunlin
+            number={routes.number}
+            fromTo={routes.fromTo}
+            fromToEng={routes.fromToEng}
+            pass={routes.pass}
+            charge={routes.charge}
+          />
         </svg>
       </div>
     );

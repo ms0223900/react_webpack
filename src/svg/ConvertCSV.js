@@ -12,7 +12,7 @@ const slitCSV = (csv) => {
 } 
 
 
-export const Convert_ChiaYi = (csv) => {
+const Convert_ChiaYi = (csv) => {
   const fetchData = slitCSV(csv)
   console.log(fetchData)
 
@@ -50,12 +50,12 @@ export const Convert_ChiaYi = (csv) => {
   return routes
 }
 
-export const Convert_Yunlin = (csv) => {
-  let CSV = csv.split('\r').map(d => d.replace('\n', ''))
+const Convert_Yunlin = (csv) => {
+  let CSV = csv.split('\r\n').map(d => d.replace('\n', ''))
   if(CSV.length % 14 !== 0) {
     CSV = [...CSV, '']
   }
-  console.log(CSV)
+  // console.log(CSV)
   //single row
   CSV = CSV.map(arr => arr.split(',').filter(d => d.length > 0))
   for (let i = 0; i < CSV.length; i++) {
@@ -71,7 +71,7 @@ export const Convert_Yunlin = (csv) => {
     multiRoute[i] = CSV.slice(14 * i, 13 + (14 * i + 1))
   }
   CSV = multiRoute
-  console.log(multiRoute)
+  // console.log(multiRoute)
 
   //multi routes
   let routeData = []
@@ -97,7 +97,7 @@ export const Convert_Yunlin = (csv) => {
     routes[i] = {
       number: multiRoute[i][0][0],
       fromTo: [multiRoute[i][1][0], multiRoute[i][1][1]],
-      pass:[...multiRoute[i][1].slice(2)],
+      pass:[...multiRoute[i][1].slice(2).filter(t => t.search(/[A-Z]/gi) === -1)],
       fromToEng: [engName[0], engName[1]],
       charge:multiRoute[i][3][0],
       companyService: multiRoute[i][4],
@@ -111,3 +111,6 @@ export const Convert_Yunlin = (csv) => {
 
   return routes
 }
+
+module.exports = Convert_ChiaYi
+module.exports = Convert_Yunlin

@@ -2,7 +2,7 @@
 import React from 'react'
 import '../../styles/style.scss'
 
-import { Convert_Yunlin } from './ConvertCSV'
+// import { Convert_Yunlin } from './ConvertCSV'
 import { SVGPaper_ChiaYi, SVGPaper_Yunlin } from './SVGPaper'
 
 
@@ -27,12 +27,13 @@ export default class App extends React.Component {
     //       routes: fetchRoutes,
     //     })
     //   })
-    fetch('routeDataAll_Yunlin.txt')
-      .then(res => res.text())
+    fetch('test.JSON')
+      .then(res => res.json())
       .then(txt => { 
-        console.log(Convert_Yunlin(txt))
+        console.log(txt)
+        // console.log(Convert_Yunlin(txt))
         this.setState({
-          routes: Convert_Yunlin(txt),
+          routes: txt,
         })
       })
       
