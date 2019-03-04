@@ -6,6 +6,7 @@ import { Head, Head_Yunlin } from './Head'
 import { SideInfo } from './SideInfo'
 
 import YunlinBG from '../images/Yunlin_BG-02.svg'
+import { BusSchedule } from './BusSchedule';
 
 
 export class SVGPaper_ChiaYi extends React.Component {
@@ -69,6 +70,9 @@ export class SVGPaper_Yunlin extends React.Component {
             fromToEng={routes.fromToEng}
             pass={routes.pass}
             charge={routes.charge}
+          />
+          <BusSchedule 
+            time={routes.time}
           />
         </svg>
       </div>

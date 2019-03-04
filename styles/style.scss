@@ -118,3 +118,21 @@
 .qrcode-text {
   font-size: 16px;
 }
+
+//Yunlin styles
+
+.fromTo-Yunlin,
+.fromTo-Yunlin .routeNumber {
+  fill: #fff;
+}
+.schedule-singleTime {
+  fill: #F4EBD2;
+}
+.schedule-singleTime-text {
+  font-size: 13px;
+}
+.schedule-line {
+  stroke: #000;
+  stroke-width: 1px;
+  stroke-dasharray: 2px;
+}

@@ -27,7 +27,7 @@ export default class App extends React.Component {
     //       routes: fetchRoutes,
     //     })
     //   })
-    fetch('test.JSON')
+    fetch(`allRoutes_${this.state.location}.json`)
       .then(res => res.json())
       .then(txt => { 
         console.log(txt)

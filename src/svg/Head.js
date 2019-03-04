@@ -115,14 +115,15 @@ export const Head_ChiaYi = (props) => {
 export const Head_Yunlin = (props) => {
   const { number, fromTo, fromToEng, pass, charge } = props
   return (
-    <g>
-      <Text 
-        x={14}
-        y={calTextY(24, 60)}
-        style={{ fontSize: styles.Yunlin.fontSize.routeNumber }} 
-        text={number}
-      />
+    <g className={'head-Yunlin'}>
       <g className={'fromTo-Yunlin'}>
+        <Text 
+          x={14}
+          y={calTextY(24, 60)}
+          style={{ fontSize: styles.Yunlin.fontSize.routeNumber }} 
+          text={number}
+          className={'routeNumber'}
+        />
         <text 
           x={164}
           y={calTextY(24 + 6, 32)} 
@@ -140,12 +141,12 @@ export const Head_Yunlin = (props) => {
         <Text
           x={474}
           y={calTextY(12, 15)}
-          text={ pass.length > 1 ? '經' + pass[1] : '經' + pass[0] }
+          text={ pass.length > 1 ? ( '經' + pass[1] ) : '' }
           style={{ fontSize: styles.Yunlin.fontSize.pass }}
         />
         <Text 
-          x={474}
-          y={calTextY(12, 35
+          x={570}
+          y={calTextY(12, 43
             )}
           text={charge}
           style={{ fontSize: styles.Yunlin.fontSize.pass }}
@@ -155,7 +156,7 @@ export const Head_Yunlin = (props) => {
         <Text 
           x={176}
           y={calTextY(72, 11)}
-          text={number + fromToEng.join('-')}
+          text={number + ' ' + fromToEng.join('→')}
           style={{ fontSize: styles.Yunlin.fontSize.stopEng }}
         />
       </g>
