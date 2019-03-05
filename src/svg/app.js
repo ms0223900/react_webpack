@@ -51,7 +51,7 @@ export default class App extends React.Component {
             <SVGPaper_ChiaYi routes={r} />
           )): ''}
           {location === 'Yunlin' ? routes.map(r => (
-            <SVGPaper_Yunlin routes={r} />
+            <SVGPaper_Yunlin routes={r} location={location} />
           )): ''}
         </div>
         <div>

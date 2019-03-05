@@ -136,3 +136,21 @@
   stroke-width: 1px;
   stroke-dasharray: 2px;
 }
+.stopName-withEng,
+.stopNameEng-withEng {
+  writing-mode: tb; 
+}
+.stopName-withEng {
+  font-weight: bold;
+}
+.stopName-withEng-now,
+.stopNameEng-withEng-now,
+.stopName-withEng-end,
+.stopNameEng-withEng-end {
+  fill: #9A2F29
+}
+.stop-withEng.stop-end {
+  stroke: #000;
+  stroke-width: 2px;
+  fill: #E5B749;
+}

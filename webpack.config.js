@@ -31,6 +31,7 @@ module.exports = {
       { test: /\.(scss|sass)$/,
         exclude: /node_modules/, 
 				use: ['style-loader','css-loader','sass-loader'],
+				include: path.resolve(__dirname, '../'),
       },
       {
         enforce: 'pre', //enforce it check code previously

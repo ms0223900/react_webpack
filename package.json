@@ -8,7 +8,9 @@
     "build": "webpack -p",
     "test": "jest",
     "lint": "eslint src/*.js",
-    "lintFix": "eslint --fix src/*.js"
+    "lintFix": "eslint --fix src/*.js",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "keywords": [],
   "author": "",
@@ -46,6 +48,10 @@
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
     "webpack": "^4.29.3",
-    "webpack-dev-server": "^3.1.14"
+    "webpack-dev-server": "^3.1.14",
+    "@storybook/react": "^4.1.13",
+    "@storybook/addon-actions": "^4.1.13",
+    "@storybook/addon-links": "^4.1.13",
+    "@storybook/addons": "^4.1.13"
   }
 }

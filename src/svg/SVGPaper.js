@@ -55,7 +55,7 @@ export class SVGPaper_Yunlin extends React.Component {
   }
   
   render() {
-    const { routes } = this.props
+    const { routes, location } = this.props
     return (
       <div>
         <svg id='paper' xmlns='http://www.w3.org/2000/svg'>
@@ -74,6 +74,9 @@ export class SVGPaper_Yunlin extends React.Component {
           <BusSchedule 
             time={routes.time}
           />
+          <StopLine 
+            routeData={routes.data}
+            location={location} />
         </svg>
       </div>
     );
