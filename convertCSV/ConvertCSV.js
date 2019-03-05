@@ -112,5 +112,7 @@ const Convert_Yunlin = (csv) => {
   return routes
 }
 
-module.exports = Convert_ChiaYi
-module.exports = Convert_Yunlin
+module.exports = {
+  Convert_ChiaYi, 
+  Convert_Yunlin
+}

@@ -34,7 +34,7 @@ export const Stop = (props) => {
 }
 
 export const Stop_WithEng = (props) => {
-  const { x=0, y=0, stopType='normal', stopName='車站', stopNameEng='station', circleR=6, fontSize=18,  } = props
+  const { x=0, y=0, stopType='normal', stopName='車站', stopNameEng='station', circleR=6, fontSize=18, direction='left'  } = props
   const { stopNameEng_fs } = styles.stopWithEng.fontSize
   
   return (
@@ -45,6 +45,7 @@ export const Stop_WithEng = (props) => {
           <image 
             width={13}
             height={13}
+            transform={ direction === 'left' ? 'rotate(180, 6.5, 6.5)' : ''}
             xlinkHref={nowStopArrow}
           />
         ) :
@@ -74,7 +75,6 @@ export const Stop_WithEng = (props) => {
           'stopName-withEng stopName-withEng-end' : 
           'stopName-withEng stopName-withEng-now') 
         } 
-        style={{fontSize: fontSize}}
       >
         {stopName}
       </text>

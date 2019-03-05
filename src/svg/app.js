@@ -12,7 +12,7 @@ export default class App extends React.Component {
     this.state = {
       text: '',
       routes: [],
-      location: 'Yunlin',
+      location: 'ChiaYi',
     };
   }
 
@@ -48,7 +48,7 @@ export default class App extends React.Component {
       <React.Fragment>
         <div>
           {location === 'ChiaYi' ? routes.map(r => (
-            <SVGPaper_ChiaYi routes={r} />
+            <SVGPaper_ChiaYi routes={r} location={location} />
           )): ''}
           {location === 'Yunlin' ? routes.map(r => (
             <SVGPaper_Yunlin routes={r} location={location} />
