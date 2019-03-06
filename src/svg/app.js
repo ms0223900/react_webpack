@@ -79,6 +79,16 @@ export default class App extends React.Component {
           {this.state.loading}
         </div>
         <div id={'changeLocation'}>
+          <div id='manual'>
+            <h3>操作說明</h3>
+            <h4>列印設定:</h4>
+            <p>設定<span>132%, 無邊界</span></p>
+            <hr />
+            <h4>公車路線檔案: (檔案格式為.csv, 需為utf-8編碼)</h4>
+            <p>放置於 <span> src/routeFiles/該區域的資料夾</span></p>
+          </div>
+          <hr />
+          <h4>切換路線 / 列印</h4>
           <button 
             id='ChiaYi' 
             className={location === 'ChiaYi' ? 'location-button active' : 'location-button'}
@@ -93,7 +103,7 @@ export default class App extends React.Component {
           >
             Yunlin 雲林
           </button>
-          <button onClick={window.print}>
+          <button id='print' onClick={window.print}>
             列印
           </button>
         </div>

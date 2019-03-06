@@ -26,7 +26,7 @@ export const Stop = (props) => {
       />
       <text 
         x={ circleR - 1 } 
-        y={ circleR * 2 + 8 }
+        y={ circleR * 1.5 + 8 }
         className={ stopType === 'normal' ? ('stopName-normal') : (stopType === 'passed' ? 'stopName-passed' : 'stopName-now') } >
         {stopName}
       </text>
@@ -54,7 +54,7 @@ export class Stop_WithEng extends React.Component {
   
 
   render() {
-    const { x=0, y=0, stopType='normal', stopName='車站', stopNameEng='station', circleR=6, fontSize=18, direction='left'  } = this.props
+    const { x=0, y=0, stopType='normal', stopName='車站', stopNameEng='station', circleR=6, direction='left' } = this.props
     const { stopNameH, stopNameEngH } = this.state
     const { stopNameEng_fs } = styles.stopWithEng.fontSize
     
@@ -65,7 +65,7 @@ export class Stop_WithEng extends React.Component {
             width={18}
             height={18}
             x={ -3 }
-            y={ - circleR * 2 - stopName.length * (fontSize + 2) - 18 } 
+            y={ - circleR * 1.5 - stopNameH - 18 } 
             xlinkHref={hospital}
           /> : ''
         }
@@ -95,8 +95,8 @@ export class Stop_WithEng extends React.Component {
         }
         
         <text 
-          x={ circleR - 2 } 
-          y={ - circleR * 2 - stopNameH + 2 }
+          x={ circleR } 
+          y={ - circleR * 1.5 - stopNameH + 2 }
           className={ 
             stopType === 'normal' ? 
             ('stopName-withEng stopName-withEng-normal') : 
@@ -111,7 +111,7 @@ export class Stop_WithEng extends React.Component {
 
         <text 
           x={ circleR - 1 + 15 } 
-          y={ -circleR * 2 - stopNameEngH }
+          y={ -circleR * 1.5 - stopNameEngH }
           className={ 
             stopType === 'normal' ? 
             ('stopNameEng-withEng stopNameEng-withEng-normal') : 

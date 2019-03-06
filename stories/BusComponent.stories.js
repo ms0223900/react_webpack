@@ -2,6 +2,7 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 
 import { Stop_WithEng } from '../src/svg/Stop'
+import { BusSchedule } from '../src/svg/BusSchedule'
 
 export const normalStop = {
   id: 0,
@@ -33,6 +34,12 @@ export const endStop = {
   circleR: 6,
 }
 
+export const TIME = [
+  ['0120', '0230', '0620', '0640'],
+  ['0830', '1030', '1120']
+]
+
+
 storiesOf('BusStop', module)
   .add('stops', () => 
     <svg width='720' height='720'>
@@ -44,5 +51,10 @@ storiesOf('BusStop', module)
 
       <Stop_WithEng {...endStop} />
       <text x='370' y='250'>end stop</text>
+    </svg>
+  )
+  .add('bus schedule', () => 
+    <svg width='720' height='720'>
+      <BusSchedule time={TIME}/>
     </svg>
   )

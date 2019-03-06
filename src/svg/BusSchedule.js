@@ -59,6 +59,29 @@ const textAlignCenter = (text, fontWidth, width) => {
   return x
 }
 
+const SingleTime = (props) => {
+  const { hour='00', normalMin='-', holidayMin='-', y=150 } = props
+  return (
+    <g>
+      <text 
+        x={10}
+        y={y} 
+        className={'schedule-singleTime-text'}
+      >
+        <tspan>
+          {hour}
+        </tspan>
+        <tspan x={ 37 + textAlignCenter(normalMin, 7.5, 61) }>
+          {normalMin}
+        </tspan>
+        <tspan x={ 98 + textAlignCenter(holidayMin, 7.5, 65) }>
+          {holidayMin}
+        </tspan>
+      </text>
+    </g>
+    
+  )
+}
 
 export const BusSchedule = (props) => {
   const { time } = props
@@ -117,33 +140,3 @@ export const BusSchedule = (props) => {
   )
 }
 
-const SingleTime = (props) => {
-  const { hour='00', normalMin='-', holidayMin='-', y=150 } = props
-  return (
-    <g>
-      {/* <Rect
-        x={0}
-        y={0}
-        width={164}
-        height={22}
-        className={'schedule-singleTime'}  
-      /> */}
-      <text 
-        x={10}
-        y={y} 
-        className={'schedule-singleTime-text'}
-      >
-        <tspan>
-          {hour}
-        </tspan>
-        <tspan x={ 37 + textAlignCenter(normalMin, 7.5, 61) }>
-          {normalMin}
-        </tspan>
-        <tspan x={ 98 + textAlignCenter(holidayMin, 7.5, 65) }>
-          {holidayMin}
-        </tspan>
-      </text>
-    </g>
-    
-  )
-}

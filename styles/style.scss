@@ -164,9 +164,34 @@
   position: fixed;
   bottom: 20px;
   right: 20px;
+  background-color: #fff;
+  box-shadow: 0px 0px 20px #888;
+  border-radius: 10px;
+  overflow: hidden;
+}
+#changeLocation h3, 
+#changeLocation h4,
+#changeLocation p {
+  padding: 10px;
+  font-family: 'Roboto', sans-serif, 'Noto Sans TC';
+}
+#changeLocation h3 {
+  font-size: 20px;
+  background-color: #303054;
+  color: #fff;
+}
+#changeLocation h4 {
+  font-size: 18px;
+  font-weight: 600;
+}
+#changeLocation p span {
+  background-color: #ff0;
+}
+#print {
+  margin-left: 20px;
 }
 .location-button.active {
-  background-color: #111;
+  background-color: #303054;
   color: #fff;
 }
 .qrcode-nowStop, 

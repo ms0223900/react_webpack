@@ -128,8 +128,8 @@ function genarateRoutes_Yunlin(routeData) {
     font: {
       '1Line': 22,
       '2Line': 17,
-      '3Line': 15,
-      '4Line': 14,
+      '3Line': 14,
+      '4Line': 13,
     }
   }
   
