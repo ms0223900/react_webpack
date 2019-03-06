@@ -76,7 +76,7 @@ export const BusSchedule = (props) => {
       time: mergedTimeArr[i]
     }
   }
-  console.log(mergedTimeObj)
+  // console.log(mergedTimeObj)
 
   return (
     <g>    

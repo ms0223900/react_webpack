@@ -84,27 +84,23 @@ export const BigArrow = (props) => {
   )
 }
 
-// export const RoundedCorner = (props) => {
-//   const { x1=40, y1=100, h=200, v=200, r=30 } = props
-//   let corner;
-//   if(v < 0 && h > 0) {
-//     corner = `c${5.5 * (r / 10)} 0, ${r} ${-4.5 * r /10}, ${r} ${-r} v${v}`;
-//   } else if(v > 0 && h > 0 || h < 0 && v < 0) {
-//     corner = `c${5.5 * (r / 10)} 0, ${r} ${4.5 * r /10}, ${r} ${r} v${v}`;
-//   }
-//   return (
-//     <g>
-//       <path 
-//         d={ `M${x1} ${y1}, h${h - 30}, ${corner}` }
-//         fill={'none'} 
-//         stroke={'#000'} 
-//         strokeWidth={2} {...props}
-//       />
-//     </g>
+export const LineArrow = (props) => {
+  const { x=0, y=0 } = props
+  return (
+    <g transform={`translate(${x}, ${y})`}>
+      <polyline 
+        fill='none'
+        stroke='#487C8F'
+        stroke-width='4'
+        stroke-linecap='round'
+        stroke-linejoin='round'
+        points="0.4 0.2, 7.5 15.6, 14 0.2 "
+        className='line-arrow'
+      />
+    </g>
     
-//   )
-// }
-
+  )
+}
 
 export const RoundedCorner = (props) => {
   const { x, y, h, v } = props

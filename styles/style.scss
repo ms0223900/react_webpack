@@ -140,9 +140,6 @@
 .stopNameEng-withEng {
   writing-mode: tb; 
 }
-.stopName-withEng {
-  font-weight: bold;
-}
 .stopName-withEng-now,
 .stopNameEng-withEng-now,
 .stopName-withEng-end,
@@ -153,4 +150,35 @@
   stroke: #000;
   stroke-width: 2px;
   fill: #E5B749;
+}
+.stopName-withEng-end,
+.stopName-withEng-now {
+  font-weight: bolder;
+}
+@media print {
+  #changeLocation {
+    display: none !important;
+  }
+}
+#changeLocation {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+.location-button.active {
+  background-color: #111;
+  color: #fff;
+}
+.qrcode-nowStop, 
+.qrcode-query {
+  writing-mode: tb;
+}
+.qrcode-query {
+  font-weight: bold;
+  fill: #C66E32;
+}
+.bottom-info {
+  fill: #fff;
+  font-size: 14px;
+  letter-spacing: .5px;
 }

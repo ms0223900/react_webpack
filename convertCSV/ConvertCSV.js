@@ -14,7 +14,7 @@ const slitCSV = (csv) => {
 
 const Convert_ChiaYi = (csv) => {
   const fetchData = slitCSV(csv)
-  console.log(fetchData)
+  // console.log(fetchData)
 
   //split into multi row
   let multiRoute = []

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {  RoundedCorner } from './SVGComponents'
+import {  RoundedCorner, LineArrow } from './SVGComponents'
 import { Route, Route_Yunlin } from './SingleStopLine'
 
 
@@ -94,7 +94,7 @@ function genarateRoutes(routeData) {
               h={ l % 2 === 0 ? 20 : -20}
               v={drawLineArea.h / lines * 1}
               r={10}  
-              strokeWidth={3}
+              strokeWidth={5}
               stroke={ThemeColor}
             />
             <Route
@@ -133,21 +133,7 @@ function genarateRoutes_Yunlin(routeData) {
     }
   }
   
-  if(lines === 1) {
-    return (
-      <g style={{ 'fontSize': styles.font['1Line'] }}>
-        <Route_Yunlin
-          direction='right' 
-          route={routeData} 
-          x={drawLineArea.x}
-          y={drawLineArea.y + drawLineArea.h / (lines + 1) - 100}
-          stops={stopsPerLine}
-          fontSize={ styles.font['1Line'] }
-          endID={ [0, stops - 1] }
-        />
-      </g>
-    )
-  } else {
+  
     const linesArrForMap = linesArr(lines)
     return (
       <g style={{ 'fontSize': styles.font[`${lines}Line`] }}>
@@ -169,8 +155,12 @@ function genarateRoutes_Yunlin(routeData) {
               h={ l % 2 === 0 ? 20 : -20}
               v={drawLineArea.h / lines * 1}
               r={10}  
-              strokeWidth={3}
+              strokeWidth={5}
               stroke={ThemeColor_Yunlin}
+            />
+            <LineArrow 
+              x={ l % 2 === 0 ? drawLineArea.x + drawLineArea.w + 12 + 13 : drawLineArea.x - 27}
+              y={ drawLineArea.y + (drawLineArea.h / lines) * (l * 2 - 1) / 2 + 6 + 6 }
             />
             <Route_Yunlin
               direction={l % 2 === 0 ? 'left' : 'right'} 
@@ -189,4 +179,3 @@ function genarateRoutes_Yunlin(routeData) {
       </g>
     )
   }
-}

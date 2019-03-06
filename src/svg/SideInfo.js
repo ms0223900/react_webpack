@@ -10,7 +10,16 @@ const layout = {
     left: 32,
     between: 16,
   },
-  fontSize: 16,
+  
+}
+const styles = {
+  ChiaYi: {
+    fontSize: 16,
+  },
+  Yunlin : {
+    stopFS: 12,
+    stopQueryFS: 18, 
+  }
 }
 
 const calTextY = (y, fontSize) => {
@@ -20,6 +29,7 @@ const calTextY = (y, fontSize) => {
 
 const QRcode = (props) => {
   const { x=0, y=0, width=72, text='text', imgSrc='' } = props
+  const { fontSize } = styles.ChiaYi
   return (
     <g transform={`translate(${x}, ${y})`}>
       <image 
@@ -27,12 +37,43 @@ const QRcode = (props) => {
         width={width} />
       <Text
         x={0}
-        y={calTextY(width, layout.fontSize) + 4}
+        y={calTextY(width, fontSize) + 4}
         text={text}
         className={'qrcode-text'} />
     </g>
   )
 }
+
+export const QRcode_Yunlin = (props) => {
+  const { x=0, y=0, width=72, imsi='466011200153956', nowStop='頂湳站' } = props
+  const { stopFS, stopQueryFS } = styles.Yunlin
+  const url = 'http://ebus.yunlin.gov.tw/QRcodeGetBusTime.aspx?imsi=' + imsi
+
+  return (
+    <g transform={`translate(${x}, ${y})`}>
+      <image 
+        xlinkHref={ 'http://chart.apis.google.com/chart?cht=qr&choe=UTF-8&chs=300x300&chl=' + url }
+        width={width} />
+      <text
+        x={90}
+        y={calTextY(-8, stopFS) + 4}
+        fontSize={stopFS}
+        className={'qrcode-nowStop'}
+      >
+        {`(${nowStop})`}
+      </text>
+      <text
+        x={108}
+        y={calTextY(0, stopQueryFS) - 6}
+        fontSize={stopQueryFS}
+        className={'qrcode-query'}
+      >
+        {'到站查詢'}
+      </text>
+    </g>
+  )
+}
+
 
 export const SideInfo = () => {
   // const {  } = props
@@ -54,7 +95,6 @@ export const SideInfo = () => {
           imgSrc={QRcodeTicketPrice}
         />
       </g>
-      
     </g>
   )
 }

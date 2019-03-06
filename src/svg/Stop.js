@@ -1,5 +1,6 @@
 import React, {  } from 'react'
 import nowStopArrow from '../images/nowStop-arrow.svg'
+import hospital from '../images/hospital.svg'
 // import PropTypes from 'prop-types'
 
 const styles = {
@@ -33,66 +34,97 @@ export const Stop = (props) => {
   )
 }
 
-export const Stop_WithEng = (props) => {
-  const { x=0, y=0, stopType='normal', stopName='車站', stopNameEng='station', circleR=6, fontSize=18, direction='left'  } = props
-  const { stopNameEng_fs } = styles.stopWithEng.fontSize
-  
-  return (
-    <g transform={`translate(${x}, ${y})`}>
-      
-      {
-        stopType === 'now' ? (
-          <image 
-            width={13}
-            height={13}
-            transform={ direction === 'left' ? 'rotate(180, 6.5, 6.5)' : ''}
-            xlinkHref={nowStopArrow}
-          />
-        ) :
-        (
-          <circle 
-            cx={ circleR } 
-            cy={ circleR } 
-            r={ circleR } 
-            className={ 
-              stopType === 'normal' ? 
-              ('stop-withEng stop-normal') : 
-              (stopType === 'end' ? 
-              'stop-withEng stop-end' : 
-              'stop-withEng stop-now') 
-            } 
-          />
-        )
-      }
-      
-      <text 
-        x={ circleR - 2 } 
-        y={ - circleR * 2 - stopName.length * (fontSize + 2) + 2 }
-        className={ 
-          stopType === 'normal' ? 
-          ('stopName-withEng stopName-withEng-normal') : 
-          (stopType === 'end' ? 
-          'stopName-withEng stopName-withEng-end' : 
-          'stopName-withEng stopName-withEng-now') 
-        } 
-      >
-        {stopName}
-      </text>
+export class Stop_WithEng extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      stopNameH: 0,
+      stopNameEngH: 0,
+    };
+  }
 
-      <text 
-        x={ circleR - 1 + 15 } 
-        y={ -circleR * 2 - stopNameEng.length * stopNameEng_fs / 2.2 }
-        className={ 
-          stopType === 'normal' ? 
-          ('stopNameEng-withEng stopNameEng-withEng-normal') : 
-          (stopType === 'end' ? 
-          'stopNameEng-withEng stopNameEng-withEng-end' : 
-          'stopNameEng-withEng stopNameEng-withEng-now') 
-        } 
-        style={{fontSize: stopNameEng_fs}}
-      >
-        {stopNameEng}
-      </text>
-    </g>
-  )
+  componentDidMount = () => {
+    const stopNameHeight = this.stopNameEl.getBBox().height
+    const stopNameEngHeight = this.stopNameEngEl.getBBox().height
+    this.setState({
+      stopNameH: stopNameHeight,
+      stopNameEngH: stopNameEngHeight,
+    })
+  }
+  
+
+  render() {
+    const { x=0, y=0, stopType='normal', stopName='車站', stopNameEng='station', circleR=6, fontSize=18, direction='left'  } = this.props
+    const { stopNameH, stopNameEngH } = this.state
+    const { stopNameEng_fs } = styles.stopWithEng.fontSize
+    
+    return (
+      <g transform={`translate(${x}, ${y})`}>
+        {stopName.indexOf('醫院') !== -1 ? 
+          <image
+            width={18}
+            height={18}
+            x={ -3 }
+            y={ - circleR * 2 - stopName.length * (fontSize + 2) - 18 } 
+            xlinkHref={hospital}
+          /> : ''
+        }
+        {
+          stopType === 'now' ? (
+            <image 
+              width={13}
+              height={13}
+              transform={ direction === 'left' ? 'rotate(180, 6.5, 6.5)' : ''}
+              xlinkHref={nowStopArrow}
+            />
+          ) :
+          (
+            <circle 
+              cx={ circleR } 
+              cy={ circleR } 
+              r={ circleR } 
+              className={ 
+                stopType === 'normal' ? 
+                ('stop-withEng stop-normal') : 
+                (stopType === 'end' ? 
+                'stop-withEng stop-end' : 
+                'stop-withEng stop-now') 
+              } 
+            />
+          )
+        }
+        
+        <text 
+          x={ circleR - 2 } 
+          y={ - circleR * 2 - stopNameH + 2 }
+          className={ 
+            stopType === 'normal' ? 
+            ('stopName-withEng stopName-withEng-normal') : 
+            (stopType === 'end' ? 
+            'stopName-withEng stopName-withEng-end' : 
+            'stopName-withEng stopName-withEng-now') 
+          } 
+          ref={(e) => this.stopNameEl = e}
+        >
+          {stopName}
+        </text>
+
+        <text 
+          x={ circleR - 1 + 15 } 
+          y={ -circleR * 2 - stopNameEngH }
+          className={ 
+            stopType === 'normal' ? 
+            ('stopNameEng-withEng stopNameEng-withEng-normal') : 
+            (stopType === 'end' ? 
+            'stopNameEng-withEng stopNameEng-withEng-end' : 
+            'stopNameEng-withEng stopNameEng-withEng-now') 
+          } 
+          style={{fontSize: stopNameEng_fs}}
+          ref={(e) => this.stopNameEngEl = e}
+        >
+          {stopNameEng}
+        </text>
+      </g>
+    )
+  }
 }

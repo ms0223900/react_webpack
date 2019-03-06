@@ -23,10 +23,9 @@ export function Route({ direction='right', route=[], x=100, y=200, stops=16, las
           M ${x} ${y + 6} 
           l ${ dir ? (route.length - 1) * avgDistance : -(route.length - 1) * avgDistance } 0` } 
         stroke={ThemeColor} 
-        strokeWidth={3} />
+        strokeWidth={5} />
       {
         route.map(ls => {
-          console.log(ls.stopType * 1)
           return (
             <Stop 
             x={ dir ? x + (( ls.id % lastStops ) * avgDistance) : x - (( ls.id % lastStops ) * avgDistance) }
@@ -63,10 +62,9 @@ export function Route_Yunlin({ direction='right', route=[], x=100, y=200, stops=
           M ${x} ${y + 6} 
           l ${ dir ? (route.length - 1) * avgDistance : -(route.length - 1) * avgDistance } 0` } 
         stroke={ThemeColor_Yunlin} 
-        strokeWidth={3} />
+        strokeWidth={5} />
       {
         route.map(ls => {
-          console.log(ls.stopType * 1)
           return (
             <Stop_WithEng 
               x={ dir ? x + (( ls.id % lastStops ) * avgDistance) : x - (( ls.id % lastStops ) * avgDistance) }

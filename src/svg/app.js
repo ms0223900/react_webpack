@@ -1,10 +1,11 @@
-
 import React from 'react'
 import '../../styles/style.scss'
 
-// import { Convert_Yunlin } from './ConvertCSV'
 import { SVGPaper_ChiaYi, SVGPaper_Yunlin } from './SVGPaper'
 
+// const $class = (className) => document.getElementsByClassName(className)
+// const $id = (id) => document.getElementById(id)
+// const $all = (all) => document.querySelectorAll(all)
 
 export default class App extends React.Component {
   constructor(props) {
@@ -13,54 +14,106 @@ export default class App extends React.Component {
       text: '',
       routes: [],
       location: 'ChiaYi',
+      loading: 0,
     };
   }
 
   componentWillMount = () => {
-    // const routePath = '../src/routeFiles/routeDataAll.txt'
-    // const routePath = 'routeDataAll.txt'
-    // fetch(routePath)
-    //   .then(res => res.text())
-    //   .then(txt => { 
-    //     const fetchRoutes = Convert_ChiaYi(txt)
-    //     this.setState({
-    //       routes: fetchRoutes,
-    //     })
-    //   })
     fetch(`allRoutes_${this.state.location}.json`)
       .then(res => res.json())
-      .then(txt => { 
-        console.log(txt)
-        // console.log(Convert_Yunlin(txt))
+      .then(json => { 
+        console.log(json)
         this.setState({
-          routes: txt,
+          routes: json,
         })
       })
-      
   }
   componentDidMount = () => {
     console.log('load success!')
   }
-  
+
+  changeLocation = (e) => {
+    const id = e.target.id
+    if(this.state.location !== id) {
+      fetch(`allRoutes_${id}.json`)
+      .then(res => res.json())
+      .then(json => { 
+        console.log(json)
+        this.setState({
+          routes: json,
+          location: id,
+        })
+      })
+    }
+  }
+
+  loadingCount = () => {
+    console.log('loading count')
+    this.setState({
+      loading: this.state.loading + 1,
+    })
+  }
+
   render() {
     const { routes, location } = this.state;
     return (
       <React.Fragment>
         <div>
           {location === 'ChiaYi' ? routes.map(r => (
-            <SVGPaper_ChiaYi routes={r} location={location} />
+            <SVGPaper_ChiaYi 
+              routes={r} 
+              location={location} 
+              loadingStatus={console.log('loaddddd')}
+            />
           )): ''}
           {location === 'Yunlin' ? routes.map(r => (
-            <SVGPaper_Yunlin routes={r} location={location} />
+            <SVGPaper_Yunlin 
+              routes={r} 
+              location={location} 
+              
+            />
           )): ''}
         </div>
         <div>
           路線資料載入中...
+          {this.state.loading}
+        </div>
+        <div id={'changeLocation'}>
+          <button 
+            id='ChiaYi' 
+            className={location === 'ChiaYi' ? 'location-button active' : 'location-button'}
+            onClick={this.changeLocation}
+          >
+            ChiaYi 嘉義
+          </button>
+          <button 
+            id='Yunlin' 
+            className={location === 'Yunlin' ? 'location-button active' : 'location-button'}
+            onClick={this.changeLocation}
+          >
+            Yunlin 雲林
+          </button>
+          <button onClick={window.print}>
+            列印
+          </button>
         </div>
       </React.Fragment>
     );
   }
 }
+
+// if($class('action-button').length > 0) {
+//   console.log('actionBTN', $class('action-button').length)
+//   $all('#button-strip .action-button')[0].addEventListener('click', () => {
+//     $id('changeLocation').style.display = 'block'
+//     console.log('clicked')
+//   })
+  
+//   $all('#button-strip .cancel-button')[0].addEventListener('click', () => {
+//     $id('changeLocation').style.display = 'block'
+//     console.log('clicked')
+//   })
+// }
 
 
 
