@@ -1,11 +1,27 @@
 import React from 'react'
 import '../../styles/style.scss'
 
-import { SVGPaper_ChiaYi, SVGPaper_Yunlin } from './SVGPaper'
+import { SVGPaper_ChiaYi, SVGPaper_Yunlin, SVGPaper_ChanHua } from './SVGPaper'
 
 // const $class = (className) => document.getElementsByClassName(className)
 // const $id = (id) => document.getElementById(id)
 // const $all = (all) => document.querySelectorAll(all)
+
+const loadLocationSVG = (location, routes) => {
+  routes.map(r => {
+    switch (location) {
+      case 'ChiaYi':
+        return <SVGPaper_ChiaYi routes={r} location={location} />
+      case 'Yunlin':
+        return <SVGPaper_Yunlin routes={r} location={location} />
+      case 'ChanHua':
+        return <SVGPaper_ChanHua routes={r} location={location} />
+
+      default:
+        return ''
+    }
+  })
+}
 
 export default class App extends React.Component {
   constructor(props) {
@@ -47,32 +63,12 @@ export default class App extends React.Component {
     }
   }
 
-  loadingCount = () => {
-    console.log('loading count')
-    this.setState({
-      loading: this.state.loading + 1,
-    })
-  }
-
   render() {
     const { routes, location } = this.state;
     return (
       <React.Fragment>
         <div>
-          {location === 'ChiaYi' ? routes.map(r => (
-            <SVGPaper_ChiaYi 
-              routes={r} 
-              location={location} 
-              loadingStatus={console.log('loaddddd')}
-            />
-          )): ''}
-          {location === 'Yunlin' ? routes.map(r => (
-            <SVGPaper_Yunlin 
-              routes={r} 
-              location={location} 
-              
-            />
-          )): ''}
+          {loadLocationSVG(location, routes)}
         </div>
         <div>
           路線資料載入中...
@@ -112,18 +108,6 @@ export default class App extends React.Component {
   }
 }
 
-// if($class('action-button').length > 0) {
-//   console.log('actionBTN', $class('action-button').length)
-//   $all('#button-strip .action-button')[0].addEventListener('click', () => {
-//     $id('changeLocation').style.display = 'block'
-//     console.log('clicked')
-//   })
-  
-//   $all('#button-strip .cancel-button')[0].addEventListener('click', () => {
-//     $id('changeLocation').style.display = 'block'
-//     console.log('clicked')
-//   })
-// }
 
 
 

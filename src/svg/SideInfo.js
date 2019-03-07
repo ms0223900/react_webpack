@@ -75,8 +75,7 @@ export const QRcode_Yunlin = (props) => {
 }
 
 
-export const SideInfo = () => {
-  // const {  } = props
+export const SideInfo_ChiaYi = () => {
   return (
     <g>
       <g transform={`translate(${layout.padding.left}, 0)`}>

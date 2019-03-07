@@ -39,15 +39,18 @@ export class Stop_WithEng extends React.Component {
     super(props);
     this.state = {
       stopNameH: 0,
+      stopNameW: 0,
       stopNameEngH: 0,
     };
   }
 
   componentDidMount = () => {
     const stopNameHeight = this.stopNameEl.getBBox().height
+    const stopNameWidth = this.stopNameEl.getBBox().width
     const stopNameEngHeight = this.stopNameEngEl.getBBox().height
     this.setState({
       stopNameH: stopNameHeight,
+      stopNameW: stopNameWidth,
       stopNameEngH: stopNameEngHeight,
     })
   }
@@ -55,7 +58,7 @@ export class Stop_WithEng extends React.Component {
 
   render() {
     const { x=0, y=0, stopType='normal', stopName='車站', stopNameEng='station', circleR=6, direction='left' } = this.props
-    const { stopNameH, stopNameEngH } = this.state
+    const { stopNameH, stopNameW, stopNameEngH } = this.state
     const { stopNameEng_fs } = styles.stopWithEng.fontSize
     
     return (
@@ -110,7 +113,7 @@ export class Stop_WithEng extends React.Component {
         </text>
 
         <text 
-          x={ circleR - 1 + 15 } 
+          x={ stopNameW + 1.5 } 
           y={ -circleR * 1.5 - stopNameEngH }
           className={ 
             stopType === 'normal' ? 

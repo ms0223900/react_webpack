@@ -112,7 +112,52 @@ const Convert_Yunlin = (csv) => {
   return routes
 }
 
+const Convert_ChanHua = (csv) => {
+  let CSV = csv.split('\n').map(arr => arr = arr.split(',').filter(d => d.length > 0))
+  
+
+  //split into multi row
+  let multiRoute = []
+  for (let i = 0; i < ~~(CSV.length / 9); i++) {
+    multiRoute[i] = CSV.slice(9 * i, 8 + (9 * i + 1))
+  }
+  console.log(multiRoute)
+  //multi route data
+  let routeData = []
+  for (let i = 0; i < multiRoute.length; i++) {
+    routeData[i] = []
+    
+    for (let j = 0; j < multiRoute[i][6].length; j++) {
+      routeData[i] = [
+        ...routeData[i],
+        {
+          id: j,
+          stopName: multiRoute[i][6][j],
+          stopNameEng: multiRoute[i][7][j],
+          stopType: multiRoute[i][8][j]
+        }
+      ]
+    }
+  }
+  //multi route info
+  let routes = []
+  for (let i = 0; i < multiRoute.length; i++) {
+  const engName = multiRoute[i][2].length === 0 ? ['', ''] : multiRoute[i][2]
+    routes[i] = {
+      number: multiRoute[i][0][0],
+      fromTo: [multiRoute[i][1][0], multiRoute[i][1][1]],
+      fromToEng: [engName[0], engName[1]],
+      byPass: multiRoute[i][3][0] || '',
+      companyService: [multiRoute[i][4][0], multiRoute[i][4][1]],
+      time: [...multiRoute[i][5]],
+      data: routeData[i]
+    }
+  }
+  return routes
+}
+
 module.exports = {
   Convert_ChiaYi, 
-  Convert_Yunlin
+  Convert_Yunlin,
+  Convert_ChanHua
 }

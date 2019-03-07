@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 /* eslint-disable quotes */
 var fs = require("fs");
-var { Convert_Yunlin, Convert_ChiaYi }  = require('./ConvertCSV')
+var { Convert_Yunlin, Convert_ChiaYi, Convert_ChanHua }  = require('./ConvertCSV')
 // var express = require('express');
 
 module.exports = write = (location) => {
@@ -18,6 +18,8 @@ module.exports = write = (location) => {
     } else if(location === 'ChiaYi') {
       dataArr = [...dataArr, ...Convert_ChiaYi(fileCxt)]
       // console.log(dataArr[i])
+    } else if(location === 'ChanHua') {
+      dataArr = [...dataArr, ...Convert_ChanHua(fileCxt)]
     }
   }
 

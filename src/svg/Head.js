@@ -17,6 +17,13 @@ const styles = {
       routeNumber: 60,
       pass: 15,
     },
+  },
+  ChanHua: {
+    fontSize: {
+      stop: 34,
+      stopEng: 11,
+      routeNumber: 52,
+    },
   }
 }
 const layOut = {
@@ -29,11 +36,16 @@ const layOut = {
     x: 340,
   },
 }
-
 const calTextY = (y, fontSize) => {
   const fontSpacing = (1.175 - 1) * fontSize
   return y - fontSpacing + fontSize
 }
+
+const textAlignCenter = (textFrmaeX, fontWidth, textFrameWidth) => {
+  return textFrmaeX + (textFrameWidth - fontWidth) / 2
+}
+
+const getBBox_Width = (el) => el.getBBox().width
 
 export const Head_ChiaYi = (props) => {
   const { number, fromTo, fromToEng } = props
@@ -163,3 +175,80 @@ export const Head_Yunlin = (props) => {
     </g>
   )
 }  
+export class Head_ChanHua extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      fromTo1_W: 0,
+      fromTo2_W: 0,
+      fromTo1Eng_W: 0,
+      fromTo2Eng_W: 0,
+    };
+  }
+
+  componentDidMount = () => {
+    this.setState({
+      fromTo1_W: getBBox_Width(this.fromTo1),
+      fromTo2_W: getBBox_Width(this.fromTo2),
+      fromTo1Eng_W: getBBox_Width(this.fromToEng1),
+      fromTo2Eng_W: getBBox_Width(this.fromToEng2),
+    })
+  }
+  
+  render() {
+    const { routeNumber, stop, stopEng } = styles.ChanHua.fontSize
+    const { number, fromTo, fromToEng } = this.props
+    const { fromTo1_W, fromTo2_W, fromTo1Eng_W, fromTo2Eng_W } = this.state
+
+    return (
+      <g className={'head-ChanHua'}>
+        <Text 
+          x={13}
+          y={calTextY(24, routeNumber)}
+          style={{ fontSize: styles.ChanHua.fontSize.routeNumber }} 
+          text={number}
+          className={'routeNumber'}
+        />
+        <g className={'fromTo-ChanHua'}>
+          <text 
+            x={textAlignCenter(182, fromTo1_W, 305)}
+            y={calTextY(24 + 6, stop)} 
+            style={{ fontSize: styles.ChanHua.fontSize.stop }}
+            ref={(e) => this.fromTo1 = e}
+          >
+            {fromTo[0]}
+          </text>
+          <text 
+            x={textAlignCenter(520, fromTo2_W, 305)}
+            y={calTextY(24 + 6, stop)} 
+            style={{ fontSize: styles.ChanHua.fontSize.stop }}
+            ref={(e) => this.fromTo2 = e}
+          >
+            {fromTo[1]}
+          </text>
+        </g>
+        <text>
+          {' → '}
+        </text>
+        <g className={'fromToEng-ChanHua'}>
+          <text
+            x={textAlignCenter(182, fromTo1Eng_W, 305)}
+            y={calTextY(48, stopEng)}
+            style={{ fontSize: styles.ChanHua.fontSize.stopEng }}
+            ref={(e) => this.fromToEng1 = e}
+          >
+            {fromToEng[0]}
+          </text>
+          <text
+            x={textAlignCenter(520, fromTo2Eng_W, 305)}
+            y={calTextY(48, stopEng)}
+            style={{ fontSize: styles.ChanHua.fontSize.stopEng }}
+            ref={(e) => this.fromToEng2 = e}
+          >
+            {fromToEng[0]}
+          </text>
+        </g>
+      </g>
+    )
+  }
+}
