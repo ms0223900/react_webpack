@@ -187,7 +187,7 @@ function genarateRoutes_ChanHua(routeData) {
   const lines = Math.round(stops < 10 ? 1 : Math.ceil(routeData.length / 40) + 1)
   const stopsPerLine = Math.ceil(stops / lines)
   const drawLineArea = {
-    x: 168,
+    x: 180,
     y: 108,
     w: 614,
     h: 468,

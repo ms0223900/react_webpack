@@ -121,7 +121,7 @@ const Convert_ChanHua = (csv) => {
   for (let i = 0; i < ~~(CSV.length / 9); i++) {
     multiRoute[i] = CSV.slice(9 * i, 8 + (9 * i + 1))
   }
-  console.log(multiRoute)
+  // console.log(multiRoute)
   //multi route data
   let routeData = []
   for (let i = 0; i < multiRoute.length; i++) {

@@ -3,7 +3,7 @@ import React from 'react'
 import { GridLayout } from './GridLayout'
 import StopLine from './StopLine'
 import { Head_ChiaYi, Head_Yunlin, Head_ChanHua } from './Head'
-import { SideInfo_ChiaYi, QRcode_Yunlin } from './SideInfo'
+import { SideInfo_ChiaYi, QRcode_Yunlin, SideInfo_ChanHua } from './SideInfo'
 import { BusSchedule } from './BusSchedule'
 import { CompanyInfo } from './CompanyInfo'
 
@@ -128,10 +128,14 @@ export class SVGPaper_ChanHua extends React.Component {
           <CompanyInfo 
             x1={274}
             x2={590}
-            y={72 + 6}
+            y={72 + 14}
             txt1={routes.companyService[0]}
             txt2={routes.companyService[1]}
             location={location}
+          />
+          <SideInfo_ChanHua
+            byPass={routes.byPass}
+            time={routes.time}
           />
         </svg>
       </div>

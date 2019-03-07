@@ -1,6 +1,8 @@
 /* eslint-disable quotes */
 import React from 'react'
 import { Text } from './SVGComponents'
+import { calTextY, genObjArr } from './svgFunctions'
+
 import QRcodeBusDynamic from '../images/QRcode-busDynamic.svg'
 import QRcodeTicketPrice from '../images/QRcode-ticketPrice.svg'
 
@@ -22,10 +24,6 @@ const styles = {
   }
 }
 
-const calTextY = (y, fontSize) => {
-  const fontSpacing = (1.175 - 1) * fontSize
-  return y - fontSpacing + fontSize
-}
 
 const QRcode = (props) => {
   const { x=0, y=0, width=72, text='text', imgSrc='' } = props
@@ -94,6 +92,30 @@ export const SideInfo_ChiaYi = () => {
           imgSrc={QRcodeTicketPrice}
         />
       </g>
+    </g>
+  )
+}
+
+export const SideInfo_ChanHua = (props) => {
+  const { byPass, time } = props
+  const timeObjArr = genObjArr(time)
+  return (
+    <g>
+      <text 
+        x={32} 
+        y={150} 
+        className={'byPass-ChanHua'}
+      >
+        {byPass}
+      </text>
+      {timeObjArr.map(t => (
+        <text
+          x={32}
+          y={ 200 + t.id * 18 }
+        >
+          {t.data}
+        </text>
+      ))}
     </g>
   )
 }

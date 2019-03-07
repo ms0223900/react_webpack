@@ -1,5 +1,6 @@
 import React from 'react'
 import { Text, BigArrow } from './SVGComponents'
+import { calTextY, textAlignCenter, splitBrackets } from './svgFunctions'
 import backgroudImage from '../images/Head_background.png'
 
 const styles = {
@@ -35,14 +36,6 @@ const layOut = {
   stop: {
     x: 340,
   },
-}
-const calTextY = (y, fontSize) => {
-  const fontSpacing = (1.175 - 1) * fontSize
-  return y - fontSpacing + fontSize
-}
-
-const textAlignCenter = (textFrmaeX, fontWidth, textFrameWidth) => {
-  return textFrmaeX + (textFrameWidth - fontWidth) / 2
 }
 
 const getBBox_Width = (el) => el.getBBox().width
@@ -199,7 +192,7 @@ export class Head_ChanHua extends React.Component {
     const { routeNumber, stop, stopEng } = styles.ChanHua.fontSize
     const { number, fromTo, fromToEng } = this.props
     const { fromTo1_W, fromTo2_W, fromTo1Eng_W, fromTo2Eng_W } = this.state
-
+    console.log(splitBrackets(fromTo[1]))
     return (
       <g className={'head-ChanHua'}>
         <Text 
@@ -224,7 +217,10 @@ export class Head_ChanHua extends React.Component {
             style={{ fontSize: styles.ChanHua.fontSize.stop }}
             ref={(e) => this.fromTo2 = e}
           >
-            {fromTo[1]}
+              {splitBrackets(fromTo[1])[0]}
+            <tspan className={'fromTo-ChanHua-description'}>
+              {splitBrackets(fromTo[1]).length > 1 ? splitBrackets(fromTo[1])[1] : ''}
+            </tspan>
           </text>
         </g>
         <text>
