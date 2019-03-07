@@ -8,19 +8,17 @@ import { SVGPaper_ChiaYi, SVGPaper_Yunlin, SVGPaper_ChanHua } from './SVGPaper'
 // const $all = (all) => document.querySelectorAll(all)
 
 const loadLocationSVG = (location, routes) => {
-  routes.map(r => {
-    switch (location) {
-      case 'ChiaYi':
-        return <SVGPaper_ChiaYi routes={r} location={location} />
-      case 'Yunlin':
-        return <SVGPaper_Yunlin routes={r} location={location} />
-      case 'ChanHua':
-        return <SVGPaper_ChanHua routes={r} location={location} />
+  switch (location) {
+    case 'ChiaYi':
+      return routes.map(r => <SVGPaper_ChiaYi routes={r} location={location} />)
+    case 'Yunlin':
+      return routes.map(r => <SVGPaper_Yunlin routes={r} location={location} />)
+    case 'ChanHua':
+      return routes.map(r => <SVGPaper_ChanHua routes={r} location={location} />)
 
-      default:
-        return ''
-    }
-  })
+    default:
+      return ''
+  }
 }
 
 export default class App extends React.Component {
@@ -98,6 +96,13 @@ export default class App extends React.Component {
             onClick={this.changeLocation}
           >
             Yunlin 雲林
+          </button>
+          <button 
+            id='ChanHua' 
+            className={location === 'ChanHua' ? 'location-button active' : 'location-button'}
+            onClick={this.changeLocation}
+          >
+            ChanHua 彰化
           </button>
           <button id='print' onClick={window.print}>
             列印

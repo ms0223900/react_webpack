@@ -113,7 +113,7 @@ const Convert_Yunlin = (csv) => {
 }
 
 const Convert_ChanHua = (csv) => {
-  let CSV = csv.split('\n').map(arr => arr = arr.split(',').filter(d => d.length > 0))
+  let CSV = csv.split('\r\n').map(arr => arr = arr.split(',').filter(d => d.length > 0))
   
 
   //split into multi row

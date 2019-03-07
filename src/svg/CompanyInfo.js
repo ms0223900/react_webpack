@@ -1,3 +1,6 @@
+import React from 'react'
+
+
 export const CompanyInfo = (props) => {
   const { x1, x2, y, txt1, txt2, location } = props
   return (

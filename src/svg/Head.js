@@ -212,7 +212,7 @@ export class Head_ChanHua extends React.Component {
         <g className={'fromTo-ChanHua'}>
           <text 
             x={textAlignCenter(182, fromTo1_W, 305)}
-            y={calTextY(24 + 6, stop)} 
+            y={calTextY(12, stop)} 
             style={{ fontSize: styles.ChanHua.fontSize.stop }}
             ref={(e) => this.fromTo1 = e}
           >
@@ -220,7 +220,7 @@ export class Head_ChanHua extends React.Component {
           </text>
           <text 
             x={textAlignCenter(520, fromTo2_W, 305)}
-            y={calTextY(24 + 6, stop)} 
+            y={calTextY(12, stop)} 
             style={{ fontSize: styles.ChanHua.fontSize.stop }}
             ref={(e) => this.fromTo2 = e}
           >
@@ -245,7 +245,7 @@ export class Head_ChanHua extends React.Component {
             style={{ fontSize: styles.ChanHua.fontSize.stopEng }}
             ref={(e) => this.fromToEng2 = e}
           >
-            {fromToEng[0]}
+            {fromToEng[1]}
           </text>
         </g>
       </g>

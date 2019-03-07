@@ -1,7 +1,7 @@
 import React from 'react'
 
 import {  RoundedCorner, LineArrow } from './SVGComponents'
-import { Route, Route_Yunlin } from './SingleStopLine'
+import { Route, Route_Yunlin, Route_ChanHua } from './SingleStopLine'
 
 
 const ThemeColor = '#006633'
@@ -13,6 +13,8 @@ const getRouteByLocation = (location, routeData=[]) => {
       return genarateRoutes(routeData) 
     case 'Yunlin':
       return genarateRoutes_Yunlin(routeData) 
+    case 'ChanHua':
+      return genarateRoutes_ChanHua(routeData) 
     default:
       return genarateRoutes(routeData) 
   }
@@ -144,8 +146,8 @@ function genarateRoutes_Yunlin(routeData) {
           y={drawLineArea.y + drawLineArea.h / ((lines) * 1)}
           width={ drawLineArea.w }
           stops={stopsPerLine}
-          fontSize={ styles.font['2Line'] }
-          endID={ [0, routeData.length - 1] }
+          fontSize={ styles.font[`${lines}Line`] }
+          endID={ [0, stops - 1] }
         />
         {linesArrForMap.map(l => (
           <React.Fragment>
@@ -178,4 +180,62 @@ function genarateRoutes_Yunlin(routeData) {
         ))}
       </g>
     )
+}
+
+function genarateRoutes_ChanHua(routeData) {
+  const stops = routeData.length
+  const lines = Math.round(stops < 10 ? 1 : Math.ceil(routeData.length / 40) + 1)
+  const stopsPerLine = Math.ceil(stops / lines)
+  const drawLineArea = {
+    x: 168,
+    y: 108,
+    w: 614,
+    h: 468,
   }
+  const styles = {
+    font: {
+      '1Line': 22,
+      '2Line': 18,
+      '3Line': 15,
+      '4Line': 14,
+    }
+  }
+  
+  const linesArrForMap = linesArr(lines)
+  return (
+    <g style={{ 'fontSize': styles.font[`${lines}Line`] }}>
+      <Route_ChanHua
+        direction='right' 
+        route={routeData.filter(data => data.id < stopsPerLine)} 
+        x={drawLineArea.x}
+        y={ lines === 1 ? drawLineArea.y + drawLineArea.h / 2 - 100 :drawLineArea.y }
+        width={ drawLineArea.w }
+        stops={stopsPerLine}
+        endID={ [0, stops - 1] }
+      />
+      {linesArrForMap.map(l => (
+        <React.Fragment>
+          <RoundedCorner 
+            x={ l % 2 === 0 ? drawLineArea.x + drawLineArea.w + 12 : drawLineArea.x }
+            y={ drawLineArea.y + (drawLineArea.h / lines) * (l - 2) + 6 }
+            h={ l % 2 === 0 ? 20 : -20}
+            v={drawLineArea.h / lines * 1}
+            r={10}  
+            strokeWidth={5}
+            stroke={ThemeColor}
+          />
+          <Route_ChanHua
+            direction={l % 2 === 0 ? 'left' : 'right'} 
+            route={routeData.filter(
+              data => data.id >= stopsPerLine * (l - 1) && data.id < stopsPerLine * l )} 
+            x={ l % 2 === 0 ? drawLineArea.x + drawLineArea.w : drawLineArea.x }
+            y={ drawLineArea.y + (drawLineArea.h / lines) * (l - 1) }
+            stops={ l === lines ? stops - stopsPerLine * (l - 1) : stopsPerLine } //剩下的站
+            lastStops={ l === lines ? stopsPerLine : 0 }
+            endID={ [0, stops - 1] }
+          />
+        </React.Fragment>  
+      ))}
+    </g>
+  )
+}
