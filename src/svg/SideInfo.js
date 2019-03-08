@@ -91,6 +91,28 @@ export const SideInfo_ChiaYi = () => {
           text={'梯形票價'}
           imgSrc={QRcodeTicketPrice}
         />
+        <g transform={`translate(0, 550)`} >
+          <circle 
+            cx={ 8 } 
+            cy={ 8 } 
+            r={ 8 } 
+            className={ 'stop-now' } 
+          />
+          <circle 
+            cx={ 8 } 
+            cy={ 8 } 
+            r={ 4 } 
+            className={ 'stop-now-center' } 
+          />
+          <text
+            x={ 18 }
+            y={ 13 }
+            fontSize={14}
+            className={'stop-now-sideInfo'}
+          >
+            {'現在位置'}
+          </text>
+        </g>
       </g>
     </g>
   )

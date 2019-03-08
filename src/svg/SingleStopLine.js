@@ -32,7 +32,7 @@ export function Route({ direction='right', route=[], x=100, y=200, stops=16, las
           M ${x} ${y + 6} 
           l ${ dir ? (route.length - 1) * avgDistance : -(route.length - 1) * avgDistance } 0` } 
         stroke={ThemeColor} 
-        strokeWidth={5} />
+        strokeWidth={3} />
       {
         route.map(ls => {
           return (

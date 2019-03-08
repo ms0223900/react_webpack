@@ -2,7 +2,7 @@ import React from 'react'
 
 
 export const CompanyInfo = (props) => {
-  const { x1, x2, y, txt1, txt2, location } = props
+  const { x1, x2=0, y, txt1, txt2, location } = props
   return (
     <g>
       <text
@@ -12,13 +12,15 @@ export const CompanyInfo = (props) => {
       >
         {txt1}
       </text>
-      <text
-        x={x2}
-        y={y}
-        className={`${location}-company-info`}
-      >
-        {txt2}
-      </text>
+      {txt2 !== '' ? 
+        <text
+          x={x2}
+          y={y}
+          className={`${location}-company-info`}
+        >
+          {txt2}
+        </text> : ''
+      }
     </g>
   )
 }

@@ -30,6 +30,13 @@ export const Stop = (props) => {
         r={ circleR } 
         className={ stopType === 'normal' ? ('stop-normal') : (stopType === 'passed' ? 'stop-passed' : 'stop-now') } 
       />
+      {stopType === 'now' ? 
+        <circle 
+          cx={ circleR }
+          cy={ circleR }
+          r={ 3 }
+          className={ 'stop-now-center' }
+        /> : ''}
       <text 
         x={ circleR - 1 } 
         y={ circleR * 1.5 + 8 }

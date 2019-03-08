@@ -39,7 +39,14 @@ export class SVGPaper_ChiaYi extends React.Component {
             location={location}
             onLoad={loadingStatus} 
           />
-          
+          <CompanyInfo 
+            x1={routes.companyService.length > 1 ? 380 : 600}
+            x2={600}
+            y={100}
+            txt1={routes.companyService[0]}
+            txt2={routes.companyService.length > 1 ? routes.companyService[1] : ''}
+            location={location}
+          />
         </svg>
       </div>
     );
@@ -88,7 +95,7 @@ export class SVGPaper_Yunlin extends React.Component {
           />
           <CompanyInfo 
             x1={132}
-            x2={132}
+            x2={432}
             y={580 + 6}
             txt1={routes.companyService[0]}
             txt2={routes.companyService[1]}

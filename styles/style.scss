@@ -71,31 +71,34 @@
 
 .stop-normal {
   fill: #fff;
-  stroke: #000;
-  stroke-width: 3px;
+  stroke: #006633;
+  stroke-width: 2px;
 }
 
 .stop-now {
-  fill: #000;
-  stroke: #000;
-  stroke-width: 2.5px;
+  fill: #fff;
+  stroke: #006633;
+  stroke-width: 2px;
+}
+.stop-now-center {
+  fill: #006633;
 }
 .stopName-passed {
   // font-size: 16px;
-  font-weight: 600;
+  // font-weight: 600;
   writing-mode: tb;
   opacity: .35;
 }
 
 .stopName-normal {
   // font-size: 16px;
-  font-weight: 600;
+  // font-weight: 600;
   writing-mode: tb;
 }
 
 .stopName-now {
   // font-size: 16px;
-  font-weight: 900;
+  font-weight: 600;
   writing-mode: tb;
   fill: #f00;
 }
@@ -202,14 +205,13 @@
   font-weight: bold;
   fill: #C66E32;
 }
-.bottom-info {
+.Yunlin-company-info {
   fill: #fff;
   font-size: 14px;
   letter-spacing: .5px;
 }
 
 //ChanHua
-
 .stopName-withEng-down,
 .stopNameEng-withEng-down {
   writing-mode: tb;

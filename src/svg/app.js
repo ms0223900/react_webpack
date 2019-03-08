@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 import '../../styles/style.scss'
 
@@ -21,6 +22,15 @@ const loadLocationSVG = (location, routes) => {
   }
 }
 
+const fetchURLSetting = {
+  method: 'GET',
+  mode: 'cors',
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+    'Content-Type': 'text/plain;charset=UTF-8',
+  },
+}
+
 export default class App extends React.Component {
   constructor(props) {
     super(props);
@@ -33,18 +43,57 @@ export default class App extends React.Component {
   }
 
   componentWillMount = () => {
-    fetch(`allRoutes_${this.state.location}.json`)
+    const { location } = this.state
+    fetch(`allRoutes_${location}.json`)
       .then(res => res.json())
-      .then(json => { 
-        console.log(json)
-        this.setState({
-          routes: json,
-        })
+      .then(routeJSON => { 
+        
+        if(location === 'ChiaYi') {
+          fetch('http://ebus.cyhg.gov.tw/cms/api/route', fetchURLSetting)
+            .then(res => res.json())
+            .then(routesInfo => {
+              console.log(routesInfo)
+              let getProviderId = []
+              for (let i = 0; i < routeJSON.length; i++) {
+                const routeNum = routeJSON[i].number
+                getProviderId[i] = routesInfo.filter(rs => rs.NameZh.trim() === routeNum.trim()).map(arr => arr = arr.ProviderId)
+              }
+              
+              fetch('http://ebus.cyhg.gov.tw/cms/api/provider', fetchURLSetting)
+                .then(res => res.json())
+                .then(providerInfo => {
+                  let getProviderInfo = []
+                  for (let j = 0; j < getProviderId.length; j++) {
+                    getProviderInfo[j] = getProviderId[j]
+                      .map(id => id = providerInfo
+                        .filter(pro => pro.Id === id)
+                        .map(arr => arr = arr.NameZh.replace('鼠?', '公總') + ': ' + arr.telephone)).map(info => info = info[0])
+                    routeJSON[j] = {...routeJSON[j], companyService: getProviderInfo[j]}
+                  }
+                  this.setState({
+                    routes: routeJSON,
+                  })
+                })
+          })
+        } else {
+          this.setState({
+            routes: routeJSON,
+          })
+        }
       })
+    
   }
   componentDidMount = () => {
     console.log('load success!')
+    document.title = this.state.location + 'SVG'
   }
+  componentDidUpdate = (prevProps, prevState) => {
+    if(this.state.location !== prevState.location) {
+      document.title = this.state.location + 'SVG'
+    }
+  }
+  
+  
 
   changeLocation = (e) => {
     const id = e.target.id

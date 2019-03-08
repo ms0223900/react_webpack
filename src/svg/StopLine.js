@@ -96,7 +96,7 @@ function genarateRoutes(routeData) {
               h={ l % 2 === 0 ? 20 : -20}
               v={drawLineArea.h / lines * 1}
               r={10}  
-              strokeWidth={5}
+              strokeWidth={3}
               stroke={ThemeColor}
             />
             <Route
