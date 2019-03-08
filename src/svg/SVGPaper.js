@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 
 import { GridLayout } from './GridLayout'
 import StopLine from './StopLine'
@@ -25,30 +25,33 @@ export class SVGPaper_ChiaYi extends React.Component {
   render() {
     const { routes, location, loadingStatus } = this.props
     return (
-      <div>
-        <svg id='paper' xmlns='http://www.w3.org/2000/svg'>
-          <GridLayout w={840} h={600}/>
-          <Head_ChiaYi 
-            number={routes.number}
-            fromTo={routes.fromTo}
-            fromToEng={routes.fromToEng}
-          />
-          <SideInfo_ChiaYi />
-          <StopLine 
-            routeData={routes.data}  
-            location={location}
-            onLoad={loadingStatus} 
-          />
-          <CompanyInfo 
-            x1={routes.companyService.length > 1 ? 380 : 600}
-            x2={600}
-            y={100}
-            txt1={routes.companyService[0]}
-            txt2={routes.companyService.length > 1 ? routes.companyService[1] : ''}
-            location={location}
-          />
-        </svg>
-      </div>
+      <Fragment>
+      
+        <div>
+          <svg id='paper' xmlns='http://www.w3.org/2000/svg'>
+            <GridLayout w={840} h={600}/>
+            <Head_ChiaYi 
+              number={routes.number}
+              fromTo={routes.fromTo}
+              fromToEng={routes.fromToEng}
+            />
+            <SideInfo_ChiaYi />
+            <StopLine 
+              routeData={routes.data}  
+              location={location}
+              onLoad={loadingStatus} 
+            />
+            <CompanyInfo 
+              x1={routes.companyService.length > 1 ? 380 : 600}
+              x2={600}
+              y={100}
+              txt1={routes.companyService[0]}
+              txt2={routes.companyService.length > 1 ? routes.companyService[1] : ''}
+              location={location}
+            />
+          </svg>
+        </div>
+      </Fragment>
     );
   }
 }

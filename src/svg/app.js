@@ -11,7 +11,7 @@ import { SVGPaper_ChiaYi, SVGPaper_Yunlin, SVGPaper_ChanHua } from './SVGPaper'
 const loadLocationSVG = (location, routes) => {
   switch (location) {
     case 'ChiaYi':
-      return routes.map(r => <SVGPaper_ChiaYi routes={r} location={location} />)
+      return routes.map(r => <SVGPaper_ChiaYi routes={r} location={location} onLoad={console.log('11')} />)
     case 'Yunlin':
       return routes.map(r => <SVGPaper_Yunlin routes={r} location={location} />)
     case 'ChanHua':
@@ -21,6 +21,8 @@ const loadLocationSVG = (location, routes) => {
       return ''
   }
 }
+
+const routeLocations = ['ChiaYi', 'Yunlin', 'ChanHua']
 
 const fetchURLSetting = {
   method: 'GET',
@@ -38,21 +40,42 @@ export default class App extends React.Component {
       text: '',
       routes: [],
       location: 'ChiaYi',
-      loading: 0,
+      loadComplete: 0,
     };
   }
 
   componentWillMount = () => {
     const { location } = this.state
-    fetch(`allRoutes_${location}.json`)
+    for (let i = 0; i < routeLocations.length; i++) {
+      const routeName = routeLocations[i]
+      this.fetchRouteJSON(routeName)
+    }
+    
+  }
+  componentDidMount = () => {
+    console.log('load success!')
+    document.title = this.state.location + 'SVG'
+  }
+  componentDidUpdate = (prevProps, prevState) => {
+    if(this.state.location !== prevState.location) {
+      document.title = this.state.location + 'SVG'
+    }
+    if(this.state.routes.length !== prevState.routes.length) {
+      this.setState((state) => ({
+        loadComplete: state.loadComplete + 1,
+      }))
+    }
+  }
+  
+  fetchRouteJSON = (locationName) => {
+    fetch(`allRoutes_${locationName}.json`)
       .then(res => res.json())
       .then(routeJSON => { 
-        
-        if(location === 'ChiaYi') {
+        if(locationName === 'ChiaYi') {
           fetch('http://ebus.cyhg.gov.tw/cms/api/route', fetchURLSetting)
             .then(res => res.json())
             .then(routesInfo => {
-              console.log(routesInfo)
+              console.log('chiayi', routeJSON)
               let getProviderId = []
               for (let i = 0; i < routeJSON.length; i++) {
                 const routeNum = routeJSON[i].number
@@ -70,56 +93,52 @@ export default class App extends React.Component {
                         .map(arr => arr = arr.NameZh.replace('鼠?', '公總') + ': ' + arr.telephone)).map(info => info = info[0])
                     routeJSON[j] = {...routeJSON[j], companyService: getProviderInfo[j]}
                   }
+                  
                   this.setState({
-                    routes: routeJSON,
+                    routes: [...this.state.routes, {
+                      location: locationName,
+                      routeData: routeJSON,
+                    }],
                   })
                 })
           })
         } else {
+          console.log(routeJSON)
           this.setState({
-            routes: routeJSON,
+            routes: [...this.state.routes, {
+              location: locationName,
+              routeData: routeJSON,
+            }],
           })
         }
       })
-    
   }
-  componentDidMount = () => {
-    console.log('load success!')
-    document.title = this.state.location + 'SVG'
-  }
-  componentDidUpdate = (prevProps, prevState) => {
-    if(this.state.location !== prevState.location) {
-      document.title = this.state.location + 'SVG'
-    }
-  }
-  
-  
 
   changeLocation = (e) => {
     const id = e.target.id
     if(this.state.location !== id) {
-      fetch(`allRoutes_${id}.json`)
-      .then(res => res.json())
-      .then(json => { 
-        console.log(json)
-        this.setState({
-          routes: json,
-          location: id,
-        })
+      // this.fetchRouteJSON(id)
+      this.setState({
+        location: id,
       })
     }
   }
 
   render() {
-    const { routes, location } = this.state;
+    const { routes, location, loadComplete } = this.state
+    console.log(routes)
+    // console.log(routes.filter(r => r.location === location)[0].routeData)
     return (
-      <React.Fragment>
-        <div>
-          {loadLocationSVG(location, routes)}
+      <div>
+        <div id='SVGArea'>
+          {loadComplete === 3 ? loadLocationSVG(location, routes.filter(r => r.location === location)[0].routeData ) : ''}
         </div>
         <div>
-          路線資料載入中...
-          {this.state.loading}
+          {<img 
+            src={'https://www.coolpix.com.tw/images/loading_s.gif'}
+            style={loadComplete === 3 ? {display: 'none'} : {display: 'block'}}
+          />}
+          {'如果轉太久，請開啟CORS'}
         </div>
         <div id={'changeLocation'}>
           <div id='manual'>
@@ -157,7 +176,7 @@ export default class App extends React.Component {
             列印
           </button>
         </div>
-      </React.Fragment>
+      </div>
     );
   }
 }
