@@ -8,14 +8,16 @@ import { SVGPaper_ChiaYi, SVGPaper_Yunlin, SVGPaper_ChanHua } from './SVGPaper'
 // const $id = (id) => document.getElementById(id)
 // const $all = (all) => document.querySelectorAll(all)
 
-const loadLocationSVG = (location, routes) => {
+let count = 0
+
+const loadLocationSVG = (location, routes, loadFn) => {
   switch (location) {
     case 'ChiaYi':
-      return routes.map(r => <SVGPaper_ChiaYi routes={r} location={location} onLoad={console.log('11')} />)
+      return routes.map(r => <SVGPaper_ChiaYi routes={r} location={location} loaddd={loadFn} />)
     case 'Yunlin':
-      return routes.map(r => <SVGPaper_Yunlin routes={r} location={location} />)
+      return routes.map(r => <SVGPaper_Yunlin routes={r} location={location} loaddd={loadFn} />)
     case 'ChanHua':
-      return routes.map(r => <SVGPaper_ChanHua routes={r} location={location} />)
+      return routes.map(r => <SVGPaper_ChanHua routes={r} location={location} loaddd={loadFn} />)
 
     default:
       return ''
@@ -41,6 +43,7 @@ export default class App extends React.Component {
       routes: [],
       location: 'ChiaYi',
       loadComplete: 0,
+      loadStatus: 0,
     };
   }
 
@@ -115,6 +118,7 @@ export default class App extends React.Component {
   }
 
   changeLocation = (e) => {
+    count = 0
     const id = e.target.id
     if(this.state.location !== id) {
       // this.fetchRouteJSON(id)
@@ -124,25 +128,36 @@ export default class App extends React.Component {
     }
   }
 
+  updateLoad = () => {
+    const total = this.state.routes.filter(r => r.location === this.state.location)[0].routeData.length
+    console.log('SVGPaper load success from app.js')
+    count = count + 1
+    let loadS =  ~~(count / total * 100) / 100 
+    console.log(loadS)
+    this.setState({
+      loadStatus: loadS
+    })
+  }
+
   render() {
     const { routes, location, loadComplete } = this.state
     console.log(routes)
     // console.log(routes.filter(r => r.location === location)[0].routeData)
     return (
       <div>
+        
         <div id='SVGArea'>
-          {loadComplete === 3 ? loadLocationSVG(location, routes.filter(r => r.location === location)[0].routeData ) : ''}
+          {loadComplete === 3 ? loadLocationSVG(location, routes.filter(r => r.location === location)[0].routeData,  this.updateLoad) : ''}
         </div>
-        <div>
+        <div style={loadComplete === 3 ? {display: 'none'} : {display: 'block'}}>
           {<img 
             src={'https://www.coolpix.com.tw/images/loading_s.gif'}
-            style={loadComplete === 3 ? {display: 'none'} : {display: 'block'}}
           />}
-          {'如果轉太久，請開啟CORS'}
+          {'如果轉很久，可能是沒開啟CORS，或是資料太多'}
         </div>
         <div id={'changeLocation'}>
           <div id='manual'>
-            <h3>操作說明</h3>
+            <h3>操作說明 {this.state.loadStatus} </h3>
             <h4>列印設定:</h4>
             <p>設定<span>132%, 無邊界</span></p>
             <hr />

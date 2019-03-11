@@ -19,7 +19,8 @@ export class SVGPaper_ChiaYi extends React.Component {
   }
   componentDidMount = () => {
     // const { routes } = this.props
-    console.log('SVGPaper load success')
+    // console.log('SVGPaper load success')
+    this.props.loaddd()
   }
   
   render() {
@@ -63,7 +64,9 @@ export class SVGPaper_Yunlin extends React.Component {
   }
   componentDidMount = () => {
     // const { routes } = this.props
-    console.log('SVGPaper load success')
+    
+    // console.log('SVGPaper load success')
+    this.props.loaddd()
   }
   
   render() {
