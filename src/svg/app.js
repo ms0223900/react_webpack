@@ -10,7 +10,8 @@ import { SVGPaper_ChiaYi, SVGPaper_Yunlin, SVGPaper_ChanHua } from './SVGPaper'
 
 let count = 0
 
-const loadLocationSVG = (location, routes, loadFn) => {
+const loadLocationSVG = (location, routes, loadFn, isPreview) => {
+  routes = isPreview ? routes.slice(0, 10) : routes
   switch (location) {
     case 'ChiaYi':
       return routes.map(r => <SVGPaper_ChiaYi routes={r} location={location} loaddd={loadFn} />)
@@ -44,6 +45,7 @@ export default class App extends React.Component {
       location: 'ChiaYi',
       loadComplete: 0,
       loadStatus: 0,
+      isPreview: true,
     };
   }
 
@@ -138,16 +140,35 @@ export default class App extends React.Component {
       loadStatus: loadS
     })
   }
+  changeViewMode = (e) => {
+    const mode = e.target.id
+    if(this.state.isPreview && mode === 'all') {
+      this.setState({
+        isPreview: false,
+      })
+    } else {
+      this.setState({
+        isPreview: true,
+      })
+    }
+  }
+
 
   render() {
-    const { routes, location, loadComplete } = this.state
+    const { routes, location, loadComplete, isPreview } = this.state
     console.log(routes)
     // console.log(routes.filter(r => r.location === location)[0].routeData)
     return (
       <div>
         
         <div id='SVGArea'>
-          {loadComplete === 3 ? loadLocationSVG(location, routes.filter(r => r.location === location)[0].routeData,  this.updateLoad) : ''}
+          {loadComplete === 3 ? 
+            loadLocationSVG(location, 
+            routes.filter(r => r.location === location)[0].routeData, 
+            this.updateLoad, 
+            isPreview) : 
+            ''
+          }
         </div>
         <div style={loadComplete === 3 ? {display: 'none'} : {display: 'block'}}>
           {<img 
@@ -164,6 +185,22 @@ export default class App extends React.Component {
             <h4>公車路線檔案: (檔案格式為.csv, 需為utf-8編碼)</h4>
             <p>放置於 <span> src/routeFiles/該區域的資料夾</span></p>
           </div>
+          <hr />
+          <h4>切換顯示模式: 預覽(只有10張) / 全部</h4>
+          <button
+            id='preview'
+            onClick={this.changeViewMode}
+            className={isPreview ? 'location-button active' : 'location-button'}
+          >
+            預覽
+          </button>
+          <button
+            id='all'
+            onClick={this.changeViewMode}
+            className={isPreview ? 'location-button' : 'location-button active'}
+          >
+            全部(資料量大時 需等待片刻)
+          </button>
           <hr />
           <h4>切換路線 / 列印</h4>
           <button 

@@ -43,8 +43,8 @@ export class SVGPaper_ChiaYi extends React.Component {
               onLoad={loadingStatus} 
             />
             <CompanyInfo 
-              x1={routes.companyService.length > 1 ? 380 : 600}
-              x2={600}
+              x1FromRight={40}
+              x2FromRight={40}
               y={100}
               txt1={routes.companyService[0]}
               txt2={routes.companyService.length > 1 ? routes.companyService[1] : ''}
@@ -100,8 +100,8 @@ export class SVGPaper_Yunlin extends React.Component {
             nowStop={routes.stopNow[1]}
           />
           <CompanyInfo 
-            x1={132}
-            x2={432}
+            x1FromRight={202}
+            x2FromRight={74}
             y={580 + 6}
             txt1={routes.companyService[0]}
             txt2={routes.companyService[1]}
@@ -139,8 +139,8 @@ export class SVGPaper_ChanHua extends React.Component {
             routeData={routes.data}
             location={location} />
           <CompanyInfo 
-            x1={274}
-            x2={590}
+            x1FromRight={202}
+            x2FromRight={74}
             y={72 + 14}
             txt1={routes.companyService[0]}
             txt2={routes.companyService[1]}
