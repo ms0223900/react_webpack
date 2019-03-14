@@ -1,6 +1,7 @@
+/* eslint-disable no-unused-vars */
 import React from 'react'
 
-import { Stop, Stop_WithEng_Up, Stop_WithEng_Down } from './Stop'
+import { Stop, Stop_WithEng_Up, Stop_WithEng_Down, StopWithEng } from './Stop'
 import { Arrow } from './SVGComponents'
 
 const ThemeColor = '#006633'
@@ -56,7 +57,7 @@ export function Route_Yunlin({ direction='right', route=[], x=100, y=200, stops=
   
 
   lastStops = lastStops === 0 ? stops : lastStops
-
+  // const StopWithEngUp = getStopUpOrDown('Up')
   return (
     <g>
       <path 
@@ -68,7 +69,7 @@ export function Route_Yunlin({ direction='right', route=[], x=100, y=200, stops=
       {
         route.map(ls => {
           return (
-            <Stop_WithEng_Up 
+            <StopWithEng
               x={ dir ? x + (( ls.id % lastStops ) * avgDistance) : x - (( ls.id % lastStops ) * avgDistance) }
               y={ y }
               stopName={ ls.stopName }
@@ -76,7 +77,7 @@ export function Route_Yunlin({ direction='right', route=[], x=100, y=200, stops=
               stopType={ stopType(ls.stopType, ls.id, endID) }
               fontSize={ fontSize }
               direction={direction}
-          />
+            />
           )
         })
       }
