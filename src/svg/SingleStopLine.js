@@ -26,7 +26,8 @@ export function Route({ direction='right', route=[], x=100, y=200, stops=16, las
       <Arrow 
         x={dir ? x + 18 : x - 18} 
         y={y}
-        rotate={ dir ? '0' : '180, 6, 6' } />
+        rotate={ dir ? '0' : '180, 6, 6' }
+        fill={ThemeColor} />
       <path 
         d={`
           M ${x} ${y + 6} 
@@ -113,3 +114,31 @@ export function Route_ChanHua({ direction='right', route=[], x=100, y=200, stops
     </g>
   )
 }
+
+// <Route>
+//   {type=='ch' ? 
+//   <Stop_WithEng_Down  />
+//   :
+//   <Stop_WithEng_Up />
+// }
+// </Route>
+
+// <Route>
+//   <Stop_WithEng_Up />
+// </Route>
+
+// route.map(ls => {
+//   return (
+//     cloneElement(children, {...props})
+//   )
+
+
+// <Parent>
+//   <Ch />
+// </Parent>
+// function Parent = ({children, ...props}) =>
+
+//   (<p>{children}</p>)
+
+
+// <p><Ch /></p>

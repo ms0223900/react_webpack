@@ -7,7 +7,6 @@
     "open": "webpack-dev-server",
     "build": "webpack -p",
     "test": "jest",
-    "lint": "eslint src/*.js",
     "lintFix": "eslint --fix src/*.js",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"

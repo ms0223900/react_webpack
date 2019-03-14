@@ -19,26 +19,15 @@ module.exports = {
 				test: /\.(jsx|js)$/, 
 				exclude: /node_modules/, use: { 
 					loader: 'babel-loader', 
-					options: { presets: ['@babel/preset-react'] } }
-			},
-			{ test: /.js$/, exclude: /node_modules/, use: { 
-				loader: 'babel-loader', options: { presets: ['@babel/preset-env'] } }
+					options: { presets: ['@babel/preset-react', '@babel/preset-env'] } }
 			},
       { test: /\.css$/, 
         exclude: /node_modules/, 
         use: ['style-loader', 'css-loader'],
 			},
       { test: /\.(scss|sass)$/,
-        exclude: /node_modules/, 
-				use: ['style-loader','css-loader','sass-loader'],
-				include: path.resolve(__dirname, '../'),
+        use: ['style-loader','css-loader','sass-loader'],
       },
-      {
-        enforce: 'pre', //enforce it check code previously
-        test: /\.(jsx|js)$/, 
-        exclude: /node_modules/,
-        loader: 'eslint-loader',
-			},
 			{
 				test: /\.(jpe?g|png|gif|svg)$/i, 
 				loader: 'file-loader'

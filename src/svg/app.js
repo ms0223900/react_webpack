@@ -58,7 +58,7 @@ export default class App extends React.Component {
     
   }
   componentDidMount = () => {
-    console.log('load success!')
+    // console.log('load success!')
     document.title = this.state.location + 'SVG'
   }
   componentDidUpdate = (prevProps, prevState) => {
@@ -132,10 +132,8 @@ export default class App extends React.Component {
 
   updateLoad = () => {
     const total = this.state.routes.filter(r => r.location === this.state.location)[0].routeData.length
-    console.log('SVGPaper load success from app.js')
     count = count + 1
     let loadS =  ~~(count / total * 100) / 100 
-    console.log(loadS)
     this.setState({
       loadStatus: loadS
     })
@@ -178,7 +176,7 @@ export default class App extends React.Component {
         </div>
         <div id={'changeLocation'}>
           <div id='manual'>
-            <h3>操作說明 {this.state.loadStatus} </h3>
+            <h3>操作說明 </h3>
             <h4>列印設定:</h4>
             <p>設定<span>132%, 無邊界</span></p>
             <hr />

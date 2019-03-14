@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 
-import { GridLayout } from './GridLayout'
+// import { GridLayout } from './GridLayout'
 import StopLine from './StopLine'
 import { Head_ChiaYi, Head_Yunlin, Head_ChanHua } from './Head'
 import { SideInfo_ChiaYi, QRcode_Yunlin, SideInfo_ChanHua } from './SideInfo'
@@ -30,7 +30,7 @@ export class SVGPaper_ChiaYi extends React.Component {
       
         <div>
           <svg id='paper' xmlns='http://www.w3.org/2000/svg'>
-            <GridLayout w={840} h={600}/>
+            {/* <GridLayout w={840} h={600}/> */}
             <Head_ChiaYi 
               number={routes.number}
               fromTo={routes.fromTo}

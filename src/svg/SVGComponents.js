@@ -63,7 +63,7 @@ export const Arrow = (props) => {
   const { x, y, rotate=0 } = props
   return (
     <g transform={`translate(${x}, ${y}) rotate(${rotate})`}  > 
-      <path d={'M0 0 l16 6 l-16 6 z'} />
+      <path d={'M0 0 l16 6 l-16 6 z'} {...props} />
     </g>
   )
 }

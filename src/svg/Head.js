@@ -87,18 +87,22 @@ export const Head_ChiaYi = (props) => {
           />
         </g>
         <g>
-          <Text 
+          <text 
             x={ 
               layOut.stop.x + 
               fromTo[0].length * styles.ChiaYi.fontSize.stop + 
               layOut.bigArrow.width + 
               layOut.bigArrow.spacting * 2
             }
-            y={ calTextY(layOut.topLine, styles.ChiaYi.fontSize.stop) } 
-            text={fromTo[1]}
+            y={ calTextY(layOut.topLine, styles.ChiaYi.fontSize.stop) }
             className={'stop'}
             style={{ fontSize: styles.ChiaYi.fontSize.stop }} 
-          />
+          >
+            {splitBrackets(fromTo[1])[0]}
+              <tspan className={'fromTo-ChanHua-description'}>
+                {splitBrackets(fromTo[1]).length > 1 ? splitBrackets(fromTo[1])[1] : ''}
+              </tspan>
+          </text>
           <Text 
             x={ 
               layOut.stop.x + 

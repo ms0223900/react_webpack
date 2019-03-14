@@ -69,7 +69,8 @@
   stroke-width: 1px;
 }
 
-.stop-normal {
+.stop-normal,
+.stop-withEng {
   fill: #fff;
   stroke: #006633;
   stroke-width: 2px;
@@ -149,7 +150,7 @@
 .stopNameEng-withEng-end {
   fill: #9A2F29
 }
-.stop-withEng.stop-end {
+.stop-withEng.stop-withEng-end {
   stroke: #000;
   stroke-width: 2px;
   fill: #E5B749;
