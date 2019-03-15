@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React from 'react'
+import React, { Children, cloneElement } from 'react'
 
 import { Stop, StopWithEng } from './Stop'
 import { Arrow } from './SVGComponents'
@@ -32,11 +32,11 @@ export const getBetweenStopDistance = (dir, x, id, lastStops, avgDistance) => (
   x - (( id % lastStops ) * avgDistance)
 )
 
-export function Route({ direction='right', route=[], x=100, y=200 }) {
+export function Route({ direction='right', route=[], x=100, y=200, width=614, lastStopAmount=0, }) {
   const STOPS = route.length
   const totalLength = STOPS - 1
-  const avgDistance = 614 / totalLength
-  let dir = (direction === 'right' ? true : false);
+  const avgDistance = width / totalLength
+  let dir = (direction === 'right' ? true : false)
 
   return (
     <g>
@@ -68,12 +68,12 @@ export function Route({ direction='right', route=[], x=100, y=200 }) {
   )
 }
 
-export function RouteWithEngStops({ direction='right', route=[], x=100, y=200, width=614, endID=[], UpOrDown='Up' }) {
+export function RouteWithEngStops({ direction='right', route=[], x=100, y=200, width=614, lastStopAmount=0, endID=[], UpOrDown='Up' }) {
   const STOPS = route.length
+  const STOPSForStop = lastStopAmount !== 0 ? lastStopAmount : STOPS
   const totalLength = STOPS - 1
   const avgDistance = width / totalLength
-  // const LastStops = lastStops === 0 ? stops : lastStops
-  let dir = (direction === 'right' ? true : false);
+  let dir = (direction === 'right' ? true : false)
   return (
     <g>
       <path 
@@ -91,7 +91,7 @@ export function RouteWithEngStops({ direction='right', route=[], x=100, y=200, w
           return (
             <StopWithEng
               key={ls.id}
-              x={ getBetweenStopDistance(dir, x, ls.id, STOPS, avgDistance) }
+              x={ getBetweenStopDistance(dir, x, ls.id, STOPSForStop, avgDistance) }
               y={ y }
               stopName={ ls.stopName }
               stopNameEng={ ls.stopNameEng }
@@ -125,6 +125,7 @@ export const Route_ChanHua = HOCRouteWithEngStops(RouteWithEngStops, 'Down')
 //   return (
 //     cloneElement(children, {...props})
 //   )
+
 
 
 // <Parent>

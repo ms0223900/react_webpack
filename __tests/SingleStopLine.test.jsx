@@ -6,6 +6,8 @@ import {
   getBetweenStopDistance,
   Route,
   RouteWithEngStops,
+  Route_Yunlin,
+  Route_ChanHua,
 } from '../src/svg/SingleStopLine'
 import { shallow, render } from 'enzyme'
 import { Stop, StopWithEng } from '../src/svg/Stop';
@@ -53,7 +55,13 @@ describe('test single stop line (Route)', () => {
       {id: 0, stopName: 'aa', stopType: 1}, 
       {id: 1, stopName: 'bb', stopType: 1}, ],
   }
-
+  const routeData2 = {
+    direction: 'left',
+    route: [
+      {id: 0, stopName: 'aa', stopType: 1}, 
+      {id: 1, stopName: 'bb', stopType: 0},
+      {id: 2, stopName: 'cc', stopType: 1} ],
+  }
   it('test amount of Stops (Route)', () => {
     const { direction, route } = routeData
     const ROUTE = shallow(<Route direction={direction} route={route} />)
@@ -64,13 +72,32 @@ describe('test single stop line (Route)', () => {
     const ROUTE = shallow(<RouteWithEngStops direction={direction} route={route} />)
     expect(ROUTE.find(StopWithEng)).toHaveLength(2)
   })
-  it('test position of Stops (RouteWithEngStops)', () => {
+  it('test position of Stops (RouteWithEngStops) when the direction is right', () => {
     const { direction, route } = routeData
     const ROUTE = shallow(<RouteWithEngStops direction={direction} route={route} />)
     expect(ROUTE.find(StopWithEng).get(0).props.x).toBe(100)
     expect(ROUTE.find(StopWithEng).get(1).props.x).toBe(714)
   })
+  it('test position of Stops (RouteWithEngStops) when the direction is left', () => {
+    const { direction, route } = routeData2
+    const ROUTE = shallow(<RouteWithEngStops x={714} direction={direction} route={route} />)
+    expect(ROUTE.find(StopWithEng).get(0).props.x).toBe(714)
+    expect(ROUTE.find(StopWithEng).get(2).props.x).toBe(100)
+  })
 
+  it('test Yunlin prop of UpOrDown should be "Up"', () => {
+    const Yunlin = shallow(<Route_Yunlin />)
+    expect(Yunlin.find(RouteWithEngStops).props().UpOrDown).toBe('Up')
+  })
+  it('test ChanHua prop of UpOrDown should be "Up"', () => {
+    const ChanHua = shallow(<Route_ChanHua />)
+    expect(ChanHua.find(RouteWithEngStops).props().UpOrDown).toBe('Down')
+  })
+  it('test ChanHua prop of UpOrDown should be "Up"', () => {
+    const { direction, route } = routeData2
+    const ChanHua = shallow(<Route_ChanHua x={714} direction={direction} route={route} />)
+    expect(ChanHua.find(RouteWithEngStops).get(0).props.x).toBe(714)
+  })
 })
 
 
