@@ -162,7 +162,10 @@ function genarateRoutes(routeData) {
 export const RouteRoundedCorner = ({l, x, y, w, h, lines, strokeWidth, strokeTheme='#000', txtUpOrDown='Up'}) => (
   <RoundedCorner 
     x={ l % 2 === 0 ? x + w + 12 : x }
-    y={ txtUpOrDown === 'Up' ?  y + (h / lines) * (l - 1) + 6 : y + (h / lines) * (l - 2) + 6 }
+    y={ txtUpOrDown === 'Up' ? 
+      y + (h / lines) * (l - 1) + 6 : 
+      y + (h / lines) * (l - 2) + 6 
+    }
     h={ l % 2 === 0 ? 20 : -20 }
     v={h / lines * 1}
     r={10}  
@@ -212,7 +215,7 @@ function genarateRoutes_ChanHua(routeData) {
   return <MappedRoutesChanHua routeData={routeData}/>
 }
 function genarateRoutes_Yunlin(routeData) {
-  return <MappedRoutesChanHua routeData={routeData}/>
+  return <MappedRoutesYunlin routeData={routeData}/>
 }  
 
 
