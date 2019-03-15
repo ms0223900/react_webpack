@@ -12,7 +12,7 @@ import {
  } 
 from '../src/svg/Stop'
 
-import { shallow } from 'enzyme'
+import { shallow, render, mount } from 'enzyme'
 
 describe('test stops', () => {
   it('test set stop className function', () => {
@@ -33,13 +33,12 @@ describe('test stops', () => {
     const specialIcon = shallow(<SpecialIcon  stopName='OX醫院' />)
     expect(specialIcon.find(HospitalIcon)).toHaveLength(1)
   })
+  it('test hospital icon when "醫院" string is included and the UpOrDown is down', () => {
+    const specialIcon = shallow(<SpecialIcon  stopName='OX醫院' UpOrDown={'Down'} />)
+    expect(specialIcon.find(HospitalIcon)).toHaveLength(0)
+  })
   it('test hospital icon when "醫院" string is "not" included', () => {
     const specialIcon = shallow(<SpecialIcon  stopName='OX學院' />)
     expect(specialIcon.find(HospitalIcon)).toHaveLength(0)
   })
-  it('test getStopUpOrDown function', () => {
-    // const stopWithEngDown = shallow(<StopWithEng UpOrDown='Down'/>)
-    expect(getStopUpOrDown('Down')).toEqual(<StopWithEng UpOrDown='Down'/>)
-  })
-
 })
