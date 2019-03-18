@@ -25,7 +25,6 @@ export const getStopType = (stopTypeNo=1, id=1, endIDs=[]) => {
     }
   }
 }
-
 export const getBetweenStopDistance = (dir, x, id, lastStops, avgDistance) => (
   dir ? 
   x + (( id % lastStops ) * avgDistance) : 
@@ -67,7 +66,6 @@ export function Route({ direction='right', route=[], x=100, y=200, width=614, la
     </g>
   )
 }
-
 export function RouteWithEngStops({ direction='right', route=[], x=100, y=200, width=614, lastStopAmount=0, endID=[], UpOrDown='Up' }) {
   const STOPS = route.length
   const STOPSForStop = lastStopAmount !== 0 ? lastStopAmount : STOPS
@@ -105,6 +103,8 @@ export function RouteWithEngStops({ direction='right', route=[], x=100, y=200, w
     </g>
   )
 }
+
+
 export const HOCRouteWithEngStops = (RouteComponent, UpOrDown) => class extends React.Component {
   constructor(props) {
     super(props);

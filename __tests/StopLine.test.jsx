@@ -1,21 +1,24 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 import React from 'react'
-import { 
+import StopLine, { 
   sepLines,
   MappedRoutesDefault,
   MappedRoutesChanHua,
   MappedRoutesYunlin,
   setPosOfLinesY,
-  RouteRoundedCorner
+  RouteRoundedCorner,
+  getRouteByLocation,
+  genarateRoutes,
+  genarateRoutes_Yunlin,
+  genarateRoutes_ChanHua,
 } from '../src/svg/StopLine'
 import { 
   Route,
   Route_ChanHua,
   Route_Yunlin
 } from '../src/svg/SingleStopLine'
-import { shallow, render } from 'enzyme'
-import { Stop, StopWithEng } from '../src/svg/Stop';
+import { shallow } from 'enzyme'
 
 describe('test amount of lines when amount of data is different', () => {
   it('when the data is less than 10 and it should be 1 line', () => {
@@ -32,12 +35,12 @@ describe('test amount of lines when amount of data is different', () => {
   })
 })
 
-describe('test HOC and amount of routes', () => {
+describe('test HOC and amount of routes, amount of stops', () => {
   //the rule of line's amount is based on the previous test
   const routeData1 = Array(9)
-  const routeData2 = Array(20)
-  const routeData3 = Array(45)
-  const routeData4 = Array(100)
+  const routeData2 = Array(29)
+  const routeData3 = Array(77)
+  const routeData4 = Array(103)
   it('test deafult Route', () => {
     const DefaultRoute = shallow(<MappedRoutesDefault routeData={routeData1} />)
     expect(DefaultRoute.find(Route)).toHaveLength(1)
@@ -74,15 +77,16 @@ describe('test HOC and amount of routes', () => {
     expect(YunlinRoute.find(Route_Yunlin)).toHaveLength(4)
     expect(YunlinRoute.find(RouteRoundedCorner)).toHaveLength(3)
   })
-})
-
-describe('test the amount of stops per routes', () => {
-  it('', () => {
-      
+  it('Amount of last routes stops should be less than or equal to other routes.Expect the last routes , other stops amount of routes should be the same.', () => {
+    const DefaultRoute = shallow(<MappedRoutesDefault routeData={routeData3} />)
+    const route1Stops = DefaultRoute.find(Route).get(0).props.route.length
+    const route2Stops = DefaultRoute.find(Route).get(1).props.route.length
+    const route3Stops = DefaultRoute.find(Route).get(2).props.route.length
+    expect(route1Stops > 0).toBeTruthy()
+    expect(route1Stops >= route3Stops && route2Stops >= route3Stops).toBeTruthy()
+    expect(route1Stops === route2Stops).toBeTruthy()
   })
 })
-
-
 
 describe('test position of lines when it is up or down', () => {
   it('it should be 300 when line is only one and it is Up', () => {
@@ -97,9 +101,29 @@ describe('test position of lines when it is up or down', () => {
   it('it should be ... when line is Down', () => {
     expect(setPosOfLinesY(2, 200, 200, 2, 'Down')).toBe(200 + 200 / 2 * (2 - 1))
   })
+})
 
+describe('test getRouteByLocation function', () => {
+  it('', () => {
+    const ChiaYiRoute = getRouteByLocation('ChiaYi', [])
+    expect(ChiaYiRoute).toEqual(genarateRoutes([]))
+  })
+  it('', () => {
+    const YunlinRoute = getRouteByLocation('Yunlin', [])
+    expect(YunlinRoute).toEqual(genarateRoutes_Yunlin([]))
+  })
+  it('', () => {
+    const ChanHuaRoute = getRouteByLocation('ChanHua', [])
+    expect(ChanHuaRoute).toEqual(genarateRoutes_ChanHua([]))
+  })
+  it('test StopLine component', () => {
+    const FN = jest.fn()
+    const ChiaYiStopLine = shallow(<StopLine routeData={[]} location={'ChiaYi'} generateRouteFn={FN} />)
+    expect(FN).toHaveBeenCalled()
+  })
   
 })
+
 
 
 

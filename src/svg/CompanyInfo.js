@@ -19,7 +19,7 @@ export class CompanyInfo extends React.Component {
   }
   
   render() {
-    const { x1FromRight=0, x2FromRight=0, y, txt1, txt2, location } = this.props
+    const { x1FromRight=0, x2FromRight=0, y=0, txt1='', txt2='', location } = this.props
     const { txt1_Width, txt2_Width } = this.state
     return (
       <g>

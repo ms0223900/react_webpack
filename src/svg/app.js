@@ -14,11 +14,11 @@ const loadLocationSVG = (location, routes, loadFn, isPreview) => {
   routes = isPreview ? routes.slice(0, 10) : routes
   switch (location) {
     case 'ChiaYi':
-      return routes.map(r => <SVGPaper_ChiaYi routes={r} location={location} loaddd={loadFn} />)
+      return routes.map(r => <SVGPaper_ChiaYi routes={r} loaddd={loadFn} />)
     case 'Yunlin':
-      return routes.map(r => <SVGPaper_Yunlin routes={r} location={location} loaddd={loadFn} />)
+      return routes.map(r => <SVGPaper_Yunlin routes={r} loaddd={loadFn} />)
     case 'ChanHua':
-      return routes.map(r => <SVGPaper_ChanHua routes={r} location={location} loaddd={loadFn} />)
+      return routes.map(r => <SVGPaper_ChanHua routes={r} loaddd={loadFn} />)
 
     default:
       return ''

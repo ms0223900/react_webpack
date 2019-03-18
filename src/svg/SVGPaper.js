@@ -15,16 +15,10 @@ import ChanHuaBG from '../images/ChanHua_BG.svg'
 export class SVGPaper_ChiaYi extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
-  }
-  componentDidMount = () => {
-    // const { routes } = this.props
-    // console.log('SVGPaper load success')
-    this.props.loaddd()
   }
   
   render() {
-    const { routes, location, loadingStatus } = this.props
+    const { routes, loadingStatus } = this.props
     return (
       <Fragment>
       
@@ -39,7 +33,7 @@ export class SVGPaper_ChiaYi extends React.Component {
             <SideInfo_ChiaYi />
             <StopLine 
               routeData={routes.data}  
-              location={location}
+              location={'ChiaYi'}
               onLoad={loadingStatus} 
             />
             <CompanyInfo 
@@ -48,7 +42,7 @@ export class SVGPaper_ChiaYi extends React.Component {
               y={100}
               txt1={routes.companyService[0]}
               txt2={routes.companyService.length > 1 ? routes.companyService[1] : ''}
-              location={location}
+              location={'ChiaYi'}
             />
           </svg>
         </div>
@@ -60,17 +54,13 @@ export class SVGPaper_ChiaYi extends React.Component {
 export class SVGPaper_Yunlin extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
   }
   componentDidMount = () => {
-    // const { routes } = this.props
-    
-    // console.log('SVGPaper load success')
     this.props.loaddd()
   }
   
   render() {
-    const { routes, location } = this.props
+    const { routes } = this.props
     return (
       <div>
         <svg id='paper' xmlns='http://www.w3.org/2000/svg'>
@@ -91,7 +81,7 @@ export class SVGPaper_Yunlin extends React.Component {
           />
           <StopLine 
             routeData={routes.data}
-            location={location} />
+            location={'Yunlin'} />
           <QRcode_Yunlin 
             x={0}
             y={470}
@@ -105,7 +95,7 @@ export class SVGPaper_Yunlin extends React.Component {
             y={580 + 6}
             txt1={routes.companyService[0]}
             txt2={routes.companyService[1]}
-            location={location}
+            location={'Yunlin'}
           />
         </svg>
       </div>
@@ -116,10 +106,9 @@ export class SVGPaper_Yunlin extends React.Component {
 export class SVGPaper_ChanHua extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
   }
   render() {
-    const { routes, location } = this.props
+    const { routes } = this.props
     return (
       <div>
         <svg id='paper' xmlns='http://www.w3.org/2000/svg'>
@@ -137,14 +126,14 @@ export class SVGPaper_ChanHua extends React.Component {
           />
           <StopLine 
             routeData={routes.data}
-            location={location} />
+            location={'ChanHua'} />
           <CompanyInfo 
             x1FromRight={202}
             x2FromRight={74}
             y={72 + 14}
             txt1={routes.companyService[0]}
             txt2={routes.companyService[1]}
-            location={location}
+            location={'ChanHua'}
           />
           <SideInfo_ChanHua
             byPass={routes.byPass}

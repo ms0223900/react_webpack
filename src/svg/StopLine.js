@@ -13,69 +13,13 @@ const lineToArr = (lines) => {
   } return arr
 }
 export const sepLines = (stops) => (stops < 10 ? 1 : Math.ceil(stops / 40) + 1)
-export const sepRouteData = (routeData=[{id: 0}], stopsPerLine=10, l=1) => (
-  routeData.filter(
-    data => data.id >= stopsPerLine * (l - 1) && data.id < stopsPerLine * l )
-)
-export const setPosOfLinesY = (lines=1, y=100, h=100, l=1, UpOrDown='Up') => 
+export const sepRouteData = (routeData=[{id: 0}], stopsPerLine=10, l=1) => ( routeData.slice(stopsPerLine * (l - 1), stopsPerLine * l) )
+export const setPosOfLinesY = (lines=1, y=100, h=100, l=1, UpOrDown='Up') => (
   UpOrDown === 'Up' ?
   (y + (h / lines) * l) :
   (lines === 1 ? (y + h / 2 - 100) : (y + (h / lines) * (l - 1)))
+)
 
-
-
-// function genarateRoutes(routeData) {
-//   const stops = routeData.length
-//   const lines = sepLines(stops)
-//   const stopsPerLine = Math.ceil(stops / lines)
-//   const { x, y, w, h } = defaultStyle.drawLineArea
-  
-//   if(lines === 1) {
-//     return (
-//       <g style={{ 'fontSize': defaultStyle.fontSize['1Line'] }}>
-//         <Route
-//           direction='right' 
-//           route={routeData} 
-//           x={x}
-//           y={y + h / (lines + 1) - 100}
-//           stops={stopsPerLine}
-//           fontSize={ defaultStyle.fontSize['1Line'] }
-//           endID={ [0, stops - 1] }
-//         />
-//       </g>
-//     )
-//   } else {
-//     const linesArrForMap = lineToArr(lines)
-//     return (
-//       <g style={{ 'fontSize': defaultStyle.fontSize[`${lines}Line`] }}>
-//         <Route
-//           direction='right' 
-//           route={routeData.filter(data => data.id < stopsPerLine)} 
-//           x={x}
-//           y={y}
-//           width={ w }
-//           stops={stopsPerLine}
-//         />
-//         {linesArrForMap.map(l => (
-//           <React.Fragment key={l}>
-//             <RouteRoundedCorner l={l} x={x} y={y} w={w} h={h} lines={lines} 
-//             strokeTheme={defaultTheme} strokeWidth={3} txtUpOrDown={'Down'}
-//             />
-//             <Route
-//               direction={l % 2 === 0 ? 'left' : 'right'} 
-//               route={routeData.filter(
-//                 data => data.id >= stopsPerLine * (l - 1) && data.id < stopsPerLine * l )} 
-//               x={ l % 2 === 0 ? x + w : x }
-//               y={ y + (h / lines) * (l - 1) }
-//               stops={ l === lines ? stops - stopsPerLine * (l - 1) : stopsPerLine } //剩下的站
-//               lastStops={ l === lines ? stopsPerLine : 0 }
-//             />
-//           </React.Fragment>  
-//         ))}
-//       </g>
-//     )
-//   }
-// }
 export const RouteRoundedCorner = ({l, x, y, w, h, lines, strokeWidth, strokeTheme='#000', txtUpOrDown='Up'}) => (
   <RoundedCorner 
     x={ l % 2 === 0 ? x + w + 12 : x }
@@ -132,17 +76,17 @@ export const MappedRoutesChanHua = HOCMappedRoute(Route_ChanHua, ChanHua, 'Down'
 export const MappedRoutesYunlin = HOCMappedRoute(Route_Yunlin, YunlinChanHua, 'Up')
 export const MappedRoutesDefault = HOCMappedRoute(Route, defaultStyle, 'Down')
 
-function genarateRoutes_ChanHua(routeData) {
+export function genarateRoutes_ChanHua(routeData) {
   return <MappedRoutesChanHua routeData={routeData}/>
 }
-function genarateRoutes_Yunlin(routeData) {
+export function genarateRoutes_Yunlin(routeData) {
   return <MappedRoutesYunlin routeData={routeData}/>
 }  
-function genarateRoutes(routeData) {
+export function genarateRoutes(routeData) {
   return <MappedRoutesDefault routeData={routeData}/>
 }
 
-const getRouteByLocation = (location, routeData=[]) => {
+export const getRouteByLocation = (location, routeData=[]) => {
   switch (location) {
     case 'ChiaYi':
       return genarateRoutes(routeData) 
@@ -162,10 +106,12 @@ export default class StopLine extends React.Component {
     this.state = {};
   }
   render() {
-    const { routeData=[], location='Yunlin' } = this.props;
+    const { routeData=[], 
+      location='Yunlin', 
+      generateRouteFn=getRouteByLocation } = this.props;
     return (
       <g id={'route1'}>
-        { getRouteByLocation(location, routeData) }
+        { generateRouteFn(location, routeData) }
       </g>
     )
   }

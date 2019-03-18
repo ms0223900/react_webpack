@@ -3,30 +3,9 @@ import { Text, BigArrow } from './SVGComponents'
 import { calTextY, textAlignCenter, splitBrackets } from './svgFunctions'
 import backgroudImage from '../images/Head_background.png'
 
-const styles = {
-  ChiaYi: {
-    fontSize: {
-      stop: 24,
-      stopEng: 14,
-      routeNumber: 60,
-    },
-  },
-  Yunlin: {
-    fontSize: {
-      stop: 32,
-      stopEng: 11,
-      routeNumber: 60,
-      pass: 15,
-    },
-  },
-  ChanHua: {
-    fontSize: {
-      stop: 34,
-      stopEng: 11,
-      routeNumber: 52,
-    },
-  }
-}
+import { styles } from '../../config'
+const { ChiaYi, Yunlin, ChanHua } = styles.head
+
 const layOut = {
   topLine: 16,
   bigArrow: {
@@ -50,10 +29,10 @@ export const Head_ChiaYi = (props) => {
       />
       <Text
         x={20}
-        y={ calTextY(layOut.topLine, styles.ChiaYi.fontSize.routeNumber) }
+        y={ calTextY(layOut.topLine, ChiaYi.fontSize.routeNumber) }
         text={number}
         className={'routeNumber'}
-        style={{ fontSize: styles.ChiaYi.fontSize.routeNumber }} 
+        style={{ fontSize: ChiaYi.fontSize.routeNumber }} 
       />
       <g 
         className={'fromTo'} 
@@ -61,24 +40,24 @@ export const Head_ChiaYi = (props) => {
         <g>
           <Text
             x={ layOut.stop.x }
-            y={ calTextY(layOut.topLine, styles.ChiaYi.fontSize.stop) } 
+            y={ calTextY(layOut.topLine, ChiaYi.fontSize.stop) } 
             text={fromTo[0]}
             className={'stop'}
-            style={{ fontSize: styles.ChiaYi.fontSize.stop }} 
+            style={{ fontSize: ChiaYi.fontSize.stop }} 
           />
           <Text 
             x={ layOut.stop.x }
-            y={ calTextY(layOut.topLine, styles.ChiaYi.fontSize.stopEng) + 30 }
+            y={ calTextY(layOut.topLine, ChiaYi.fontSize.stopEng) + 30 }
             text={fromToEng[0]}
             className={'stop-eng'}
-            style={{ fontSize: styles.ChiaYi.fontSize.stopEng }} 
+            style={{ fontSize: ChiaYi.fontSize.stopEng }} 
           />
         </g>
         <g>
           <BigArrow 
             x={ 
               layOut.stop.x + 
-              fromTo[0].length * styles.ChiaYi.fontSize.stop + layOut.bigArrow.spacting 
+              fromTo[0].length * ChiaYi.fontSize.stop + layOut.bigArrow.spacting 
             }
             y={layOut.topLine + 2}
             width={40}
@@ -90,13 +69,13 @@ export const Head_ChiaYi = (props) => {
           <text 
             x={ 
               layOut.stop.x + 
-              fromTo[0].length * styles.ChiaYi.fontSize.stop + 
+              fromTo[0].length * ChiaYi.fontSize.stop + 
               layOut.bigArrow.width + 
               layOut.bigArrow.spacting * 2
             }
-            y={ calTextY(layOut.topLine, styles.ChiaYi.fontSize.stop) }
+            y={ calTextY(layOut.topLine, ChiaYi.fontSize.stop) }
             className={'stop'}
-            style={{ fontSize: styles.ChiaYi.fontSize.stop }} 
+            style={{ fontSize: ChiaYi.fontSize.stop }} 
           >
             {splitBrackets(fromTo[1])[0]}
               <tspan className={'fromTo-ChanHua-description'}>
@@ -106,14 +85,14 @@ export const Head_ChiaYi = (props) => {
           <Text 
             x={ 
               layOut.stop.x + 
-              fromTo[0].length * styles.ChiaYi.fontSize.stop + 
+              fromTo[0].length * ChiaYi.fontSize.stop + 
               layOut.bigArrow.width + 
               layOut.bigArrow.spacting * 2
             }
-            y={ calTextY(layOut.topLine, styles.ChiaYi.fontSize.stopEng) + 30 }
+            y={ calTextY(layOut.topLine, ChiaYi.fontSize.stopEng) + 30 }
             text={fromToEng[1]}
             className={'stop-eng'}
-            style={{ fontSize: styles.ChiaYi.fontSize.stopEng }} 
+            style={{ fontSize: ChiaYi.fontSize.stopEng }} 
           />
         </g>
       </g>
@@ -123,7 +102,7 @@ export const Head_ChiaYi = (props) => {
 
 export const Head_Yunlin = (props) => {
   const { number, fromTo, fromToEng, pass, charge } = props
-  const { fontSize } = styles.Yunlin
+  const { fontSize } = Yunlin
   return (
     <g className={'head-Yunlin'}>
       <g className={'fromTo-Yunlin'}>
@@ -194,7 +173,7 @@ export class Head_ChanHua extends React.Component {
   }
   
   render() {
-    const { routeNumber, stop, stopEng } = styles.ChanHua.fontSize
+    const { routeNumber, stop, stopEng } = ChanHua.fontSize
     const { number, fromTo, fromToEng } = this.props
     const { fromTo1_W, fromTo2_W, fromTo1Eng_W, fromTo2Eng_W } = this.state
     console.log(splitBrackets(fromTo[1]))
@@ -203,7 +182,7 @@ export class Head_ChanHua extends React.Component {
         <Text 
           x={13}
           y={calTextY(24, routeNumber)}
-          style={{ fontSize: styles.ChanHua.fontSize.routeNumber }} 
+          style={{ fontSize: ChanHua.fontSize.routeNumber }} 
           text={number}
           className={'routeNumber'}
         />
@@ -211,7 +190,7 @@ export class Head_ChanHua extends React.Component {
           <text 
             x={textAlignCenter(182, fromTo1_W, 305)}
             y={calTextY(12, stop)} 
-            style={{ fontSize: styles.ChanHua.fontSize.stop }}
+            style={{ fontSize: ChanHua.fontSize.stop }}
             ref={(e) => this.fromTo1 = e}
           >
             {fromTo[0]}
@@ -219,7 +198,7 @@ export class Head_ChanHua extends React.Component {
           <text 
             x={textAlignCenter(520, fromTo2_W, 305)}
             y={calTextY(12, stop)} 
-            style={{ fontSize: styles.ChanHua.fontSize.stop }}
+            style={{ fontSize: ChanHua.fontSize.stop }}
             ref={(e) => this.fromTo2 = e}
           >
               {splitBrackets(fromTo[1])[0]}
@@ -235,7 +214,7 @@ export class Head_ChanHua extends React.Component {
           <text
             x={textAlignCenter(182, fromTo1Eng_W, 305)}
             y={calTextY(48, stopEng)}
-            style={{ fontSize: styles.ChanHua.fontSize.stopEng }}
+            style={{ fontSize: ChanHua.fontSize.stopEng }}
             ref={(e) => this.fromToEng1 = e}
           >
             {fromToEng[0]}
@@ -243,7 +222,7 @@ export class Head_ChanHua extends React.Component {
           <text
             x={textAlignCenter(520, fromTo2Eng_W, 305)}
             y={calTextY(48, stopEng)}
-            style={{ fontSize: styles.ChanHua.fontSize.stopEng }}
+            style={{ fontSize: ChanHua.fontSize.stopEng }}
             ref={(e) => this.fromToEng2 = e}
           >
             {fromToEng[1]}

@@ -2,9 +2,12 @@
 import React from 'react'
 import { Text } from './SVGComponents'
 import { calTextY, genObjArr } from './svgFunctions'
+import { styles } from '../../config'
 
 import QRcodeBusDynamic from '../images/QRcode-busDynamic.svg'
 import QRcodeTicketPrice from '../images/QRcode-ticketPrice.svg'
+const { ChiaYi, Yunlin } = styles.sideInfo
+
 
 const layout = {
   padding: {
@@ -12,22 +15,11 @@ const layout = {
     left: 32,
     between: 16,
   },
-  
 }
-const styles = {
-  ChiaYi: {
-    fontSize: 16,
-  },
-  Yunlin : {
-    stopFS: 12,
-    stopQueryFS: 18, 
-  }
-}
-
 
 const QRcode = (props) => {
   const { x=0, y=0, width=72, text='text', imgSrc='' } = props
-  const { fontSize } = styles.ChiaYi
+  const { fontSize } = ChiaYi
   return (
     <g transform={`translate(${x}, ${y})`}>
       <image 
@@ -44,7 +36,7 @@ const QRcode = (props) => {
 
 export const QRcode_Yunlin = (props) => {
   const { x=0, y=0, width=72, imsi='466011200153956', nowStop='頂湳站' } = props
-  const { stopFS, stopQueryFS } = styles.Yunlin
+  const { stopFS, stopQueryFS } = Yunlin
   const url = 'http://ebus.yunlin.gov.tw/QRcodeGetBusTime.aspx?imsi=' + imsi
 
   return (

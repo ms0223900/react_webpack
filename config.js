@@ -54,7 +54,40 @@ export const styles = {
         h: 468,
       },
     }
-  }
+  },
+  head: {
+    ChiaYi: {
+      fontSize: {
+        stop: 24,
+        stopEng: 14,
+        routeNumber: 60,
+      },
+    },
+    Yunlin: {
+      fontSize: {
+        stop: 32,
+        stopEng: 11,
+        routeNumber: 60,
+        pass: 15,
+      },
+    },
+    ChanHua: {
+      fontSize: {
+        stop: 34,
+        stopEng: 11,
+        routeNumber: 52,
+      },
+    }
+  },
+  sideInfo: {
+    ChiaYi: {
+      fontSize: 16,
+    },
+    Yunlin : {
+      stopFS: 12,
+      stopQueryFS: 18, 
+    }
+  },
 }
 export const THEME = {
   defaultStyle: '#006633',
