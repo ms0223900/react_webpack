@@ -7,6 +7,8 @@ export const styles = {
   },
   routes: {
     defaultStyle: {
+      THEME: '#006633',
+      lineWidth: 3,
       fontSize: {
         '1Line': 22,
         '2Line': 18,
@@ -21,6 +23,8 @@ export const styles = {
       }
     },
     YunlinChanHua: {
+      THEME: '#497D90',
+      lineWidth: 5,
       fontSize: {
         '1Line': 22,
         '2Line': 17,
@@ -35,6 +39,8 @@ export const styles = {
       }
     },
     ChanHua: {
+      THEME: '#497D90',
+      lineWidth: 5,
       fontSize: {
         '1Line': 22,
         '2Line': 17,
@@ -51,7 +57,8 @@ export const styles = {
   }
 }
 export const THEME = {
-  defaultTheme: '#006633',
-  YunlinChanHuaTheme: '#497D90',
+  defaultStyle: '#006633',
+  YunlinChanHua: '#497D90',
+  ChanHua: '#497D90',
 }
 
