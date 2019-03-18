@@ -10,7 +10,7 @@ import { SVGPaper_ChiaYi, SVGPaper_Yunlin, SVGPaper_ChanHua } from './SVGPaper'
 
 let count = 0
 
-const loadLocationSVG = (location, routes, loadFn, isPreview) => {
+const loadLocationSVG = (location, routes=[], loadFn=false, isPreview=true) => {
   routes = isPreview ? routes.slice(0, 10) : routes
   switch (location) {
     case 'ChiaYi':
@@ -19,14 +19,12 @@ const loadLocationSVG = (location, routes, loadFn, isPreview) => {
       return routes.map(r => <SVGPaper_Yunlin routes={r} loaddd={loadFn} />)
     case 'ChanHua':
       return routes.map(r => <SVGPaper_ChanHua routes={r} loaddd={loadFn} />)
-
     default:
       return ''
   }
 }
 
 const routeLocations = ['ChiaYi', 'Yunlin', 'ChanHua']
-
 const fetchURLSetting = {
   method: 'GET',
   mode: 'cors',
@@ -34,6 +32,28 @@ const fetchURLSetting = {
     'Access-Control-Allow-Origin': '*',
     'Content-Type': 'text/plain;charset=UTF-8',
   },
+}
+export const getBusProviderId = (routeJSON, routesInfo) => {
+  let providerId = []
+  for (let i = 0; i < routeJSON.length; i++) {
+    providerId[i] = routesInfo
+      .filter(rs => rs.NameZh.trim() === routeJSON[i].number.trim())
+      .map(arr => arr = arr.ProviderId)
+  }
+  return providerId
+}
+export const getBusProviderInfo = (routeJSON, providerId, providerInfo) => {
+  let getProviderInfo = []
+  for (let j = 0; j < providerId.length; j++) {
+    getProviderInfo[j] = providerId[j]
+      .map(id => id = providerInfo
+        .filter(pro => pro.Id === id)
+        //亂碼問題
+        .map(arr => arr = arr.NameZh.replace('鼠?', '公總') + ': ' + arr.telephone))
+      .map(info => info = info[0])
+    routeJSON[j] = {...routeJSON[j], companyService: getProviderInfo[j]}
+  }
+  return routeJSON
 }
 
 export default class App extends React.Component {
@@ -81,28 +101,17 @@ export default class App extends React.Component {
             .then(res => res.json())
             .then(routesInfo => {
               console.log('chiayi', routeJSON)
-              let getProviderId = []
-              for (let i = 0; i < routeJSON.length; i++) {
-                const routeNum = routeJSON[i].number
-                getProviderId[i] = routesInfo.filter(rs => rs.NameZh.trim() === routeNum.trim()).map(arr => arr = arr.ProviderId)
-              }
+              const providerId = getBusProviderId(routeJSON, routesInfo)
               
               fetch('http://ebus.cyhg.gov.tw/cms/api/provider', fetchURLSetting)
                 .then(res => res.json())
                 .then(providerInfo => {
-                  let getProviderInfo = []
-                  for (let j = 0; j < getProviderId.length; j++) {
-                    getProviderInfo[j] = getProviderId[j]
-                      .map(id => id = providerInfo
-                        .filter(pro => pro.Id === id)
-                        .map(arr => arr = arr.NameZh.replace('鼠?', '公總') + ': ' + arr.telephone)).map(info => info = info[0])
-                    routeJSON[j] = {...routeJSON[j], companyService: getProviderInfo[j]}
-                  }
+                  const RouteJSONWithCompanyInfo = getBusProviderInfo(routeJSON, providerId, providerInfo)
                   
                   this.setState({
                     routes: [...this.state.routes, {
                       location: locationName,
-                      routeData: routeJSON,
+                      routeData: RouteJSONWithCompanyInfo,
                     }],
                   })
                 })

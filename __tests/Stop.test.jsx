@@ -1,17 +1,15 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 import React from 'react'
-
 import { 
   setStopClassName, 
   setTextY, 
   SpecialIcon,
   HospitalIcon,
-  getStopUpOrDown,
-  StopWithEng
+  StopWithEng,
+  IconNow
  } 
 from '../src/svg/Stop'
-
 import { shallow, render, mount } from 'enzyme'
 
 describe('test stops', () => {
@@ -29,6 +27,11 @@ describe('test stops', () => {
     expect(setTextY('Eng', 6, 'Up', 10, 10)).toBe(-19)
   })
   
+  it('test it should have IconNow when the stopType is now', () => {
+    const specialIcon = shallow(<SpecialIcon  stopType='now' />)
+    expect(specialIcon.find(IconNow)).toHaveLength(1)
+  })
+
   it('test hospital icon when "醫院" string is included', () => {
     const specialIcon = shallow(<SpecialIcon  stopName='OX醫院' />)
     expect(specialIcon.find(HospitalIcon)).toHaveLength(1)
