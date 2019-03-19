@@ -93,11 +93,6 @@ describe('test single stop line (Route)', () => {
     const ChanHua = shallow(<Route_ChanHua />)
     expect(ChanHua.find(RouteWithEngStops).props().UpOrDown).toBe('Down')
   })
-  it('test ChanHua prop of UpOrDown should be "Up"', () => {
-    const { direction, route } = routeData2
-    const ChanHua = shallow(<Route_ChanHua x={714} direction={direction} route={route} />)
-    expect(ChanHua.find(RouteWithEngStops).get(0).props.x).toBe(714)
-  })
 })
 
 

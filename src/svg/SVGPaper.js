@@ -1,16 +1,45 @@
 import React, { Fragment } from 'react'
-
-// import { GridLayout } from './GridLayout'
+//
 import StopLine from './StopLine'
 import { Head_ChiaYi, Head_Yunlin, Head_ChanHua } from './Head'
 import { SideInfo_ChiaYi, QRcode_Yunlin, SideInfo_ChanHua } from './SideInfo'
 import { BusSchedule } from './BusSchedule'
 import { CompanyInfo } from './CompanyInfo'
-
 import YunlinBG from '../images/Yunlin_BG.svg'
 import ChanHuaBG from '../images/ChanHua_BG.svg'
 
 
+export const AllSVGPaper = ['ChiaYi', 'Yunlin', 'ChanHua']
+export const getLocationRouteData = (location='ChiaYi', routes=[], isPreview=true) => {
+  const locationRoute = routes.filter(r => r.location === location)[0] ? 
+  routes.filter(r => r.location === location)[0].routeData : routes
+  return isPreview ? locationRoute.slice(0, 10) : locationRoute
+}
+export const loadLocationSVGPaper = (location='ChiaYi', route=[]) => {
+  switch (location) {
+    case 'ChiaYi':
+      return <SVGPaper_ChiaYi routes={route} />
+    case 'Yunlin':
+      return <SVGPaper_Yunlin routes={route} />
+    case 'ChanHua':
+      return <SVGPaper_ChanHua routes={route} />
+    default:
+      return ''
+  }
+}
+
+export const SVGPaper = ({ routes=[], loadCompleteCount=0,  isPreview=true, location='ChiaYi'}) => {
+  return (
+    <div id='SVGArea'>
+      {loadCompleteCount === AllSVGPaper.length ? 
+        getLocationRouteData(location, routes, isPreview).map(
+          r => loadLocationSVGPaper(location, r)
+        ) : 
+        'please wait'
+      }
+    </div>
+  )
+}
 
 export class SVGPaper_ChiaYi extends React.Component {
   constructor(props) {
@@ -54,9 +83,6 @@ export class SVGPaper_ChiaYi extends React.Component {
 export class SVGPaper_Yunlin extends React.Component {
   constructor(props) {
     super(props);
-  }
-  componentDidMount = () => {
-    this.props.loaddd()
   }
   
   render() {
