@@ -1,7 +1,11 @@
 import React from 'react'
 import { Rect, Line } from './SVGComponents'
-
-const removeDupliArr = (arr) => {
+import { genObjArr } from './svgFunctions'
+export const sepTimeToHourMin = (timeArr=[['0011', '0022'], ['0022', '0033']]) => (
+  timeArr.map(t => t.map(time => 
+    time = [time.slice(0, 2), time.slice(2)]))
+)
+export const removeDupliArr = (arr) => {
   let newArr = []
   for (let i = 0; i < arr.length; i++) {
     if(newArr.indexOf(arr[i]) === -1) {
@@ -10,8 +14,8 @@ const removeDupliArr = (arr) => {
   }
   return newArr
 }
-const mergeTimeByHour = (time) => {
-  let hour = '00'
+export const mergeTimeByHour = (time) => {
+  let hour = ''
   let newTime = []
   let hourCount = 0
   for (let i = 0; i < time.length; i++) {
@@ -25,7 +29,7 @@ const mergeTimeByHour = (time) => {
   }
   return newTime.slice(1)
 }
-const merge2Time_ByHour = (times) => {
+export const merge2Time_ByHour = (times=['00', '00']) => {
   let newTime = []
   if(times.length > 1) {
     const allTime = [...times[0], ...times[1]]
@@ -58,7 +62,18 @@ const textAlignCenter = (text, fontWidth, width) => {
   }
   return x
 }
+//
 
+
+export const SepLine = ({ x=37, length=1 }) => (
+  <Line
+    x1={x}
+    y1={107}
+    x2={x}
+    y2={107 + (length + 2) * 22}
+    className={'schedule-line'}
+  />
+)
 const SingleTime = (props) => {
   const { hour='00', normalMin='-', holidayMin='-', y=150 } = props
   return (
@@ -82,61 +97,47 @@ const SingleTime = (props) => {
     
   )
 }
+export const SingleSchedule = ({ objArr=[{}] }) => (
+  <g>
+    {objArr.id % 2 === 1 ? 
+      <Rect
+        x={0}
+        y={150 + objArr.id * 22}
+        width={164}
+        height={22}
+        className={'schedule-singleTime'}
+      /> : ''
+    }
+    <SingleTime 
+      hour={objArr.data[0]}
+      normalMin={ objArr.data[1].join(' ') }
+      holidayMin={objArr.data.length > 2 ? objArr.data[2].join(' ') : objArr.data[1].join(' ')}
+      y={150 + 22 * objArr.id  + 16}
+    />
+  </g>
+)
 
 export const BusSchedule = (props) => {
   const { time } = props
   //string to hour, min
-  const timeArr = time.map(t => t.map(time => time = [time.slice(0, 2), time.slice(2)]))
+  const timeArr = sepTimeToHourMin(time)
   //merge hour
   const mergedTime = timeArr.map(t => t = mergeTimeByHour(t))
   //merge two time
   const mergedTimeArr = merge2Time_ByHour(mergedTime)
-
-  let mergedTimeObj = []
-  for (let i = 0; i < mergedTimeArr.length; i++) {
-    mergedTimeObj[i] = {
-      id: i,
-      time: mergedTimeArr[i]
-    }
-  }
-  // console.log(mergedTimeObj)
+  const mergedTimeObjArr = genObjArr(mergedTimeArr)
 
   return (
     <g>    
-      {mergedTimeObj.map(t => (
-        <g>
-          {t.id % 2 === 1 ? 
-            <Rect
-              x={0}
-              y={150 + t.id * 22}
-              width={164}
-              height={22}
-              className={'schedule-singleTime'}
-            /> : ''
-          }
-          <SingleTime 
-            hour={t.time[0]}
-            normalMin={ t.time[1].join(' ') }
-            holidayMin={t.time.length > 2 ? t.time[2].join(' ') : t.time[1].join(' ')}
-            y={150 + 22 * t.id  + 16}
-          />
-        </g>
-      ))}
-      {<Line
-        x1={37}
-        y1={107}
-        x2={37}
-        y2={107 + (mergedTimeObj.length + 2) * 22}
-        className={'schedule-line'}
-      />}
-      {<Line
-        x1={98}
-        y1={107}
-        x2={98}
-        y2={107 + (mergedTimeObj.length + 2) * 22}
-        className={'schedule-line'}
-      />}
+      { mergedTimeObjArr.map(t => <SingleSchedule objArr={t} />) }
+      <SepLine 
+        x={37}
+        length={mergedTimeObjArr.length}
+      />
+      <SepLine 
+        x={98}
+        length={mergedTimeObjArr.length}
+      />
     </g>
   )
 }
-

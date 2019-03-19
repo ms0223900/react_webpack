@@ -116,7 +116,6 @@ export default class App extends React.Component {
       isPreview: true,
     };
   }
-
   componentWillMount = () => {
     for (let i = 0; i < routeLocations.length; i++) {
       const routeName = routeLocations[i]
@@ -136,7 +135,6 @@ export default class App extends React.Component {
       }))
     }
   }
-  
   fetchRouteJSON = (locationName) => {
     fetch(`allRoutes_${locationName}.json`)
       .then(res => res.json())
@@ -173,7 +171,6 @@ export default class App extends React.Component {
       })
       .catch(err => console.log(err))
   }
-
   changeLocation = (e) => {
     count = 0
     const id = e.target.id
@@ -195,7 +192,6 @@ export default class App extends React.Component {
       })
     }
   }
-
   render() {
     const { routes, location, loadComplete, isPreview } = this.state
     // console.log(routes)
