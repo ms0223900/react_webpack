@@ -10,7 +10,6 @@ import {
   BusSchedule
 } from '../src/svg/BusSchedule'
 import { Rect } from '../src/svg/SVGComponents'
-import { genObjArr } from '../src/svg/svgFunctions'
 import { shallow, render } from 'enzyme'
 
 describe('test handle time array functions', () => {
@@ -59,13 +58,15 @@ describe('test handle time array functions', () => {
   })
 })
 describe('test BusSchedule components', () => {
-  // it('the Rect component should be only appear when the id is even', () => {
-  //   const mergedOnlyOneByHourArr = genObjArr([
-  //     ['00', ['11', '22', '33']],
-  //     ['11', ['22']],
-  //   ])
-  //   const singleSchedule = shallow(<SingleSchedule objArr={mergedOnlyOneByHourArr} />)
-  //   expect(singleSchedule.find(Rect)).toHaveLength(1)
-  // })
+  it('the Rect component should be only appear when the id is odd', () => {
+    const objArr = [
+      { id: 0, data: ['00', ['11', '22', '33']], },
+      { id: 1, data: ['00', ['11', '22', '33']], }
+    ]
+    const singleSchedule = shallow(<SingleSchedule objArr={objArr[0]} />)
+    expect(singleSchedule.find(Rect)).toHaveLength(0)
+    const singleSchedule2 = shallow(<SingleSchedule objArr={objArr[1]} />)
+    expect(singleSchedule2.find(Rect)).toHaveLength(1)
+  })
 })
 
