@@ -11,18 +11,18 @@ module.exports = write = (location) => {
 
   for (let i = 0; i < datas.length; i++) {
     let file = fs.readdirSync(`src/routeFiles/${location}`)[i]
+    // console.log(file)
     let fileCxt = fs.readFileSync(`src/routeFiles/${location}/${file}`, 'UTF-8')
+    // console.log(fileCxt)
     if(location === 'Yunlin') {
       dataArr = [...dataArr, ...Convert_Yunlin(fileCxt)]
-      // console.log(dataArr[i])
     } else if(location === 'ChiaYi') {
       dataArr = [...dataArr, ...Convert_ChiaYi(fileCxt)]
-      // console.log(dataArr[i])
     } else if(location === 'ChanHua') {
       dataArr = [...dataArr, ...Convert_ChanHua(fileCxt)]
+      
     }
   }
-
   // for dev-server
   fs.writeFileSync(`public/allRoutes_${location}.json`, JSON.stringify(dataArr), err => {
     if(err) throw err

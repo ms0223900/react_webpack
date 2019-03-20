@@ -29,6 +29,7 @@ export const loadLocationSVGPaper = (location='ChiaYi', route=[]) => {
 }
 
 export const SVGPaper = ({ routes=[], loadCompleteCount=0,  isPreview=true, location='ChiaYi'}) => {
+  console.log('routeData', getLocationRouteData(location, routes, isPreview))
   return (
     <div id='SVGArea'>
       {loadCompleteCount === AllSVGPaper.length ? 

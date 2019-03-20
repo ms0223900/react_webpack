@@ -51,26 +51,25 @@ const Convert_ChiaYi = (csv) => {
 }
 
 const Convert_Yunlin = (csv) => {
-  let CSV = csv.split('\r\n').map(d => d.replace('\n', ''))
-  if(CSV.length % 14 !== 0) {
-    CSV = [...CSV, '']
+  let rowCSV = csv.split(/\r|\n/gi).map(d => d.replace('\n', ''))
+  if(rowCSV.length % 14 !== 0) {
+    rowCSV = [...rowCSV, '']
   }
-  // console.log(CSV)
   //single row
-  CSV = CSV.map(arr => arr.split(',').filter(d => d.length > 0))
-  for (let i = 0; i < CSV.length; i++) {
-    if(i % 14 === 12 && CSV[i].length === 0 || 
-      i % 14 === 13 && CSV[i].length === 0) {
-      CSV[i] = ['']
+  let rowHandledCSV = rowCSV.map(arr => arr.split(',').filter(d => d.length > 0))
+  for (let i = 0; i < rowCSV.length; i++) {
+    if(i % 14 === 12 && rowCSV[i].length === 0 || 
+      i % 14 === 13 && rowCSV[i].length === 0) {
+      rowHandledCSV[i] = ['']
     }
   }
   
   //14 a row
   let multiRoute = []
-  for (let i = 0; i < ~~(CSV.length / 14); i++) {
-    multiRoute[i] = CSV.slice(14 * i, 13 + (14 * i + 1))
+  for (let i = 0; i < ~~(rowHandledCSV.length / 14); i++) {
+    multiRoute[i] = rowHandledCSV.slice(14 * i, 13 + (14 * i + 1))
   }
-  CSV = multiRoute
+  // rowHandledCSV = multiRoute
   // console.log(multiRoute)
 
   //multi routes
@@ -108,12 +107,11 @@ const Convert_Yunlin = (csv) => {
       data: routeData[i]
     }
   }
-
   return routes
 }
 
 const Convert_ChanHua = (csv) => {
-  let CSV = csv.split('\r\n').map(arr => arr = arr.split(',').filter(d => d.length > 0))
+  let CSV = csv.split(/\r|\n/gi).map(arr => arr = arr.split(',').filter(d => d.length > 0))
   
 
   //split into multi row
