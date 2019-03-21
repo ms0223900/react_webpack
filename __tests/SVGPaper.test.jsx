@@ -10,7 +10,7 @@ import React from 'react'
   SVGPaper_ChiaYi, 
   SVGPaper_Yunlin, 
   SVGPaper_ChanHua } from '../src/svg/SVGPaper'
- import { shallow } from 'enzyme'
+ import { shallow, render } from 'enzyme'
 
 describe('test load location svg function', () => {
   const route1 = Array(9)
@@ -34,6 +34,17 @@ describe('test load location svg function', () => {
     expect(SVGYunlin).toEqual(<SVGPaper_Yunlin routes={[]} />)
     const SVGChanHua = loadLocationSVGPaper('ChanHua', [])
     expect(SVGChanHua).toEqual(<SVGPaper_ChanHua routes={[]} />)
+  })
+  it('test SVGPaper component', () => {
+    const svgPaper = shallow(
+      <SVGPaper 
+        location={'ChiaYi'}
+        routes={[1, 2, 3, 4]}
+        isPreview={true}
+        loadCompleteCount={AllSVGPaper.length}
+      />
+    )
+    expect(svgPaper.find(SVGPaper_ChiaYi)).toHaveLength(4)
   })
 })
 

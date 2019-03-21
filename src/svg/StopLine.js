@@ -6,14 +6,14 @@ import { styles } from '../../config'
 
 const { defaultStyle, YunlinChanHua, ChanHua } = styles.routes
 
-const lineToArr = (lines) => {
+export const lineToArr = (lines) => {
   let arr = []
   for (let i = 0; i < lines; i++) {
     arr = [...arr, i + 1]
   } return arr
 }
 export const sepLines = (stops) => (stops < 10 ? 1 : Math.ceil(stops / 40) + 1)
-export const sepRouteData = (routeData=[{id: 0}], stopsPerLine=10, l=1) => ( routeData.slice(stopsPerLine * (l - 1), stopsPerLine * l) )
+export const sepRouteData = (routeData=[], stopsPerLine=10, l=1) => ( routeData.slice(stopsPerLine * (l - 1), stopsPerLine * l) )
 export const setPosOfLinesY = (lines=1, y=100, h=100, l=1, UpOrDown='Up') => (
   UpOrDown === 'Up' ?
   (y + (h / lines) * l) :

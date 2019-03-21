@@ -34,7 +34,9 @@ export const SVGPaper = ({ routes=[], loadCompleteCount=0,  isPreview=true, loca
     <div id='SVGArea'>
       {loadCompleteCount === AllSVGPaper.length ? 
         getLocationRouteData(location, routes, isPreview).map(
-          r => loadLocationSVGPaper(location, r)
+          r => (
+            <Fragment key={r}>{ loadLocationSVGPaper(location, r) }</Fragment>
+          )
         ) : 
         'please wait'
       }

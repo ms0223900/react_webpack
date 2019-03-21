@@ -6,7 +6,7 @@ import {
   setTextY, 
   SpecialIcon,
   HospitalIcon,
-  StopWithEng,
+  Stop,
   IconNow
  } 
 from '../src/svg/Stop'
@@ -25,6 +25,9 @@ describe('test stops', () => {
   })
   it('test set text Y postion when language is English', () => {
     expect(setTextY('Eng', 6, 'Up', 10, 10)).toBe(-19)
+  })
+  it('test set text Y postion when UpOrDown is "Down"', () => {
+    expect(setTextY('Eng', 6, 'Down', 10, 10)).toBe(17)
   })
   
   it('test it should have IconNow when the stopType is now', () => {
@@ -45,3 +48,17 @@ describe('test stops', () => {
     expect(specialIcon.find(HospitalIcon)).toHaveLength(0)
   })
 })
+describe('test Stop component', () => {
+  it('it should be have only one circle when the stopType is normal or passed', () => {
+    const stopNormal = shallow(<Stop stopType={'normal'}/>)
+    const stopPassed= shallow(<Stop stopType={'passed'}/>)
+    expect(stopNormal.find('circle')).toHaveLength(1)
+    expect(stopPassed.find('circle')).toHaveLength(1)
+  })
+  it('it should be have two circles when the stopType is now', () => {
+    const stopNow = shallow(<Stop stopType={'now'}/>)
+    expect(stopNow.find('circle')).toHaveLength(2)
+  })
+  
+})
+

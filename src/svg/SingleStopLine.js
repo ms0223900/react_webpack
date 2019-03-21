@@ -3,9 +3,9 @@ import React, { Children, cloneElement } from 'react'
 
 import { Stop, StopWithEng } from './Stop'
 import { Arrow } from './SVGComponents'
+import { THEME } from '../../config'
 
-const ThemeColor = '#006633'
-const ThemeColor_Yunlin = '#497D90'
+const { defaultStyle, YunlinChanHua } = THEME
 
 export const getStopType = (stopTypeNo=1, id=1, endIDs=[]) => {
   const StopTypeNo = stopTypeNo * 1
@@ -43,12 +43,12 @@ export function Route({ direction='right', route=[], x=100, y=200, width=614, la
         x={dir ? x + 18 : x - 18} 
         y={y}
         rotate={ dir ? '0' : '180, 6, 6' }
-        fill={ThemeColor} />
+        fill={defaultStyle} />
       <path 
         d={`
           M ${x} ${y + 6} 
           l ${ dir ? (totalLength) * avgDistance : -(totalLength) * avgDistance } 0` } 
-        stroke={ThemeColor} 
+        stroke={defaultStyle} 
         strokeWidth={3} />
       {
         route.map(ls => {
@@ -82,7 +82,7 @@ export function RouteWithEngStops({ direction='right', route=[], x=100, y=200, w
             totalLength * avgDistance : 
             -totalLength * avgDistance } 0` 
           } 
-        stroke={ThemeColor_Yunlin} 
+        stroke={YunlinChanHua} 
         strokeWidth={5} />
       {
         route.map(ls => {

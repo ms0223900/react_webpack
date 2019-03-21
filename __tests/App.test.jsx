@@ -51,6 +51,7 @@ describe('test data handling function', () => {
     const providerId2 = getBusProviderId(mockRouteJSON2, mockRoutesInfo)
     expect(getBusProviderInfo(mockRouteJSON2, providerId2, mockProviderInfo)).toEqual(mockRouteJSON_withProviderInfo2)
   })
+  
 })
 describe('test app buttons', () => {
   it('test changing location button component, and the button inside the app', () => {
@@ -101,9 +102,12 @@ describe('test functions of app', () => {
   })
   it('test change location function', () => {
     const mockEventLocation = { target: { id: 'ChiaYi', } }
+    const mockEventLocation2 = { target: { id: 'Yunlin', } }
     const app = shallow(<App />)
     app.instance().changeLocation(mockEventLocation)
     expect(app.instance().state.location).toBe('ChiaYi')
+    app.instance().changeLocation(mockEventLocation2)
+    expect(app.instance().state.location).toBe('Yunlin')
   })
 })
 

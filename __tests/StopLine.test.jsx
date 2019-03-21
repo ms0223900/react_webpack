@@ -2,11 +2,13 @@
 /* eslint-disable no-undef */
 import React from 'react'
 import StopLine, { 
+  lineToArr,
+  sepRouteData,
   sepLines,
+  setPosOfLinesY,
   MappedRoutesDefault,
   MappedRoutesChanHua,
   MappedRoutesYunlin,
-  setPosOfLinesY,
   RouteRoundedCorner,
   getRouteByLocation,
   genarateRoutes,
@@ -19,6 +21,18 @@ import {
   Route_Yunlin
 } from '../src/svg/SingleStopLine'
 import { shallow } from 'enzyme'
+describe('test data handling functions', () => {
+  it('test line to array function', () => {
+    const lines = 3
+    expect(lineToArr(lines)).toEqual([1, 2, 3])
+  })
+  it('test separate route data function', () => {
+    const routeData = lineToArr(33)
+    const stopsPerLine = 7
+    expect(sepRouteData(routeData, stopsPerLine, 1)[0]).toBe(1)
+    expect(sepRouteData(routeData, stopsPerLine, 2)[0]).toBe(8)
+  })
+})
 
 describe('test amount of lines when amount of data is different', () => {
   it('when the data is less than 10 and it should be 1 line', () => {
@@ -62,17 +76,17 @@ describe('test HOC and amount of routes, amount of stops', () => {
     expect(YunlinRoute.find(Route_Yunlin)).toHaveLength(1)
     expect(YunlinRoute.find(RouteRoundedCorner)).toHaveLength(0)
   })
-  it('test amount of single route', () => {
+  it('test amount of routes', () => {
     const YunlinRoute = shallow(<MappedRoutesYunlin routeData={routeData2} />)
     expect(YunlinRoute.find(Route_Yunlin)).toHaveLength(2)
     expect(YunlinRoute.find(RouteRoundedCorner)).toHaveLength(1)
   })
-  it('test amount of single route', () => {
+  it('test amount of routes', () => {
     const YunlinRoute = shallow(<MappedRoutesYunlin routeData={routeData3} />)
     expect(YunlinRoute.find(Route_Yunlin)).toHaveLength(3)
     expect(YunlinRoute.find(RouteRoundedCorner)).toHaveLength(2)
   })
-  it('test amount of single route', () => {
+  it('test amount of routes', () => {
     const YunlinRoute = shallow(<MappedRoutesYunlin routeData={routeData4} />)
     expect(YunlinRoute.find(Route_Yunlin)).toHaveLength(4)
     expect(YunlinRoute.find(RouteRoundedCorner)).toHaveLength(3)
@@ -116,7 +130,7 @@ describe('test getRouteByLocation function', () => {
     const ChanHuaRoute = getRouteByLocation('ChanHua', [])
     expect(ChanHuaRoute).toEqual(genarateRoutes_ChanHua([]))
   })
-  it('test StopLine component', () => {
+  it('test StopLine component should call the generateRoute function', () => {
     const FN = jest.fn()
     const ChiaYiStopLine = shallow(<StopLine routeData={[]} location={'ChiaYi'} generateRouteFn={FN} />)
     expect(FN).toHaveBeenCalled()
