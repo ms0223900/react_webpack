@@ -32,6 +32,10 @@ describe('Test different stop type(getStopType function)', () => {
   it('Test stop type when stopTypeNo is 1, id is 1, endIDs is [0, 10] and it should be "end"', () => {
     expect( getStopType(1, 0, [0, 40]) ).toBe('end')
   })
+  it('Test stop type when there is no arguments(default) or not 0, 1 or -1 and it should be normal', () => {
+    expect( getStopType() ).toBe('normal')
+    expect( getStopType(111) ).toBe('normal')
+  })
 })
 
 describe('test stop distance on the line', () => {
@@ -61,6 +65,12 @@ describe('test single stop line (Route)', () => {
       {id: 0, stopName: 'aa', stopType: 1}, 
       {id: 1, stopName: 'bb', stopType: 0},
       {id: 2, stopName: 'cc', stopType: 1} ],
+  }
+  const routeData3 = {
+    direction: 'left',
+    route: [ 
+      {id: 3, stopName: 'dd', stopType: 0},
+      {id: 4, stopName: 'ee', stopType: 1} ],
   }
   it('test amount of Stops (Route)', () => {
     const { direction, route } = routeData
@@ -92,6 +102,13 @@ describe('test single stop line (Route)', () => {
   it('test ChanHua prop of UpOrDown should be "Up"', () => {
     const ChanHua = shallow(<Route_ChanHua />)
     expect(ChanHua.find(RouteWithEngStops).props().UpOrDown).toBe('Down')
+  })
+  it('test x of stops when the amount of last stops is not 0', () => {
+    const { direction, route } = routeData3
+    const ROUTE = shallow(<RouteWithEngStops lastStopAmount={3} x={714} direction={direction} route={route} />)
+    expect(ROUTE.find(StopWithEng).get(0).props.x).toBe(714)
+    expect(ROUTE.find(StopWithEng).get(1).props.x).toBe(100)
+    
   })
 })
 

@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 import React from 'react'
 import { 
@@ -7,6 +6,7 @@ import {
   SpecialIcon,
   HospitalIcon,
   Stop,
+  StopWithEng,
   IconNow
  } 
 from '../src/svg/Stop'
@@ -21,14 +21,18 @@ describe('test stops', () => {
   })
 
   it('test set text Y postion when language is Chinese', () => {
-    expect(setTextY('Chi', 6, 'Up', 10, 10)).toBe(-17)
+    expect(setTextY('Chi', 6, 10, 10, 'Up')).toBe(-17)
   })
   it('test set text Y postion when language is English', () => {
-    expect(setTextY('Eng', 6, 'Up', 10, 10)).toBe(-19)
+    expect(setTextY('Eng', 6, 10, 10, 'Up')).toBe(-19)
   })
   it('test set text Y postion when UpOrDown is "Down"', () => {
-    expect(setTextY('Eng', 6, 'Down', 10, 10)).toBe(17)
+    expect(setTextY('Eng', 6, 10, 10, 'Down')).toBe(17)
   })
+  it('test set text Y postion when UpOrDown is not "Up" or "Down"', () => {
+    expect(setTextY('Eng', 6, 10, 10, 'Hey')).toBe(17)
+  })
+  
   
   it('test it should have IconNow when the stopType is now', () => {
     const specialIcon = shallow(<SpecialIcon  stopType='now' />)
@@ -59,6 +63,17 @@ describe('test Stop component', () => {
     const stopNow = shallow(<Stop stopType={'now'}/>)
     expect(stopNow.find('circle')).toHaveLength(2)
   })
+  it('it should be get the text with "stopName-withEng", "stopNameEng-withEng"', () => {
+    const stopWithEngNormal = render(<StopWithEng stopType={'normal'} />)
+    expect(stopWithEngNormal.find('.stopName-withEng-normal')).toHaveLength(1)
+    expect(stopWithEngNormal.find('.stopNameEng-withEng-normal')).toHaveLength(1)
+  })
+  // it('it should be update state of width or height when the component did mount', () => {
+  //   const spyFn = jest.spyOn(StopWithEng.prototype, 'setStopNameSpec')
+  //   const stopWithEngNormal = render(<StopWithEng stopType={'normal'} />)
+  //   expect(spyFn).toBeCalled()
+  //   expect(stopWithEngNormal.find('.specSet')).toHaveLength(1)
+  // })
   
 })
 

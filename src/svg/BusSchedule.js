@@ -53,14 +53,12 @@ export const merge2Time_ByHour = (times=['00', '00']) => {
     return newTime[0]
   }
 }
-const textAlignCenter = (text, fontWidth, width) => {
-  let x = 0
+export const textAlignCenter = (text, fontWidth, width) => {
   if(text.length > 5) {
-    x = 6
+    return 6
   } else {
-    x = (width - text.length * fontWidth) / 2
+    return (width - text.length * fontWidth) / 2
   }
-  return x
 }
 //
 
@@ -74,7 +72,7 @@ export const SepLine = ({ x=37, length=1 }) => (
     className={'schedule-line'}
   />
 )
-const SingleTime = (props) => {
+export const SingleTime = (props) => {
   const { hour='00', normalMin='-', holidayMin='-', y=150 } = props
   return (
     <g>
@@ -129,7 +127,7 @@ export const BusSchedule = (props) => {
 
   return (
     <g>    
-      { mergedTimeObjArr.map(t => <SingleSchedule objArr={t} />) }
+      { mergedTimeObjArr.map(t => <SingleSchedule key={t} objArr={t} />) }
       <SepLine 
         x={37}
         length={mergedTimeObjArr.length}

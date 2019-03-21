@@ -111,7 +111,7 @@ export const SideInfo_ChiaYi = () => {
 }
 
 export const SideInfo_ChanHua = (props) => {
-  const { byPass, time } = props
+  const { byPass='', time=[''] } = props
   const timeObjArr = genObjArr(time)
   return (
     <g>
@@ -124,6 +124,7 @@ export const SideInfo_ChanHua = (props) => {
       </text>
       {timeObjArr.map(t => (
         <text
+          key={t.id}
           x={32}
           y={ 200 + t.id * 18 }
         >

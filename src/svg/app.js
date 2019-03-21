@@ -169,7 +169,7 @@ export default class App extends React.Component {
           })
         }
       })
-      .catch(err => console.log(err))
+      .catch(err => {})
   }
   changeLocation = (e) => {
     count = 0

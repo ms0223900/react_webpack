@@ -5,21 +5,6 @@ import hospital from '../images/hospital.svg'
 // import PropTypes from 'prop-types'
 const { stopWithEng } = styles
 
-// export const setStopClassName = (stopType='normal', stopClassName='stop', withPassedType=false) => {
-//   if(withPassedType) {
-//     return stopType === 'normal' ? 
-//       (`${stopClassName} ${stopClassName}-normal`) : 
-//       (stopType === 'passed' ? 
-//         `${stopClassName} ${stopClassName}-passed` : 
-//         `${stopClassName} ${stopClassName}-now`)
-//   } else {
-//     return stopType === 'normal' ? 
-//       (`${stopClassName} ${stopClassName}-normal`) : 
-//       (stopType === 'end' ? 
-//       `${stopClassName} ${stopClassName}-end` : 
-//       `${stopClassName} ${stopClassName}-now`) 
-//   }
-// }
 export const setStopClassName = (stopType='normal', stopClassName='stop') => {
   switch (stopType) {
     case 'passed':
@@ -56,13 +41,16 @@ export const StopCircle = ({r, stopType, stopClassName}) => (
   />
 )
 
-export const setTextY = (ChiOrEng='Chi', r=6, UpOrDown='Up', stopNameH=0, stopNameEngH=0) => {
-  if(UpOrDown === 'Up') {
-    return ChiOrEng === 'Chi' ? 
-      (- r * 1.5 - stopNameH + 2) :
-      (- r * 1.5 - stopNameEngH)
-  } else if(UpOrDown === 'Down') {
-    return (r * 1.5 + 8)
+export const setTextY = (ChiOrEng='Chi', r=6, stopNameH=0, stopNameEngH=0, UpOrDown='Up') => {
+  switch (UpOrDown) {
+    case 'Up':
+      return ChiOrEng === 'Chi' ? 
+        (- r * 1.5 - stopNameH + 2) :
+        (- r * 1.5 - stopNameEngH)
+    case 'Down':
+      return (r * 1.5 + 8)
+    default:
+      return (r * 1.5 + 8)
   }
 }
 export const SpecialIcon = ({stopName='', stopNameH=0, stopType='normal', direction='left', circleR=6, UpOrDown='Up'}) => {
@@ -124,10 +112,12 @@ export class StopWithEng extends React.Component {
       stopNameH: 0,
       stopNameW: 0,
       stopNameEngH: 0,
+      stopNameSpecSet: false,
     };
+    this.setStopNameSpec = this.setStopNameSpec.bind(this)
   }
 
-  componentDidMount = () => {
+  setStopNameSpec() {
     const stopNameHeight = this.stopNameEl.getBBox().height
     const stopNameWidth = this.stopNameEl.getBBox().width
     const stopNameEngHeight = this.stopNameEngEl.getBBox().height
@@ -135,16 +125,20 @@ export class StopWithEng extends React.Component {
       stopNameH: stopNameHeight,
       stopNameW: stopNameWidth,
       stopNameEngH: stopNameEngHeight,
+      stopNameSpecSet: true,
     })
+  }
+  componentDidMount = () => {
+    this.setStopNameSpec()
   }
  
   render() {
     const { x=0, y=0, stopType='normal', stopName='車站', stopNameEng='station', circleR=6, UpOrDown, direction } = this.props
-    const { stopNameH, stopNameW, stopNameEngH } = this.state
+    const { stopNameH, stopNameW, stopNameEngH, stopNameSpecSet } = this.state
     const { stopNameEng_fs } = stopWithEng.fontSize
 
     return (
-      <g transform={`translate(${x}, ${y})`}>
+      <g transform={`translate(${x}, ${y})`} className={stopNameSpecSet ? 'specSet' : ''}>
          <SpecialIcon stopName={stopName} stopNameH={stopNameH} stopType={stopType} direction={direction} circleR={circleR} UpOrDown={UpOrDown} /> 
         <text 
           x={ circleR } 

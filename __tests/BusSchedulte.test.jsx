@@ -5,7 +5,11 @@ import {
   sepTimeToHourMin,
   mergeTimeByHour,
   merge2Time_ByHour,
+  textAlignCenter,
+  SepLine,
+  SingleTime,
   SingleSchedule,
+  BusSchedule,
 } from '../src/svg/BusSchedule'
 import { Rect } from '../src/svg/SVGComponents'
 import { shallow } from 'enzyme'
@@ -55,16 +59,41 @@ describe('test handle time array functions', () => {
     expect(merge2Time_ByHour([mergedArr1])).toEqual(mergedOnlyOneByHourArr)
   })
 })
+describe('test functions and other components', () => {
+  it('test text align center function', () => {
+    expect(textAlignCenter('aaa', 7, 10)).toBe((10 - 3 * 7) / 2)
+    expect(textAlignCenter('abcdefg', 5, 10)).toBe(6)
+  })
+  it('test y2 of sepLine component ', () => {
+    const sepLine = shallow(<SepLine />)
+    expect(sepLine.props().y2).toBe(173)
+    const sepLine2 = shallow(<SepLine length={3} />)
+    expect(sepLine2.props().y2).toBe(217)
+  })
+})
+
 describe('test BusSchedule components', () => {
+  const objArr = [
+    { id: 0, data: ['00', ['11', '22', '33']], },
+    { id: 1, data: ['00', ['11', '22', '33']], },
+    { id: 2, data: ['00', ['11', '22', '33'], ['44']], }
+  ]
   it('the Rect component should be only appear when the id is odd', () => {
-    const objArr = [
-      { id: 0, data: ['00', ['11', '22', '33']], },
-      { id: 1, data: ['00', ['11', '22', '33']], }
-    ]
     const singleSchedule = shallow(<SingleSchedule objArr={objArr[0]} />)
     expect(singleSchedule.find(Rect)).toHaveLength(0)
     const singleSchedule2 = shallow(<SingleSchedule objArr={objArr[1]} />)
     expect(singleSchedule2.find(Rect)).toHaveLength(1)
+  })
+  it('test part of holiday minute should be the same when there is no holiday minute data.', () => {
+    const singleSchedule = shallow(<SingleSchedule objArr={objArr[1]} />)
+    expect(singleSchedule.find(SingleTime).props().holidayMin).toBe('11 22 33')
+    const singleSchedule2 = shallow(<SingleSchedule objArr={objArr[2]} />)
+    expect(singleSchedule2.find(SingleTime).props().holidayMin).toBe('44')
+  })
+  it('test BusSchedule component', () => {
+    const mockTimeData = [['0011', '0022', '1122'], ['0033', '0044']]
+    const busSchedule = shallow(<BusSchedule time={mockTimeData} />)
+    expect(busSchedule.find(SingleSchedule)).toHaveLength(2)
   })
 })
 

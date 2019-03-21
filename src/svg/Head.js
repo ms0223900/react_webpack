@@ -19,6 +19,12 @@ const layOut = {
 
 const getBBox_Width = (el) => el.getBBox().width
 
+export const SplitBracketsText = ({splitText=''}) => (
+  <tspan className={'fromTo-small-description'}>
+    { splitBrackets(splitText).length > 1 ? 
+    splitBrackets(splitText)[1] : '' }
+  </tspan>
+)
 export const Head_ChiaYi = (props) => {
   const { number, fromTo, fromToEng } = props
   return (
@@ -78,9 +84,7 @@ export const Head_ChiaYi = (props) => {
             style={{ fontSize: ChiaYi.fontSize.stop }} 
           >
             {splitBrackets(fromTo[1])[0]}
-              <tspan className={'fromTo-ChanHua-description'}>
-                {splitBrackets(fromTo[1]).length > 1 ? splitBrackets(fromTo[1])[1] : ''}
-              </tspan>
+            <SplitBracketsText splitText={ fromTo[1] } />
           </text>
           <Text 
             x={ 
@@ -99,9 +103,13 @@ export const Head_ChiaYi = (props) => {
     </g>
   )
 }
-
+export const getPassText = (passText=['']) => (
+  passText.length > 1 ?
+  [`(${passText[0]})`, `經${passText[1]}`] :
+  ['', '']
+)
 export const Head_Yunlin = (props) => {
-  const { number, fromTo, fromToEng, pass, charge } = props
+  const { number=0, fromTo=[], fromToEng=[], pass=[], charge='' } = props
   const { fontSize } = Yunlin
   return (
     <g className={'head-Yunlin'}>
@@ -122,7 +130,7 @@ export const Head_Yunlin = (props) => {
           <tspan
             style={{ fontSize: fontSize.pass }}
           >
-            {pass.length > 1 ? '(' + pass[0] + ')' : ''}
+            { getPassText(pass)[0] }
           </tspan>
         </text>
       </g>
@@ -130,7 +138,7 @@ export const Head_Yunlin = (props) => {
         <Text
           x={474}
           y={calTextY(12, 15)}
-          text={ pass.length > 1 ? ( '經' + pass[1] ) : '' }
+          text={ getPassText(pass)[1] }
           style={{ fontSize: fontSize.pass }}
         />
         <Text 
@@ -201,10 +209,8 @@ export class Head_ChanHua extends React.Component {
             style={{ fontSize: ChanHua.fontSize.stop }}
             ref={(e) => this.fromTo2 = e}
           >
-              {splitBrackets(fromTo[1])[0]}
-            <tspan className={'fromTo-ChanHua-description'}>
-              {splitBrackets(fromTo[1]).length > 1 ? splitBrackets(fromTo[1])[1] : ''}
-            </tspan>
+            { splitBrackets(fromTo[1])[0] }
+            <SplitBracketsText splitText={ fromTo[1] } />
           </text>
         </g>
         <text>

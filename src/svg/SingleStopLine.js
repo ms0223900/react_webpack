@@ -8,21 +8,16 @@ import { THEME } from '../../config'
 const { defaultStyle, YunlinChanHua } = THEME
 
 export const getStopType = (stopTypeNo=1, id=1, endIDs=[]) => {
-  const StopTypeNo = stopTypeNo * 1
-  if(StopTypeNo === 0) {
-    return 'now'
-  } else if(endIDs.length > 0) {
-    if(endIDs.indexOf(id) === -1) {
+  switch (stopTypeNo * 1) {
+    case -1:
+      return endIDs.length > 0 ? 'normal' : 'passed'
+    case 1:
+      return endIDs.length > 0 && endIDs.indexOf(id) !== -1 ?
+      'end' : 'normal'
+    case 0:
+      return 'now'
+    default:
       return 'normal'
-    } else if(endIDs.indexOf(id) !== -1) {
-      return 'end'
-    }
-  } else {
-    if(StopTypeNo === 1) {
-      return 'normal'
-    } else if(StopTypeNo === -1) {
-      return 'passed'
-    }
   }
 }
 export const getBetweenStopDistance = (dir, x, id, lastStops, avgDistance) => (
@@ -34,6 +29,7 @@ export const getBetweenStopDistance = (dir, x, id, lastStops, avgDistance) => (
 export function Route({ direction='right', route=[], x=100, y=200, width=614, lastStopAmount=0, }) {
   const STOPS = route.length
   const totalLength = STOPS - 1
+  const STOPSForStop = lastStopAmount !== 0 ? lastStopAmount : STOPS
   const avgDistance = width / totalLength
   let dir = (direction === 'right' ? true : false)
 
@@ -55,7 +51,7 @@ export function Route({ direction='right', route=[], x=100, y=200, width=614, la
           return (
             <Stop 
               key={ls.id}
-              x={ getBetweenStopDistance(dir, x, ls.id, STOPS, avgDistance) }
+              x={ getBetweenStopDistance(dir, x, ls.id, STOPSForStop, avgDistance) }
               y={ y }
               stopName={ ls.stopName }
               stopType={ getStopType(ls.stopType, ls.id) }

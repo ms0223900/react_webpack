@@ -20,24 +20,24 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">56% </span>
+        <span class="strong">62.5% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>14/25</span>
+        <span class='fraction'>15/24</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">33.33% </span>
+        <span class="strong">66.67% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>7/21</span>
+        <span class='fraction'>14/21</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">41.67% </span>
+        <span class="strong">50% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>5/12</span>
+        <span class='fraction'>6/12</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">54.17% </span>
+        <span class="strong">60.87% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>13/24</span>
+        <span class='fraction'>14/23</span>
       </div>
     </div>
     <p class="quiet">
@@ -219,8 +219,7 @@
 <a name='L171'></a><a href='#L171'>171</a>
 <a name='L172'></a><a href='#L172'>172</a>
 <a name='L173'></a><a href='#L173'>173</a>
-<a name='L174'></a><a href='#L174'>174</a>
-<a name='L175'></a><a href='#L175'>175</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L174'></a><a href='#L174'>174</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -234,11 +233,11 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -246,13 +245,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -408,7 +406,7 @@ import ChanHuaBG from '../images/ChanHua_BG.svg'
 export const AllSVGPaper = ['ChiaYi', 'Yunlin', 'ChanHua']
 export const getLocationRouteData = (location=<span class="branch-0 cbranch-no" title="branch not covered" >'ChiaYi',</span> routes=<span class="branch-0 cbranch-no" title="branch not covered" >[],</span> isPreview=<span class="branch-0 cbranch-no" title="branch not covered" >true)</span> =&gt; {
   const locationRoute = routes.filter(r =&gt; r.location === location)[0] ? 
-<span class="branch-0 cbranch-no" title="branch not covered" >  routes.filter(<span class="fstat-no" title="function not covered" >r </span>=&gt; <span class="cstat-no" title="statement not covered" >r.location === location)</span>[0].routeData </span>: routes
+  routes.filter(r =&gt; r.location === location)[0].routeData : routes
   return isPreview ? locationRoute.slice(0, 10) : locationRoute
 }
 export const loadLocationSVGPaper = (location=<span class="branch-0 cbranch-no" title="branch not covered" >'ChiaYi',</span> route=<span class="branch-0 cbranch-no" title="branch not covered" >[])</span> =&gt; {
@@ -419,13 +417,12 @@ export const loadLocationSVGPaper = (location=<span class="branch-0 cbranch-no" 
       return &lt;SVGPaper_Yunlin routes={route} /&gt;
     case 'ChanHua':
       return &lt;SVGPaper_ChanHua routes={route} /&gt;
-<span class="branch-3 cbranch-no" title="branch not covered" >    default:</span>
-<span class="cstat-no" title="statement not covered" >      return ''</span>
+    default:
+      return ''
   }
 }
 &nbsp;
-export const SVGPaper = ({ routes=<span class="branch-0 cbranch-no" title="branch not covered" >[],</span> loadCompleteCount=<span class="branch-0 cbranch-no" title="branch not covered" >0,</span>  isPreview=<span class="branch-0 cbranch-no" title="branch not covered" >true,</span> location=<span class="branch-0 cbranch-no" title="branch not covered" >'ChiaYi'}</span>) =&gt; {
-  console.log('routeData', getLocationRouteData(location, routes, isPreview))
+export const SVGPaper = ({ routes=[], loadCompleteCount=0,  isPreview=true, location='ChiaYi'}) =&gt; {
   return (
     &lt;div id='SVGArea'&gt;
       {loadCompleteCount === AllSVGPaper.length ? 
@@ -434,7 +431,7 @@ export const SVGPaper = ({ routes=<span class="branch-0 cbranch-no" title="branc
             &lt;Fragment key={r}&gt;{ loadLocationSVGPaper(location, r) }&lt;/Fragment&gt;
           )
         ) : 
-<span class="branch-1 cbranch-no" title="branch not covered" >        'please wait'</span>
+        'please wait'
       }
     &lt;/div&gt;
   )
@@ -574,7 +571,7 @@ export class SVGPaper_ChanHua extends React.Component {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Mar 21 2019 13:08:26 GMT+0800 (GMT+08:00)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Mar 21 2019 17:54:37 GMT+0800 (GMT+08:00)
 </div>
 </div>
 <script src="../../prettify.js"></script>
