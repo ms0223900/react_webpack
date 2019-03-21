@@ -74,12 +74,11 @@ describe('test app buttons', () => {
     for (let i = 0; i < locationButtonArr.length; i++) {
       const locationButton = svgUI.find('#' + locationButtonArr[i].id)
       expect(locationButton).toHaveLength(1)
-      locationButton.prop('onClickFn')()
-      expect(fn).toBeCalled()
     }
   })
 })
 describe('test functions of app', () => {
+  
   it('when the route of state is changed, it should be add the loadComplete', () => {
     const route1 = Array(1)
     const route2 = Array(2)

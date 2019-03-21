@@ -17,7 +17,7 @@ describe('test stops', () => {
     expect(setStopClassName('now', 'stopWithEng')).toBe('stopWithEng stopWithEng-now')
   })
   it('test set stop className function when passed is true', () => {
-    expect(setStopClassName('passed', 'stop', true)).toBe('stop stop-passed')
+    expect(setStopClassName('passed', 'stop')).toBe('stop stop-passed')
   })
 
   it('test set text Y postion when language is Chinese', () => {

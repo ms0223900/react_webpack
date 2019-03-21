@@ -5,19 +5,29 @@ import hospital from '../images/hospital.svg'
 // import PropTypes from 'prop-types'
 const { stopWithEng } = styles
 
-export const setStopClassName = (stopType='normal', stopClassName='stop', withPassedType=false) => {
-  if(withPassedType) {
-    return stopType === 'normal' ? 
-      (`${stopClassName} ${stopClassName}-normal`) : 
-      (stopType === 'passed' ? 
-        `${stopClassName} ${stopClassName}-passed` : 
-        `${stopClassName} ${stopClassName}-now`)
-  } else {
-    return stopType === 'normal' ? 
-      (`${stopClassName} ${stopClassName}-normal`) : 
-      (stopType === 'end' ? 
-      `${stopClassName} ${stopClassName}-end` : 
-      `${stopClassName} ${stopClassName}-now`) 
+// export const setStopClassName = (stopType='normal', stopClassName='stop', withPassedType=false) => {
+//   if(withPassedType) {
+//     return stopType === 'normal' ? 
+//       (`${stopClassName} ${stopClassName}-normal`) : 
+//       (stopType === 'passed' ? 
+//         `${stopClassName} ${stopClassName}-passed` : 
+//         `${stopClassName} ${stopClassName}-now`)
+//   } else {
+//     return stopType === 'normal' ? 
+//       (`${stopClassName} ${stopClassName}-normal`) : 
+//       (stopType === 'end' ? 
+//       `${stopClassName} ${stopClassName}-end` : 
+//       `${stopClassName} ${stopClassName}-now`) 
+//   }
+// }
+export const setStopClassName = (stopType='normal', stopClassName='stop') => {
+  switch (stopType) {
+    case 'passed':
+    case 'end':
+    case 'now':
+      return `${stopClassName} ${stopClassName}-${stopType}`  
+    default:
+      return `${stopClassName} ${stopClassName}-normal`
   }
 }
 export const HospitalIcon = ({r, stopNameH}) => (

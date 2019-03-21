@@ -1,5 +1,4 @@
 /* eslint-disable no-undef */
-/* eslint-disable no-unused-vars */
 import React from 'react'
 import { 
   removeDupliArr,
@@ -7,10 +6,9 @@ import {
   mergeTimeByHour,
   merge2Time_ByHour,
   SingleSchedule,
-  BusSchedule
 } from '../src/svg/BusSchedule'
 import { Rect } from '../src/svg/SVGComponents'
-import { shallow, render } from 'enzyme'
+import { shallow } from 'enzyme'
 
 describe('test handle time array functions', () => {
   it('test function of removing same value', () => {
