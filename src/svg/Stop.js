@@ -112,33 +112,35 @@ export class StopWithEng extends React.Component {
       stopNameH: 0,
       stopNameW: 0,
       stopNameEngH: 0,
-      stopNameSpecSet: false,
     };
     this.setStopNameSpec = this.setStopNameSpec.bind(this)
   }
 
   setStopNameSpec() {
-    const stopNameHeight = this.stopNameEl.getBBox().height
-    const stopNameWidth = this.stopNameEl.getBBox().width
-    const stopNameEngHeight = this.stopNameEngEl.getBBox().height
-    this.setState({
-      stopNameH: stopNameHeight,
-      stopNameW: stopNameWidth,
-      stopNameEngH: stopNameEngHeight,
-      stopNameSpecSet: true,
-    })
+    if(this.stopNameEl) {
+      const stopNameHeight = this.stopNameEl.getBBox().height
+      const stopNameWidth = this.stopNameEl.getBBox().width
+      const stopNameEngHeight = this.stopNameEngEl.getBBox().height
+      this.setState({
+        stopNameH: stopNameHeight,
+        stopNameW: stopNameWidth,
+        stopNameEngH: stopNameEngHeight,
+        stopNameSpecSet: true,
+      })
+    }
   }
   componentDidMount = () => {
     this.setStopNameSpec()
+    // this.testSpyOn()
   }
  
   render() {
     const { x=0, y=0, stopType='normal', stopName='車站', stopNameEng='station', circleR=6, UpOrDown, direction } = this.props
-    const { stopNameH, stopNameW, stopNameEngH, stopNameSpecSet } = this.state
+    const { stopNameH, stopNameW, stopNameEngH } = this.state
     const { stopNameEng_fs } = stopWithEng.fontSize
 
     return (
-      <g transform={`translate(${x}, ${y})`} className={stopNameSpecSet ? 'specSet' : ''}>
+      <g transform={`translate(${x}, ${y})`} >
          <SpecialIcon stopName={stopName} stopNameH={stopNameH} stopType={stopType} direction={direction} circleR={circleR} UpOrDown={UpOrDown} /> 
         <text 
           x={ circleR } 

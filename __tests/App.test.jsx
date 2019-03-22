@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+
 /* eslint-disable no-undef */
 
 import React from 'react'
@@ -8,6 +8,7 @@ import App, {
   getBusProviderInfo,
   LocationButton,
   locationButtonArr,
+  routeLocations,
  } from '../src/svg/app'
  import { shallow } from 'enzyme'
 
@@ -54,11 +55,17 @@ describe('test data handling function', () => {
   
 })
 describe('test app buttons', () => {
-  it('test changing location button component, and the button inside the app', () => {
+  it('test changing location button component, and the click action', () => {
     const fn = jest.fn()
-    const loctionButton = shallow(<LocationButton onClickFn={fn} />)
-    loctionButton.simulate('click')
+    const locationButton = shallow(<LocationButton onClickFn={fn} />)
+    locationButton.simulate('click')
     expect(fn).toBeCalled()
+  })
+  it('test changing location button component, its className should be differ by id property', () => {
+    const locationButton1 = shallow(<LocationButton id='ChiaYi' location={'ChiaYi'} />)
+    const locationButton2 = shallow(<LocationButton id='ChiaYi' location={'Yunlin'} />)
+    expect(locationButton1.props().className).toBe('location-button active')
+    expect(locationButton2.props().className).toBe('location-button')
   })
   it('test buttons for changing view mode in svgUI', () => {
     const fn = jest.fn()
@@ -77,6 +84,32 @@ describe('test app buttons', () => {
     }
   })
 })
+describe('test component properties in the svgUI component', () => {
+  it('test loading area style, it should be none when the loadComplete is fulfilled', () => {
+    const svgUI = shallow(<SvgUI loadComplete={routeLocations.length} />)
+    expect(svgUI.find('#loadingArea').props().style).toEqual({
+      'display': 'none',
+    })
+    const svgUI2 = shallow(<SvgUI loadComplete={1} />)
+    expect(svgUI2.find('#loadingArea').props().style).toEqual({
+      'display': 'block',
+    })
+  })
+  it('test preview and show all buttons, it should be differ by isPreview property(default value of isPreview is true', () => {
+    const svgUI = shallow(<SvgUI />)
+    expect(svgUI.find('#all').props().className).toBe('location-button')
+    expect(svgUI.find('#preview').props().className).toBe('location-button active')
+
+    svgUI.setProps({ isPreview: false })
+    expect(svgUI.find('#all').props().className).toBe('location-button active')
+    expect(svgUI.find('#preview').props().className).toBe('location-button')
+
+    svgUI.setProps({ isPreview: true })
+    expect(svgUI.find('#all').props().className).toBe('location-button')
+    expect(svgUI.find('#preview').props().className).toBe('location-button active')
+  })
+})
+
 describe('test functions of app', () => {
   
   it('when the route of state is changed, it should be add the loadComplete', () => {
@@ -107,6 +140,11 @@ describe('test functions of app', () => {
     expect(app.instance().state.location).toBe('ChiaYi')
     app.instance().changeLocation(mockEventLocation2)
     expect(app.instance().state.location).toBe('Yunlin')
+  })
+  it('test fetch function to be called', () => { 
+    const spyFn = jest.spyOn(App.prototype, 'fetchRouteJSON')
+    const app = shallow(<App />)
+    expect(spyFn).toBeCalled()
   })
 })
 

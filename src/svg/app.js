@@ -5,7 +5,7 @@ import '../../styles/style.scss'
 import { SVGPaper } from './SVGPaper'
 let count = 0
 
-const routeLocations = ['ChiaYi', 'Yunlin', 'ChanHua']
+export const routeLocations = ['ChiaYi', 'Yunlin', 'ChanHua']
 export const locationButtonArr = [
   { id: 'ChiaYi', buttonText: 'ChiaYi 嘉義',  },
   { id: 'Yunlin', buttonText: 'Yunlin 雲林',  },
@@ -54,7 +54,9 @@ export const LocationButton = ({ id='ChiaYi', location='ChiaYi', buttonText='', 
 )
 export const SvgUI = ({ location='ChiaYi', loadComplete=0, isPreview=true, changeViewModeFn=() => {}, changeLocationFn=() => {},  }) => (
   <Fragment>
-    <div style={loadComplete === routeLocations.length ? 
+    <div 
+      id={'loadingArea'}
+      style={loadComplete === routeLocations.length ? 
       {display: 'none'} : {display: 'block'}}
     >
     {<img 
@@ -135,10 +137,11 @@ export default class App extends React.Component {
       }))
     }
   }
-  fetchRouteJSON = (locationName) => {
+  fetchRouteJSON(locationName) {
     fetch(`allRoutes_${locationName}.json`)
       .then(res => res.json())
       .then(routeJSON => { 
+        console.log(routeJSON)
         if(locationName === 'ChiaYi') {
           fetch('http://ebus.cyhg.gov.tw/cms/api/route', fetchURLSetting)
             .then(res => res.json())
@@ -171,6 +174,7 @@ export default class App extends React.Component {
       })
       .catch(err => {})
   }
+  
   changeLocation = (e) => {
     count = 0
     const id = e.target.id

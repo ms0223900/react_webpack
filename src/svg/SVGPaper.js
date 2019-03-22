@@ -13,6 +13,8 @@ export const AllSVGPaper = ['ChiaYi', 'Yunlin', 'ChanHua']
 export const getLocationRouteData = (location='ChiaYi', routes=[], isPreview=true) => {
   const locationRoute = routes.filter(r => r.location === location)[0] ? 
   routes.filter(r => r.location === location)[0].routeData : routes
+  console.log('routes: ', routes)
+  console.log('locationRoute: ', locationRoute)
   return isPreview ? locationRoute.slice(0, 10) : locationRoute
 }
 export const loadLocationSVGPaper = (location='ChiaYi', route=[]) => {

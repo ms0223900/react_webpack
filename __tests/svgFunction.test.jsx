@@ -1,23 +1,25 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-import { genObjArr, splitBrackets } from '../src/svg/svgFunctions'
+import { 
+  calTextY,
+  textAlignCenter,
+  genObjArr, 
+  splitBrackets 
+} from '../src/svg/svgFunctions'
 
 describe('test functions', () => {
+  it('test calculate text y position function', () => {
+    expect(calTextY(20, 24)).toBe(39.8)
+  })
+  it('test align test to center function', () => {
+    expect(textAlignCenter(40, 20, 100)).toBe(80)
+  })
   it('test generate obj to arr function', () => {
     const arr = ['a', 'b', 'c']
     const objArr = [
-      {
-        id: 0,
-        data: 'a',
-      },
-      {
-        id: 1,
-        data: 'b',
-      },
-      {
-        id: 2,
-        data: 'c',
-      }
+      { id: 0, data: 'a', },
+      { id: 1, data: 'b', },
+      { id: 2, data: 'c', }
     ]
     expect(genObjArr(arr)).toEqual(objArr)
   })

@@ -20,7 +20,7 @@ export const setPosOfLinesY = (lines=1, y=100, h=100, l=1, UpOrDown='Up') => (
   (lines === 1 ? (y + h / 2 - 100) : (y + (h / lines) * (l - 1)))
 )
 
-export const RouteRoundedCorner = ({l, x, y, w, h, lines, strokeWidth, strokeTheme='#000', txtUpOrDown='Up'}) => (
+export const RouteRoundedCorner = ({l=1, x=1, y=0, w=0, h=100, lines=1, strokeWidth=3, strokeTheme='#000', txtUpOrDown='Up'}) => (
   <RoundedCorner 
     x={ l % 2 === 0 ? x + w + 12 : x }
     y={ txtUpOrDown === 'Up' ? 

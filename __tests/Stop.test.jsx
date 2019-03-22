@@ -68,12 +68,11 @@ describe('test Stop component', () => {
     expect(stopWithEngNormal.find('.stopName-withEng-normal')).toHaveLength(1)
     expect(stopWithEngNormal.find('.stopNameEng-withEng-normal')).toHaveLength(1)
   })
-  // it('it should be update state of width or height when the component did mount', () => {
-  //   const spyFn = jest.spyOn(StopWithEng.prototype, 'setStopNameSpec')
-  //   const stopWithEngNormal = render(<StopWithEng stopType={'normal'} />)
-  //   expect(spyFn).toBeCalled()
-  //   expect(stopWithEngNormal.find('.specSet')).toHaveLength(1)
-  // })
+  it('it should be update state of width or height when the component did mount', () => {
+    const spyFn = jest.spyOn(StopWithEng.prototype, 'setStopNameSpec')
+    const stopWithEngNormal = shallow(<StopWithEng stopType={'normal'} />)
+    expect(spyFn).toBeCalled()
+  })
   
 })
 

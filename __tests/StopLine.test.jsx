@@ -5,11 +5,11 @@ import StopLine, {
   lineToArr,
   sepRouteData,
   sepLines,
+  RouteRoundedCorner,
   setPosOfLinesY,
   MappedRoutesDefault,
   MappedRoutesChanHua,
   MappedRoutesYunlin,
-  RouteRoundedCorner,
   getRouteByLocation,
   genarateRoutes,
   genarateRoutes_Yunlin,
@@ -21,6 +21,7 @@ import {
   Route_Yunlin
 } from '../src/svg/SingleStopLine'
 import { shallow } from 'enzyme'
+
 describe('test data handling functions', () => {
   it('test line to array function', () => {
     const lines = 3
@@ -31,6 +32,30 @@ describe('test data handling functions', () => {
     const stopsPerLine = 7
     expect(sepRouteData(routeData, stopsPerLine, 1)[0]).toBe(1)
     expect(sepRouteData(routeData, stopsPerLine, 2)[0]).toBe(8)
+  })
+})
+describe('test StopLine component', () => {
+  it('the property of rounded corner should be different by the l and txtUpOrDown argument', () => {
+    const routeRoundedCorner1 = shallow(
+      <RouteRoundedCorner l={1} txtUpOrDown={'Up'} />
+    )
+    const routeRoundedCorner2 = shallow(
+      <RouteRoundedCorner l={2} txtUpOrDown={'Up'}  />
+    )
+    const routeRoundedCorner3 = shallow(
+      <RouteRoundedCorner l={1} txtUpOrDown={'Down'} />
+    )
+    const routeRoundedCorner4 = shallow(
+      <RouteRoundedCorner l={2} txtUpOrDown={'Down'}  />
+    )
+    expect(routeRoundedCorner1.props().h).toBe(-20)
+    expect(routeRoundedCorner1.props().y).toBe(6)
+
+    expect(routeRoundedCorner2.props().h).toBe(20)
+    expect(routeRoundedCorner2.props().y).toBe(106)
+    //test the y property
+    expect(routeRoundedCorner3.props().y).toBe(-94)
+    expect(routeRoundedCorner4.props().y).toBe(6)
   })
 })
 
@@ -121,14 +146,12 @@ describe('test getRouteByLocation function', () => {
   it('', () => {
     const ChiaYiRoute = getRouteByLocation('ChiaYi', [])
     expect(ChiaYiRoute).toEqual(genarateRoutes([]))
-  })
-  it('', () => {
-    const YunlinRoute = getRouteByLocation('Yunlin', [])
-    expect(YunlinRoute).toEqual(genarateRoutes_Yunlin([]))
-  })
-  it('', () => {
     const ChanHuaRoute = getRouteByLocation('ChanHua', [])
     expect(ChanHuaRoute).toEqual(genarateRoutes_ChanHua([]))
+    const YunlinRoute = getRouteByLocation('Yunlin', [])
+    expect(YunlinRoute).toEqual(genarateRoutes_Yunlin([]))
+    const DeafultRoute = getRouteByLocation()
+    expect(DeafultRoute).toEqual(genarateRoutes([]))
   })
   it('test StopLine component should call the generateRoute function', () => {
     const FN = jest.fn()
