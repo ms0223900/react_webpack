@@ -1,3 +1,4 @@
+import { calTextY } from './src/svg/svgFunctions'
 export const styles = {
   stopWithEng: {
     fontSize: {
@@ -70,6 +71,24 @@ export const styles = {
         routeNumber: 60,
         pass: 15,
       },
+      layOut: {
+        stopName: {
+          x: 164,
+          y: calTextY(24 + 6, 32),
+        },
+        stopNameEng: {
+          x: 176,
+          y: calTextY(72, 11),
+        },
+        byPassStop: {
+          x: 474,
+          y: calTextY(12, 15),
+        },
+        charge: {
+          x: 570,
+          y: calTextY(12, 43),
+        }
+      }
     },
     ChanHua: {
       fontSize: {

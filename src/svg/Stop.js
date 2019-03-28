@@ -42,6 +42,7 @@ export const StopCircle = ({r, stopType, stopClassName}) => (
 )
 
 export const setTextY = (ChiOrEng='Chi', r=6, stopNameH=0, stopNameEngH=0, UpOrDown='Up') => {
+  console.log('UpOrDown: ' + UpOrDown)
   switch (UpOrDown) {
     case 'Up':
       return ChiOrEng === 'Chi' ? 
@@ -144,7 +145,7 @@ export class StopWithEng extends React.Component {
          <SpecialIcon stopName={stopName} stopNameH={stopNameH} stopType={stopType} direction={direction} circleR={circleR} UpOrDown={UpOrDown} /> 
         <text 
           x={ circleR } 
-          y={ setTextY('Chi', circleR, UpOrDown, stopNameH, stopNameEngH) }
+          y={ setTextY('Chi', circleR, stopNameH, stopNameEngH, UpOrDown) }
           className={ setStopClassName(stopType, 'stopName-withEng') }
           ref={(e) => this.stopNameEl = e}
         >
@@ -153,7 +154,7 @@ export class StopWithEng extends React.Component {
 
         <text 
           x={ stopNameW + 1.5 } 
-          y={ setTextY('Eng', circleR, UpOrDown, stopNameH, stopNameEngH) }
+          y={ setTextY('Eng', circleR, stopNameH, stopNameEngH, UpOrDown) }
           className={ setStopClassName(stopType, 'stopNameEng-withEng') } 
           style={{fontSize: stopNameEng_fs}}
           ref={(e) => this.stopNameEngEl = e}
