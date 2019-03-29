@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { Text, BigArrow } from './SVGComponents'
+import { BigArrow } from './SVGComponents'
 import { calTextY, textAlignCenter, splitBrackets } from './svgFunctions'
 import backgroudImage from '../images/Head_background.png'
 
@@ -37,22 +37,24 @@ export const getPassText = (passText=['']) => (
   ['', '']
 )
 export const RouteNumber = ({ number='0000', className='ChiaYi', x=0, y=0, fontSize=12 }) => (
-  <Text
+  <text
     x={x}
     y={ y }
-    text={number}
     className={`routeNumber routeNumber-${className}`}
     style={{ fontSize: fontSize }} 
-  />
+  >
+    {number}
+  </text>
 )
 export const StopFromTo_ChiaYi = ({ fromTo1='', fromTo2='', className='stop', fontSize=12, y=0 }) => (
   <g style={{ fontSize: fontSize }}>
-    <Text
+    <text
       x={ layOut.stop.x }
-      y={ y } 
-      text={fromTo1}
+      y={ y }
       className={className}
-    />
+    >
+      {fromTo1}
+    </text>
     <text 
       x={ stopWidthSetting(fromTo1) }
       y={ y }
@@ -112,7 +114,7 @@ export const ByPass_Yunlin = ({ passStopXY={ x:0, y:0 }, chargeXY={ x:0, y:0 }, 
 //------------------------------------
 
 export const Head_ChiaYi = (props) => {
-  const { number, fromTo, fromToEng } = props
+  const { number='0000', fromTo=['a', 'b'], fromToEng=['', ''] } = props
   return (
     <g>
       <image 
@@ -161,7 +163,7 @@ export const Head_ChiaYi = (props) => {
   )
 }
 export const Head_Yunlin = (props) => {
-  const { number=0, fromTo=[], fromToEng=[], pass=[], charge='' } = props
+  const { number='0000', fromTo=['a', 'b'], fromToEng=['', ''], pass='', charge='' } = props
   const { fontSize } = Yunlin
   return (
     <g className={'head-Yunlin'}>
@@ -219,7 +221,7 @@ export class Head_ChanHua extends React.Component {
   
   render() {
     const { routeNumber, stop, stopEng } = ChanHua.fontSize
-    const { number, fromTo, fromToEng } = this.props
+    const { number='0000', fromTo=['a', 'b'], fromToEng=['', ''] } = this.props
     const { fromTo1_W, fromTo2_W, fromTo1Eng_W, fromTo2Eng_W } = this.state
     console.log(splitBrackets(fromTo[1]))
     return (
@@ -244,9 +246,10 @@ export class Head_ChanHua extends React.Component {
           refFn1={this.setFromTo1}
           refFn2={this.setFromTo2}
         />
-        <text>
+        <text className='arrow-text-ChanHua'>
           {' → '}
-        </text><StopFromTo_ChanHua
+        </text>
+        <StopFromTo_ChanHua
           y={48}
           fromTo1={fromToEng[0]}
           fromTo2={fromToEng[1]}

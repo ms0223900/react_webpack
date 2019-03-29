@@ -42,7 +42,6 @@ export const StopCircle = ({r, stopType, stopClassName}) => (
 )
 
 export const setTextY = (ChiOrEng='Chi', r=6, stopNameH=0, stopNameEngH=0, UpOrDown='Up') => {
-  console.log('UpOrDown: ' + UpOrDown)
   switch (UpOrDown) {
     case 'Up':
       return ChiOrEng === 'Chi' ? 

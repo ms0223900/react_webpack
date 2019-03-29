@@ -43,6 +43,29 @@ export const getBusProviderInfo = (routeJSON, providerId, providerInfo) => {
   return routeJSON
 }
 
+
+export const fetchRouteJSON = (locationName) => (
+  fetch(`allRoutes_${locationName}.json`)
+    .then(res => res.json())
+    .then(routeJSON => new Promise( 
+      res => res(routeJSON)  , 
+      rej => console.log(rej)))
+)
+export const fetchChiaYiRouteInfo = (routeJSON) => (
+  fetch('http://ebus.cyhg.gov.tw/cms/api/route', fetchURLSetting)
+    .then(res => res.json())
+    .then(routesInfo => new Promise( 
+      res => res( [routeJSON, getBusProviderId(routeJSON, routesInfo)] ), 
+      rej => console.log(rej)))
+)
+export const fetchChiaYiProvider = (JSONAndProviderId) => (
+  fetch('http://ebus.cyhg.gov.tw/cms/api/provider', fetchURLSetting)
+    .then(res => res.json())
+    .then(providerInfo => new Promise( 
+      res => res( getBusProviderInfo(JSONAndProviderId[0], JSONAndProviderId[1], providerInfo) ), 
+      rej => console.log(rej)))
+)
+
 export const LocationButton = ({ id='ChiaYi', location='ChiaYi', buttonText='', onClickFn=function() {} }) => (
   <button 
     id={id} 
@@ -121,7 +144,29 @@ export default class App extends React.Component {
   componentWillMount = () => {
     for (let i = 0; i < routeLocations.length; i++) {
       const routeName = routeLocations[i]
-      this.fetchRouteJSON(routeName)
+      if(routeName !== 'ChiaYi') {
+        fetchRouteJSON(routeName)
+        .then(res => this.setState({
+          routes: [
+            ...this.state.routes, {
+              location: routeName,
+              routeData: res,
+            }],
+        }))
+        .catch(rej => console.log(rej))
+      } else {
+        fetchRouteJSON(routeName)
+          .then(res => fetchChiaYiRouteInfo(res))
+          .then(res => fetchChiaYiProvider(res))
+          .then(res => this.setState({
+            routes: [
+              ...this.state.routes, {
+                location: routeName,
+                routeData: res,
+              }],
+          }))
+          .catch(rej => console.log(rej))
+      }
     }
   }
   componentDidMount = () => {
@@ -136,43 +181,6 @@ export default class App extends React.Component {
         loadComplete: state.loadComplete + 1,
       }))
     }
-  }
-  fetchRouteJSON(locationName) {
-    fetch(`allRoutes_${locationName}.json`)
-      .then(res => res.json())
-      .then(routeJSON => { 
-        console.log(routeJSON)
-        if(locationName === 'ChiaYi') {
-          fetch('http://ebus.cyhg.gov.tw/cms/api/route', fetchURLSetting)
-            .then(res => res.json())
-            .then(routesInfo => {
-              console.log('chiayi', routeJSON)
-              const providerId = getBusProviderId(routeJSON, routesInfo)
-              
-              fetch('http://ebus.cyhg.gov.tw/cms/api/provider', fetchURLSetting)
-                .then(res => res.json())
-                .then(providerInfo => {
-                  const RouteJSONWithCompanyInfo = getBusProviderInfo(routeJSON, providerId, providerInfo)
-                  
-                  this.setState({
-                    routes: [...this.state.routes, {
-                      location: locationName,
-                      routeData: RouteJSONWithCompanyInfo,
-                    }],
-                  })
-                })
-          })
-        } else {
-          console.log(routeJSON)
-          this.setState({
-            routes: [...this.state.routes, {
-              location: locationName,
-              routeData: routeJSON,
-            }],
-          })
-        }
-      })
-      .catch(err => {})
   }
   
   changeLocation = (e) => {
@@ -219,7 +227,3 @@ export default class App extends React.Component {
     );
   }
 }
-
-
-
-

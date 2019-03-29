@@ -1,9 +1,16 @@
 import React from 'react'
 import { Rect, Line } from './SVGComponents'
 import { genObjArr } from './svgFunctions'
-export const sepTimeToHourMin = (timeArr=[['0011', '0022'], ['0022', '0033']]) => (
-  timeArr.map(t => t.map(time => 
-    time = [time.slice(0, 2), time.slice(2)]))
+export const sepTimeToHourMin = (timeStr='0011') => {
+  const result = [timeStr.slice(0, 2), timeStr.slice(2)]
+  if((result[0] * 1) < 25 && (result[1] * 1 < 61) && result[1].length === 2) {
+    return result
+  } else {
+    throw new Error('You have the wrong format of time string!')
+  }
+}
+export const setTimeToHM_multiple = (arr=[[]]) => (
+  arr.map(a => a.map(time => time = sepTimeToHourMin(time)))
 )
 export const removeDupliArr = (arr) => {
   let newArr = []
@@ -118,7 +125,7 @@ export const SingleSchedule = ({ objArr=[{}] }) => (
 export const BusSchedule = (props) => {
   const { time } = props
   //string to hour, min
-  const timeArr = sepTimeToHourMin(time)
+  const timeArr = setTimeToHM_multiple(time)
   //merge hour
   const mergedTime = timeArr.map(t => t = mergeTimeByHour(t))
   //merge two time

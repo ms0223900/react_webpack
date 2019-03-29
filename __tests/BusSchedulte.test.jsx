@@ -3,6 +3,7 @@ import React from 'react'
 import { 
   removeDupliArr,
   sepTimeToHourMin,
+  setTimeToHM_multiple,
   mergeTimeByHour,
   merge2Time_ByHour,
   textAlignCenter,
@@ -20,7 +21,14 @@ describe('test handle time array functions', () => {
     const removedArr = ['0011', '0022', '0033']
     expect(removeDupliArr(arr)).toEqual(removedArr)
   })
-  it('test time should be seperate to hour and min by sepTimeToHourMin function', () => {
+  it('test time string should be split to hour and minute format, if you gave wrong format it should throw error.', () => {
+    const timeStr = '0011'
+    const timeStr2 = '2901'
+    const mockCorrect = ['00', '11']
+    expect(sepTimeToHourMin(timeStr)).toEqual(mockCorrect)
+    expect(() => sepTimeToHourMin(timeStr2)).toThrowError('You have the wrong format of time string!')
+  })
+  it('test time arrays should be seperate to hour and min by sepTimeToHourMin_multiple function', () => {
     const arr = [
       ['0011', '0022', '0011', '0033'],
       ['0011', '0022']
@@ -29,7 +37,7 @@ describe('test handle time array functions', () => {
       [['00', '11'], ['00', '22'], ['00', '11'], ['00', '33']],
       [['00','11'], ['00','22']]
     ]
-    expect(sepTimeToHourMin(arr)).toEqual(sepArr)
+    expect(setTimeToHM_multiple(arr)).toEqual(sepArr)
   })
   it('it should merge minutes by per hours by mergeTimeByHour function. ', () => {
     const arr = [['00', '11'], ['00', '22'], ['00', '11'], ['00', '33'], ['11', '22']]

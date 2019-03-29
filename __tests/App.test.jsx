@@ -141,11 +141,6 @@ describe('test functions of app', () => {
     app.instance().changeLocation(mockEventLocation2)
     expect(app.instance().state.location).toBe('Yunlin')
   })
-  it('test fetch function to be called', () => { 
-    const spyFn = jest.spyOn(App.prototype, 'fetchRouteJSON')
-    const app = shallow(<App />)
-    expect(spyFn).toBeCalled()
-  })
 })
 
 
