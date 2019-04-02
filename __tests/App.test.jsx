@@ -1,5 +1,6 @@
 
 /* eslint-disable no-undef */
+const nock = require('nock')
 
 import React from 'react'
 import App, { 
@@ -9,6 +10,7 @@ import App, {
   LocationButton,
   locationButtonArr,
   routeLocations,
+  fetchRouteJSON,
  } from '../src/svg/app'
  import { shallow } from 'enzyme'
 
@@ -142,6 +144,19 @@ describe('test functions of app', () => {
     expect(app.instance().state.location).toBe('Yunlin')
   })
 })
+describe('test fetch', () => {
+  it('test fetch route json file', () => {
+    nock('allRoutes_ChiaYi.json')
+      .get('')
+      .reply(200, {
+        result: [{ number: '7202' }]
+      })
+    return fetchRouteJSON('ChiaYi')
+        .then(res => res.result[0].number)
+        .then(res => expect(res).toEqual('7202'))
+  })
+})
+
 
 
 
