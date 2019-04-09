@@ -10,7 +10,9 @@ const { defaultStyle, YunlinChanHua } = THEME
 export const getStopType = (stopTypeNo=1, id=1, endIDs=[]) => {
   switch (stopTypeNo * 1) {
     case -1:
-      return endIDs.length > 0 ? 'normal' : 'passed'
+      return endIDs.length > 0 ? 
+        (endIDs.indexOf(id) !== -1 ? 'end' : 'normal') : 
+        'passed'
     case 1:
       return endIDs.length > 0 && endIDs.indexOf(id) !== -1 ?
       'end' : 'normal'
