@@ -879,11 +879,6 @@ export const mockYunlinFile = {
     'stopName': '頂西庄',
     'stopNameEng': 'Dingxizhuang',
     'stopType': '1'
-  }, {
-    'id': 9,
-    'stopName': '白花墓',
-    'stopNameEng': 'Bai hua mu',
-    'stopType': '1'
   }],
   '2Lines': [
     {
@@ -1671,7 +1666,7 @@ export const mockYunlinFile = {
       'id': 70,
       'stopName': '虎尾國中',
       'stopNameEng': 'Huwei Junior High',
-      'stopType': '0'
+      'stopType': '1'
     }, {
       'id': 71,
       'stopName': '半路店',
