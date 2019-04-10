@@ -1,6 +1,6 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import { mockChiaYiFile, mockYunlinFile } from './stopMockData'
+import { mockChiaYiFile, mockYunlinFile } from './mockData'
 
 import { Route, RouteWithEngStops } from '../src/svg/SingleStopLine'
 

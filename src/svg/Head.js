@@ -64,13 +64,13 @@ export const StopFromTo_ChiaYi = ({ fromTo1='', fromTo2='', className='stop', fo
     </text>
   </g>
 )
-export const StopFromTo_Yunlin = ({ className='fromTo-Yunlin', x=0, y=0, fontSize=12, fromToWithArrow='', pass='', passFontSize=10 }) => (
+export const StopFromTo_Yunlin = ({ className='fromTo-Yunlin', x=0, y=0, fontSize=12, fromTo=[], pass=[], passFontSize=10 }) => (
   <g className={className} style={{ fontSize: fontSize }}>
     <text 
       x={x}
       y={y} 
     >
-      { fromToWithArrow }
+      { fromTo[0] + ' → ' + fromTo[1] }
       <tspan
         style={{ fontSize: passFontSize }}
       >
@@ -79,8 +79,8 @@ export const StopFromTo_Yunlin = ({ className='fromTo-Yunlin', x=0, y=0, fontSiz
     </text>
   </g>
 )
-export const StopFromTo_ChanHua = ({ y=12, fromTo1='', fromTo1W=0, fromTo2='', fromTo2W=0, fontSize=10, refFn1, refFn2 }) => (
-  <g className={'fromTo-ChanHua'} style={{ fontSize: fontSize }}>
+export const StopFromTo_ChanHua = ({ className='fromTo-ChanHua', y=12, fromTo1='', fromTo1W=0, fromTo2='', fromTo2W=0, fontSize=10, refFn1, refFn2 }) => (
+  <g className={className} style={{ fontSize: fontSize }}>
     <text 
       x={textAlignCenter(182, fromTo1W, 305)}
       y={calTextY(y, fontSize)}
@@ -178,13 +178,13 @@ export const Head_Yunlin = (props) => {
         x={ Yunlin.layOut.stopName.x } 
         y={ Yunlin.layOut.stopName.y } 
         fontSize={fontSize.stop} 
-        fromToWithArrow={fromTo[0] + ' → ' + fromTo[1]} 
+        fromTo={fromTo} 
         pass={pass}  />
       <StopFromTo_Yunlin
         x={ Yunlin.layOut.stopNameEng.x } 
         y={ Yunlin.layOut.stopNameEng.y } 
         fontSize={fontSize.stopEng} 
-        fromToWithArrow={fromToEng[0] + ' → ' + fromToEng[1]} />
+        fromTo={fromToEng} />
       <ByPass_Yunlin
         passStopXY={ Yunlin.layOut.byPassStop }
         chargeXY={ Yunlin.layOut.charge }

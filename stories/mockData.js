@@ -1725,3 +1725,34 @@ export const mockYunlinFile = {
     }
   ],
 }
+
+export const mockFromToData = {
+  ChiaYi: {
+    fromTo1: '嘉義',
+    fromTo2: '第一銀行',
+    className: 'fromTo',
+    fontSize: '24',
+    y: 100,
+  },
+  Yunlin: {
+    className: 'fromTo-Yunlin-story',
+    x: 100,
+    y: 100,
+    fontSize: 24,
+    fromTo: ['北港', '斗六'],
+    fromToEng: ['Xigang', 'Erlin Station'],
+    pass: ['經惠來厝', '虎尾、土庫、奮起湖、元長'],
+    passFontSize: 10,
+  },
+  ChanHua: {
+    className: 'fromTo-Yunlin-story',
+    fromTo1: '西港',
+    fromToEng1: 'Xigang',
+    fromTo2Text: '二林(頂莊、臺西村)',
+    fromToEng2: 'Erlin Station',
+    // y: 100,
+    fromTo1W: 100,
+    fromTo2W: 300,
+    fontSize: 24,
+  }
+}
