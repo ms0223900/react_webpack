@@ -1756,3 +1756,57 @@ export const mockFromToData = {
     fontSize: 24,
   }
 }
+
+export const mockComponentsData = {
+  normalStop: {
+    id: 0,
+    stopName: '西屯',
+    stopNameEng: 'Xitun',
+    stopType: 'normal',
+    x: 100,
+    y: 200,
+    circleR: 6,
+  },
+
+  nowStop: {
+    id: 1,
+    stopName: '東勢監理分站',
+    stopNameEng: 'Dongshi Motor Vehicle Substation',
+    stopType: 'now',
+    x: 250,
+    y: 200,
+    circleR: 6,
+  },
+
+  endStop: {
+    id: 1,
+    stopName: '虎尾',
+    stopNameEng: 'Huwei',
+    stopType: 'end',
+    x: 400,
+    y: 200,
+    circleR: 6,
+  },
+  hospitalStop: {
+    id: 1,
+    stopName: 'OX醫院',
+    stopNameEng: 'OX Hospital',
+    stopType: 'normal',
+    x: 500,
+    y: 200,
+    circleR: 6,
+  },
+
+  TIME: [
+    ['0120', '0230', '0620', '0640'],
+    ['0830', '1030', '1120']
+  ],
+
+  QRcodeYunlin: {
+    x: 30, 
+    y: 30, 
+    width: 90, 
+    imsi: '466011200153956', 
+    nowStop: '大頂湳站',
+  }
+}

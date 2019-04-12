@@ -35,7 +35,7 @@ const QRcode = (props) => {
 }
 
 export const QRcode_Yunlin = (props) => {
-  const { x=0, y=0, width=72, imsi='466011200153956', nowStop='頂湳站' } = props
+  const { x=0, y=0, width=90, imsi='466011200153956', nowStop='頂湳站' } = props
   const { stopFS, stopQueryFS } = Yunlin
   const url = 'http://ebus.yunlin.gov.tw/QRcodeGetBusTime.aspx?imsi=' + imsi
 

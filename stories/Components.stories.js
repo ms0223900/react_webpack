@@ -1,53 +1,12 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 
+import { mockComponentsData } from './mockData'
 import { Stop, StopWithEng } from '../src/svg/Stop'
+import { QRcode_Yunlin } from '../src/svg/SideInfo'
 import { BusSchedule } from '../src/svg/BusSchedule'
 
-export const normalStop = {
-  id: 0,
-  stopName: '西屯',
-  stopNameEng: 'Xitun',
-  stopType: 'normal',
-  x: 100,
-  y: 200,
-  circleR: 6,
-}
-
-export const nowStop = {
-  id: 1,
-  stopName: '東勢監理分站',
-  stopNameEng: 'Dongshi Motor Vehicle Substation',
-  stopType: 'now',
-  x: 250,
-  y: 200,
-  circleR: 6,
-}
-
-export const endStop = {
-  id: 1,
-  stopName: '虎尾',
-  stopNameEng: 'Huwei',
-  stopType: 'end',
-  x: 400,
-  y: 200,
-  circleR: 6,
-}
-export const hospitalStop = {
-  id: 1,
-  stopName: 'OX醫院',
-  stopNameEng: 'OX Hospital',
-  stopType: 'normal',
-  x: 500,
-  y: 200,
-  circleR: 6,
-}
-
-export const TIME = [
-  ['0120', '0230', '0620', '0640'],
-  ['0830', '1030', '1120']
-]
-
+const { normalStop, nowStop, endStop, hospitalStop, TIME, QRcodeYunlin } = mockComponentsData
 
 storiesOf('BusStop', module)
   .add('stop with Chinese', () => 
@@ -83,3 +42,8 @@ storiesOf('BusStop', module)
       <BusSchedule time={TIME}/>
     </svg>
   )
+  .add('QRcode for Yunlin', () => (
+    <svg width='720' height='720'>
+      <QRcode_Yunlin {...QRcodeYunlin} />
+    </svg>
+  ))
