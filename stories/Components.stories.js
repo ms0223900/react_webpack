@@ -5,12 +5,12 @@ import '../styles/style.scss'
 import { mockComponentsData } from './mockData'
 import { Stop, StopWithEng } from '../src/svg/Stop'
 import { QRcode_Yunlin } from '../src/svg/SideInfo'
-import { BusSchedule } from '../src/svg/BusSchedule'
+import { BusSchedule, SingleSchedule, SingleTime, } from '../src/svg/BusSchedule'
 
 const { normalStop, nowStop, endStop, hospitalStop, TIME, QRcodeYunlin } = mockComponentsData
 
 
-storiesOf('BusStop', module)
+storiesOf('BusStop Components', module)
   .add('stop with Chinese', () => 
     <svg width='720' height='720'>
       <Stop {...normalStop} />
@@ -40,8 +40,15 @@ storiesOf('BusStop', module)
     </svg>
   )
   .add('bus schedule', () => 
-    <svg width='720' height='720'>
-      <BusSchedule time={TIME}/>
+    <svg width='720' height='900'>
+      <text x={10} y={400}>complete bus schedule</text>
+      <BusSchedule time={TIME} forDemo={true} y={100} />
+
+      <text x={10} y={120}>single bus schedule time (when it's id is odd)</text>
+      <SingleSchedule objArr={{
+        id: 3,
+        data: ['02', ['11', '22', '44', '60'], ['33']]
+      }} y={0} />
     </svg>
   )
   .add('QRcode for Yunlin', () => (

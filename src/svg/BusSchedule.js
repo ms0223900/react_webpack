@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Rect, Line } from './SVGComponents'
 import { genObjArr } from './svgFunctions'
 export const sepTimeToHourMin = (timeStr='0011') => {
@@ -101,12 +102,12 @@ export const SingleTime = (props) => {
     </g>
   )
 }
-export const SingleSchedule = ({ objArr=[{}] }) => (
+export const SingleSchedule = ({ objArr={}, y=0 }) => (
   <g>
     {objArr.id % 2 === 1 ? 
       <Rect
         x={0}
-        y={150 + objArr.id * 22}
+        y={y + objArr.id * 22}
         width={164}
         height={22}
         className={'schedule-singleTime'}
@@ -116,13 +117,12 @@ export const SingleSchedule = ({ objArr=[{}] }) => (
       hour={objArr.data[0]}
       normalMin={ objArr.data[1].join(' ') }
       holidayMin={objArr.data.length > 2 ? objArr.data[2].join(' ') : objArr.data[1].join(' ')}
-      y={150 + 22 * objArr.id  + 16}
+      y={y + 22 * objArr.id  + 16}
     />
   </g>
 )
 
-export const BusSchedule = (props) => {
-  const { time } = props
+export const BusSchedule = ({ time=[], forDemo=false, x=0, y=150 }) => {
   //string to hour, min
   const timeArr = setTimeToHM_multiple(time)
   //merge hour
@@ -132,8 +132,16 @@ export const BusSchedule = (props) => {
   const mergedTimeObjArr = genObjArr(mergedTimeArr)
 
   return (
-    <g>    
-      { mergedTimeObjArr.map(t => <SingleSchedule key={t} objArr={t} />) }
+    <g transform={`translate(${x}, ${y})`}>    
+      { mergedTimeObjArr.map(t => <SingleSchedule key={t.id} objArr={t} 
+        y={y} />) }
+        {forDemo ? (
+          <g>
+            <text x={10} y={y - 3}>時</text>
+            <text x={60} y={y - 3}>分</text>
+            <text x={120} y={y - 3}>分</text>
+          </g>
+        ) : ''}
       <SepLine 
         x={37}
         length={mergedTimeObjArr.length}
@@ -144,4 +152,22 @@ export const BusSchedule = (props) => {
       />
     </g>
   )
+}
+SingleTime.propTypes = {
+  hour: PropTypes.string.isRequired,
+  normalMin: PropTypes.string,
+  holidayMin: PropTypes.string,
+  y: PropTypes.number
+}
+SingleSchedule.propTypes = {
+  objArr: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    data: PropTypes.array.isRequired,
+  }),
+}
+BusSchedule.propTypes = {
+  time: PropTypes.array.isRequired,
+  forDemo: PropTypes.bool,
+  x: PropTypes.number,
+  y: PropTypes.number,
 }
