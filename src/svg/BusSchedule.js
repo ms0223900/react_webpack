@@ -99,7 +99,6 @@ export const SingleTime = (props) => {
         </tspan>
       </text>
     </g>
-    
   )
 }
 export const SingleSchedule = ({ objArr=[{}] }) => (

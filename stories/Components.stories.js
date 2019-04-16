@@ -1,5 +1,6 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
+import '../styles/style.scss'
 
 import { mockComponentsData } from './mockData'
 import { Stop, StopWithEng } from '../src/svg/Stop'
@@ -7,6 +8,7 @@ import { QRcode_Yunlin } from '../src/svg/SideInfo'
 import { BusSchedule } from '../src/svg/BusSchedule'
 
 const { normalStop, nowStop, endStop, hospitalStop, TIME, QRcodeYunlin } = mockComponentsData
+
 
 storiesOf('BusStop', module)
   .add('stop with Chinese', () => 
