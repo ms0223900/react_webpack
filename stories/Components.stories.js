@@ -5,7 +5,7 @@ import '../styles/style.scss'
 import { mockComponentsData } from './mockData'
 import { Stop, StopWithEng } from '../src/svg/Stop'
 import { QRcode_Yunlin } from '../src/svg/SideInfo'
-import { BusSchedule, SingleSchedule, SingleTime, } from '../src/svg/BusSchedule'
+import { BusSchedule, SingleSchedule } from '../src/svg/BusSchedule'
 
 const { normalStop, nowStop, endStop, hospitalStop, TIME, QRcodeYunlin } = mockComponentsData
 
