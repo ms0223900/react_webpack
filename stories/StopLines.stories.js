@@ -37,8 +37,8 @@ stories
     const defaultValue2 = '1Line'
     const lines = radios(label2, options2, defaultValue2)
     return (
-      <svg width='1000' height='720'>
-       <text x='60' y='60'>1 line </text>
+      <svg width='1000' height='720' key={location + lines}>
+       {/* <text x='60' y='60'>1 line </text> */}
         {getRouteByLocation(location, getMockFiles(location, lines))}
       </svg>
     )
