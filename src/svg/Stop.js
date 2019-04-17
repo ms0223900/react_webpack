@@ -79,15 +79,15 @@ export const SpecialIcon = ({stopName='', stopNameH=0, stopType='normal', direct
 
 
 export const Stop = (props) => {
-  const { x=0, y=0, stopType='normal', stopName='車站', circleR=6, onClick } = props
+  const { x=0, y=0, stopType='normal', stopName='車站', circleR=6  } = props
 
   return (
-    <g transform={`translate(${x}, ${y})`} onClick={onClick} >
+    <g transform={`translate(${x}, ${y})`}  >
       <circle 
         cx={ circleR } 
         cy={ circleR } 
         r={ circleR } 
-        className={ setStopClassName(stopType, 'stop', true) } 
+        className={ setStopClassName(stopType, 'stop') } 
       />
       {stopType === 'now' ? 
         <circle 
@@ -99,7 +99,7 @@ export const Stop = (props) => {
       <text 
         x={ circleR - 1 } 
         y={ circleR * 1.5 + 8 }
-        className={ setStopClassName(stopType, 'stopName', true) } >
+        className={ setStopClassName(stopType, 'stopName') } >
         {stopName}
       </text>
     </g>

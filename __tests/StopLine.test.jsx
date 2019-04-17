@@ -16,7 +16,7 @@ import StopLine, {
   genarateRoutes_ChanHua,
 } from '../src/svg/StopLine'
 import { 
-  Route,
+  Route_ChiaYi,
   Route_ChanHua,
   Route_Yunlin
 } from '../src/svg/SingleStopLine'
@@ -80,14 +80,14 @@ describe('test HOC and amount of routes, amount of stops', () => {
   const routeData2 = Array(29)
   const routeData3 = Array(77)
   const routeData4 = Array(103)
-  it('test deafult Route', () => {
+  it('test deafult Route (data1)', () => {
     const DefaultRoute = shallow(<MappedRoutesDefault routeData={routeData1} />)
-    expect(DefaultRoute.find(Route)).toHaveLength(1)
+    expect(DefaultRoute.find(Route_ChiaYi)).toHaveLength(1)
     expect(DefaultRoute.find(RouteRoundedCorner)).toHaveLength(0)
   })
-  it('test deafult Route', () => {
+  it('test deafult Route (data3)', () => {
     const DefaultRoute = shallow(<MappedRoutesDefault routeData={routeData3} />)
-    expect(DefaultRoute.find(Route)).toHaveLength(3)
+    expect(DefaultRoute.find(Route_ChiaYi)).toHaveLength(3)
     expect(DefaultRoute.find(RouteRoundedCorner)).toHaveLength(2)
   })
 
@@ -118,9 +118,9 @@ describe('test HOC and amount of routes, amount of stops', () => {
   })
   it('Amount of last routes stops should be less than or equal to other routes.Expect the last routes , other stops amount of routes should be the same.', () => {
     const DefaultRoute = shallow(<MappedRoutesDefault routeData={routeData3} />)
-    const route1Stops = DefaultRoute.find(Route).get(0).props.route.length
-    const route2Stops = DefaultRoute.find(Route).get(1).props.route.length
-    const route3Stops = DefaultRoute.find(Route).get(2).props.route.length
+    const route1Stops = DefaultRoute.find(Route_ChiaYi).get(0).props.route.length
+    const route2Stops = DefaultRoute.find(Route_ChiaYi).get(1).props.route.length
+    const route3Stops = DefaultRoute.find(Route_ChiaYi).get(2).props.route.length
     expect(route1Stops > 0).toBeTruthy()
     expect(route1Stops >= route3Stops && route2Stops >= route3Stops).toBeTruthy()
     expect(route1Stops === route2Stops).toBeTruthy()

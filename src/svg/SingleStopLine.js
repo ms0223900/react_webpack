@@ -8,6 +8,7 @@ import { THEME } from '../../config'
 const { defaultStyle, YunlinChanHua } = THEME
 
 export const getStopType = (stopTypeNo=1, id=1, endIDs=[]) => {
+  console.log(endIDs)
   switch (stopTypeNo * 1) {
     case -1:
       return endIDs.length > 0 ? 
@@ -27,13 +28,13 @@ export const getBetweenStopDistance = (dir, x, id, lastStops, avgDistance) => (
   x + (( id % lastStops ) * avgDistance) : 
   x - (( id % lastStops ) * avgDistance)
 )
-
-export function Route({ direction='right', route=[], x=100, y=200, width=614, lastStopAmount=0, }) {
+export function Route({ direction='right', route=[], x=100, y=200, width=614, lastStopAmount=0, endID=[], UpOrDown='Up', StopComponentType='' }) {
   const STOPS = route.length
   const totalLength = STOPS - 1
   const STOPSForStop = lastStopAmount !== 0 ? lastStopAmount : STOPS
   const avgDistance = width / totalLength
   let dir = (direction === 'right' ? true : false)
+  const StopComponent = StopComponentType === 'Stop' ? Stop : StopWithEng
 
   return (
     <g>
@@ -51,46 +52,11 @@ export function Route({ direction='right', route=[], x=100, y=200, width=614, la
       {
         route.map(ls => {
           return (
-            <Stop 
+            <StopComponent 
               key={ls.id}
               x={ getBetweenStopDistance(dir, x, ls.id, STOPSForStop, avgDistance) }
               y={ y }
               stopName={ ls.stopName }
-              stopType={ getStopType(ls.stopType, ls.id) }
-            />
-          )
-        })
-      }
-    </g>
-  )
-}
-export function RouteWithEngStops({ direction='right', route=[], x=100, y=200, width=614, lastStopAmount=0, endID=[], UpOrDown='Up' }) {
-  const STOPS = route.length
-  const STOPSForStop = lastStopAmount !== 0 ? lastStopAmount : STOPS
-  const totalLength = STOPS - 1
-  const avgDistance = width / totalLength
-  let dir = (direction === 'right' ? true : false)
-  return (
-    <g>
-      <path 
-        d={`
-          M ${x} ${y + 6} 
-          l ${ 
-            dir ? 
-            totalLength * avgDistance : 
-            -totalLength * avgDistance } 0` 
-          } 
-        stroke={YunlinChanHua} 
-        strokeWidth={5} />
-      {
-        route.map(ls => {
-          return (
-            <StopWithEng
-              key={ls.id}
-              x={ getBetweenStopDistance(dir, x, ls.id, STOPSForStop, avgDistance) }
-              y={ y }
-              stopName={ ls.stopName }
-              stopNameEng={ ls.stopNameEng }
               stopType={ getStopType(ls.stopType, ls.id, endID) }
               direction={direction}
               UpOrDown={UpOrDown}
@@ -101,37 +67,16 @@ export function RouteWithEngStops({ direction='right', route=[], x=100, y=200, w
     </g>
   )
 }
-
-
 export const HOCRouteWithEngStops = (RouteComponent, UpOrDown) => class extends React.Component {
   constructor(props) {
     super(props);
   }
   render() {
     return (
-      <RouteComponent {...this.props} UpOrDown={UpOrDown}/>
+      <RouteComponent {...this.props} StopComponentType={'StopWithEng'} UpOrDown={UpOrDown} />
     );
   }
 }
-export const Route_Yunlin = HOCRouteWithEngStops(RouteWithEngStops, 'Up')
-export const Route_ChanHua = HOCRouteWithEngStops(RouteWithEngStops, 'Down')
-// <Route>
-//   <Stop_WithEng_Up />
-// </Route>
-
-// route.map(ls => {
-//   return (
-//     cloneElement(children, {...props})
-//   )
-
-
-
-// <Parent>
-//   <Ch />
-// </Parent>
-// function Parent = ({children, ...props}) =>
-
-//   (<p>{children}</p>)
-
-
-// <p><Ch /></p>
+export const Route_ChiaYi = (props) => <Route StopComponentType={'Stop'} {...props} />
+export const Route_Yunlin = HOCRouteWithEngStops(Route, 'Up')
+export const Route_ChanHua = HOCRouteWithEngStops(Route, 'Down')

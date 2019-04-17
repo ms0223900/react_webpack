@@ -1,7 +1,7 @@
 import React from 'react'
 
 import {  RoundedCorner } from './SVGComponents'
-import { Route, Route_Yunlin, Route_ChanHua } from './SingleStopLine'
+import { Route_ChiaYi, Route_Yunlin, Route_ChanHua } from './SingleStopLine'
 import { styles } from '../../config'
 
 const { defaultStyle, YunlinChanHua, ChanHua } = styles.routes
@@ -63,7 +63,7 @@ export const HOCMappedRoute = (RouteComponent, location, txtUpOrDown='Up') => cl
               y={ setPosOfLinesY(lines, y, h, l, txtUpOrDown) } 
               width={ w }
               lastStopAmount={ l === lines ? stopsPerLine : 0 } //之前的一條站
-              endID={ [0, stops - 1] }
+              endID={ RouteComponent === Route_ChiaYi ? [] : [0, stops - 1] }
             />
           </React.Fragment>  
         ))}
@@ -74,7 +74,7 @@ export const HOCMappedRoute = (RouteComponent, location, txtUpOrDown='Up') => cl
 
 export const MappedRoutesChanHua = HOCMappedRoute(Route_ChanHua, ChanHua, 'Down')
 export const MappedRoutesYunlin = HOCMappedRoute(Route_Yunlin, YunlinChanHua, 'Up')
-export const MappedRoutesDefault = HOCMappedRoute(Route, defaultStyle, 'Down')
+export const MappedRoutesDefault = HOCMappedRoute(Route_ChiaYi, defaultStyle, 'Down')
 
 export function genarateRoutes_ChanHua(routeData) {
   return <MappedRoutesChanHua routeData={routeData}/>

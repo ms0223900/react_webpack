@@ -1,0 +1,81 @@
+@startuml BusStopsMap
+scale 2
+class Stop {
+  - x: float
+  - y: float
+  - stopType: string
+  - stopName: string
+  - circleR: float
+  +setStopClassName(): string
+}
+class StopWithEng {
+  - x: float
+  - y: float
+  - stopType: string
+  - stopName: string
+  - stopNameEng: string
+  - circleR: float
+  - UpOrDown: string
+  - direction: string
+  + setTextY(): float
+  + setStopClassName(): string
+}
+class SingleTime {
+  - hour: string
+  - normalMin: string
+  - holidayMin: string
+  - y: float
+  + textAlignCenter(): float
+}
+class SingleSchedule {
+  - objArr: object
+  - y: float
+  - singleTime: SingleTime
+}
+class BusSchedule {
+  - time: array
+  - forDemo: bool
+  - x: float
+  - y: float
+  - singleSchedule: SingleSchedule
+  + setTimeToHM_multiple(): array 
+  + mergeTimeByHour(): array
+  + merge2Time_ByHour(): array
+  + genObjArr(): array
+} 
+class QRcode_Yunlin {
+  - x: float
+  - y: float
+  - width: float
+  - imsi: string
+  - nowStop: string
+  + calTextY(): float
+}
+class Route {
+  - x: float
+  - y: float
+  - width: float
+  - route: array
+  - endID: array
+  - UpOrDown: string
+  - direction: string
+  - lastStopAmount: int
+  - StopComponentType: string
+  + getBetweenStopDistance(): float
+  + getStopType(): string
+}
+class HOCMappedRoute {
+  - RouteComponent: class  
+  - location: string
+  - txtUpOrDown: string
+  + sepRouteData(): array
+  + setPosOfLinesY(): float
+}
+SingleSchedule "1" *-- "1" SingleTime : contains
+BusSchedule "0...1" o-- "0...＊" SingleSchedule : contains
+
+Route "0...1" o-- "0...*" Stop : contains
+Route "0...1" o-- "0...*" StopWithEng : contains
+
+HOCMappedRoute "0...1" *-- "0...1" Route : contains
+@enduml

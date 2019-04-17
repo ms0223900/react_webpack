@@ -84,18 +84,15 @@
 .stop-now-center {
   fill: #006633;
 }
+.stopName {
+  writing-mode: tb;
+}
 .stopName-passed {
   // font-size: 16px;
-  // font-weight: 600;
-  writing-mode: tb;
+  // font-weight: 600;x
   opacity: .35;
 }
 
-.stopName-normal {
-  // font-size: 16px;
-  // font-weight: 600;
-  writing-mode: tb;
-}
 
 .stopName-now {
   // font-size: 16px;
